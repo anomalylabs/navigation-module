@@ -1,0 +1,9 @@
+{% extends 'theme::layouts/default' %}
+
+{% block content %}
+    <div class="ui horizontal segment">
+        {% include 'anomaly.module.navigation::partial/buttons' %}
+        {% include 'anomaly.module.navigation::partial/groups_menu' %}
+    </div>
+    {{ content|raw }}
+{% endblock %}

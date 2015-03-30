@@ -1,0 +1,18 @@
+{% if count(linkTypes) and count(groups) %}
+<div class="ui green floating dropdown button">
+    <div class="text"><i class="linkify icon"></i> {{ trans('module::button.new_link') }}</div>
+    <div class="menu">
+        {% for type in linkTypes %}
+            <a class="item" href="{{ route('admin.navigation.links.create', {
+                'group': currentGroup.slug,
+                'type': type.getLinkType()
+            }) }}"><i class="linkify icon"></i> {{ trans(type.getLabel()) }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<a class="ui orange button" href="{{ route('admin.navigation.groups.create') }}">
+    <i class="fa fa-plus"></i> {{ trans('module::button.new_group') }}
+</a>
+
