@@ -26,4 +26,17 @@ interface GroupRepositoryInterface
      */
     public function findBySlug($slug);
 
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id);
+
+    /**
+     * @param $id
+     * @param $maxDepth
+     * @return mixed
+     */
+    public function updateMaxDepth($id, $maxDepth);
+
 }

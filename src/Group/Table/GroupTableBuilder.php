@@ -13,4 +13,8 @@ class GroupTableBuilder extends TableBuilder
         'slug',
     ];
 
+    protected $buttons = [
+        'edit',
+    ];
+
 }

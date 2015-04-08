@@ -29,4 +29,9 @@ class GroupFormBuilder extends FormBuilder
         ],
     ];
 
+    protected $buttons = [
+        'delete',
+        'cancel',
+    ];
+
 }

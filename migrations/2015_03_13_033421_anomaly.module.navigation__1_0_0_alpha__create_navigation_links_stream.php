@@ -1,6 +1,7 @@
 <?php
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
+use Anomaly\Streams\Platform\Model\EloquentNodeModel;
 
 class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationLinksStream extends Migration
 {
@@ -11,8 +12,9 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationLinksStream extends Mi
      * @var array
      */
     protected $stream = [
-        'slug'   => 'links',
-        'locked' => true,
+        'namespace' => 'navigation',
+        'slug'      => 'links',
+        'locked'    => true,
     ];
 
     /**
@@ -24,13 +26,15 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationLinksStream extends Mi
         'title'     => [
             'required' => true
         ],
+        'slug'      => [
+            'unique' => true
+        ],
         'linkable'  => [],
         'group'     => [],
-        'scope'     => [],
-        'parent_id' => [],
-        'left'      => [],
-        'right'     => [],
-        'depth'     => [],
+        'parent'    => [],
+        'type'    => [],
+        'hidden'    => [],
+        'max_depth' => [],
     ];
 
 }

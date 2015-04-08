@@ -1,129 +1,248 @@
 {% extends 'theme::layouts/default' %}
 
+{% import "anomaly.module.navigation::partial/navigation_links" as macros %}
+
 {% block content %}
 
-    <div class="ui horizontal segment">
-        <div class="ui segment">
-            <div class="ui grid">
-                <div class="three wide column">
-                    <div class="ui fluid vertical menu">
-                        <div class="header item">Groups</div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Groups
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="...">
                         {% for group in groups %}
-                            <a href="{{ route('admin.navigation.links', {group: group.slug}) }}" class="{% if currentGroup.slug == group.slug %} active {% endif %} item">
+                            <a href="{{ group.adminUrl }}"
+                               class="{{ group.active }} btn btn-default">
                                 {{ group.title }}
                             </a>
                         {% endfor %}
                     </div>
                 </div>
-                <div class="thirteen wide column">
-                    <ol class="sortable ui fluid vertical menu landing">
-                        <div class="header item">
-                            <div class="ui breadcrumb">
-                                <a class="section">Links</a>
-                                <i class="right chevron icon divider"></i>
-                                <div class="active section">Two</div>
-                            </div>
-                        </div>
-                        {% if links %}
-                            {% for link in links %}
-                                <li class="item"><i class="js-handle fa fa-bars"></i>
-                                    {{ link.title }}
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                        <li class="item"><i class="js-handle fa fa-bars"></i>
-                            One
-                            <ol class="landing"></ol>
-                        </li>
-                        <li class="item">
-                            <i class="js-handle fa fa-bars"></i>
-                            Two
-                            <ol>
-                                <li class="item"><i class="js-handle fa fa-bars"></i> One {#<a class="ui " href="#"><i class="icon pencil"></i> Edit</a>#}<ol class="landing"></ol></li>
-                                <li class="item"><i class="js-handle fa fa-bars"></i> Two <ol class="landing"></ol></li>
-                                <li class="item"><i class="js-handle fa fa-bars"></i> Three <ol class="landing"></ol></li>
-                            </ol>
-                        </li>
-                        <li>
-                            <i class="js-handle fa fa-bars"></i>
-                            Three
-                            <ol class="landing"></ol>
-                        </li>
-                    </ol>
-                </div>
             </div>
 
+            <div class="col-md-20">
+                <div class="panel">
+                    <div class="panel-heading">
+                        Links
+                        <div class="btn btn-default btn-sm pull-right" data-collapse-all>Collapse</div>
+                    </div>
+                    <ul class="sortable vertical">
+                        {% if link %}
+                            <li data-id="{{ link.id }}">
+                                <div class="content">
+                                    <a href="{{ route('admin.navigation', { 'group': currentGroup.slug }) }}"
+                                       class="section">
+                                        <i class="fa fa-arrow-circle-left"></i>
+                                        All
+                                    </a>
+                                    {% if link %}
+                                        {% for ancestor in link.ancestors() %}
+                                            <i class="divider">/</i>
+                                            <a href="{{ ancestor.adminUrl }}">
+                                                {{ ancestor.title }}
+                                            </a>
+                                        {% endfor %}
+
+                                        <i class="divider">/</i>
+                                        <span>
+                                            {{ link.title }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <ul>
+                                    {{ macros.navigation_links(links) }}
+                                </ul>
+                            </li>
+                        {% else %}
+                            {{ macros.navigation_links(links) }}
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
         </div>
     </div>
 
+    <script>
+        $(document).ready(function () {
+
+            var list = $('.sortable');
+
+            var collapseHandle = list.find('[data-collapse]');
+            var collapseAllHandle = $('[data-collapse-all]');
+
+            var item = list.find('[data-id]');
+
+            var content = item.find('> [data-content]');
+
+            content.hover(function () {
+                        $(this).find('[data-buttons]').removeClass('hidden');
+                    },
+                    function () {
+                        $(this).find('[data-buttons]').addClass('hidden');
+                    });
+
+            {% if not link %}
+            list.find('[data-children]').addClass('hidden');
+            {% endif %}
+
+            var collapseOne = function (li) {
+                var currentCollapseHandle = li.find('[data-collapse]');
+                currentCollapseHandle.toggleClass('fa-minus-square');
+                currentCollapseHandle.toggleClass('fa-plus-square');
+                var children = li.find('> [data-children]');
+                children.toggleClass('hidden');
+            };
+
+            collapseHandle.click(function () {
+                collapseOne($(this).closest('li'));
+            });
+
+            collapseAllHandle.click(function () {
+                $.each(list.find('[data-children]'), function (i, children) {
+                    collapseOne($(children).closest('li'));
+                });
+            });
+
+            list.sortable({
+                serialize: function ($parent, $children, parentIsContainer) {
+                    var result = $.extend({}, {id: $parent.data('id')});
+                    if (parentIsContainer) {
+                        return $children
+                    } else if ($children[0]) {
+                        result.children = $children
+                    }
+                    return result;
+                },
+                onDrop: function ($item, container, _super, event) {
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/admin/streams/ui/item-list/sort',
+                        data: {
+                            model: '{{ model }}',
+                            isRoot: {{ link ? 'false' : 'true' }},
+                            tree: list.sortable('serialize').get(),
+                            groupId: {{ currentGroup.id or '0' }}
+                        },
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+
+                    _super($item, container);
+                },
+                pullPlaceholder: true
+            });
+        });
+    </script>
     <style>
-        .sortable {
-            padding: 0;
-        }
 
-        .sortable ul {
-            padding-left: 10px;
-            padding-top: 10px;
-        }
-        .sortable li i {
-            margin: 0em 0.25rem 0em;
-        }
-
-/*        .sortable ol.landing, .sortable ul.landing {
-            padding: 0;
-        }*/
-
-        .sortable li {
-            display: block;
+        .btn-group-vertical {
+            width: 100%;
         }
 
         body.dragging, body.dragging * {
             cursor: move !important;
         }
 
-        li.dragged {
-            position: absolute !important;
+        .dragged {
+            position: absolute;
             top: 0;
-            left: 0;
             opacity: 0.5;
             z-index: 2000;
         }
 
-        .sortable li.placeholder {
-            position: relative;
+        .sortable a {
+            color: crimson;
         }
 
-        .sortable li.placeholder:before {
-            content: " ";
+        .sortable .divider {
+            color: #aaa;
+            padding: 0 5px;
+        }
+
+        .sortable a i {
+            color: crimson;
+            font-size: 14px;
+        }
+
+        .sortable i {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .sortable.vertical {
+            margin: 0 0 9px 0;
+            min-height: 10px;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .sortable.vertical, .sortable.vertical ul, .sortable.vertical ol {
+            list-style: none;
+        }
+
+        .sortable.vertical ul, .sortable.vertical ol {
+            border-left: solid 1px #eee;
+        }
+
+        .sortable.vertical li .content {
+            display: block;
+            margin-bottom: 5px;
+            padding: 3px 10px 3px 10px;
+            border: 1px solid #cccccc;
+            background: #eeeeee;
+        }
+
+        .sortable.vertical li .content:hover {
+            background: #ffffff;
+        }
+
+        .sortable.vertical li .content, .sortable.vertical li.placeholder {
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .sortable.vertical li.placeholder {
+            position: relative;
+            padding: 0;
+            border: none;
+        }
+
+        .sortable li.empty,
+        .sortable li.placeholder {
+            margin: 5px 0;
+            padding: 0;
+            min-height: 30px;
+            background: #f2fbff;
+            border: 1px dashed #b6bcbf !important;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .sortable.vertical li.placeholder:before {
             position: absolute;
+            content: "";
             width: 0;
             height: 0;
-            border: 5px solid transparent;
-            border-top-color: red;
-            top: -6px;
-            margin-left: -5px;
-            border-bottom: none;
-        }
-
-        .sortable .dropdown-menu li.placeholder:before {
+            margin-top: -5px;
+            left: -5px;
+            top: -4px;
             border: 5px solid transparent;
             border-left-color: red;
-            margin-top: -5px;
-            margin-left: 0;
-            top: 0;
-            left: 10px;
             border-right: none;
         }
-    </style>
 
-    <script>
-        $(document).ready(function () {
-            var list = $('.sortable');
-            list.sortable({
-                'handle': '.js-handle'
-            });
-        });
-    </script>
+        .sortable {
+            list-style-type: none;
+        }
+
+    </style>
 
 {% endblock %}
 

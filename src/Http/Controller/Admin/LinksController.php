@@ -1,13 +1,11 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
-use Anomaly\NavigationModule\Command\GetLinkType;
-use Anomaly\NavigationModule\Command\GetLinkTypes;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkTypeRepositoryInterface;
 use Anomaly\NavigationModule\Link\LinkForm\LinkFormBuilder;
-use Anomaly\NavigationModule\Link\LinkNodeModel;
+use Anomaly\NavigationModule\Link\LinkModel;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Illuminate\Http\Request;
 
 class LinksController extends AdminController
@@ -30,44 +28,52 @@ class LinksController extends AdminController
     /**
      * @param Request $request
      * @param GroupRepositoryInterface $groups
-     * @param LinkNodeModel $links
+     * @param LinkRepositoryInterface $links
      */
-    public function __construct(Request $request, GroupRepositoryInterface $groups, LinkNodeModel $links)
+    public function __construct(
+        Request $request,
+        GroupRepositoryInterface $groups,
+        LinkRepositoryInterface $links
+    )
     {
         $this->groups = $groups;
         $this->request = $request;
         $this->links = $links;
     }
 
-    public function index($group = null, $inner = null, $title = null)
+    public function index()
     {
-        $linkTypes = $this->dispatch(new GetLinkTypes());
-
-        $links = [];
+        $id = $this->request->get('id');
+        $group = $this->request->get('group');
 
         $groups = $this->groups->all();
 
-        if ($currentGroup = $this->groups->active($group)) {
-            /** @var EloquentCollection $links */
-            $links = $this->links->where('group_id', $currentGroup->getKey())->get()->toTree();
+        $currentGroup = $this->groups->active($group);
+
+        if ($id) {
+            $link = $this->links->find($id);
+            $links = $this->links->findChildren($id, 0, true);
+        } elseif ($currentGroup) {
+            $links = $this->links->findRootByGroup($currentGroup, 0, true);
         }
 
-        return view('anomaly.module.navigation::links.index', compact('links', 'linkTypes', 'groups', 'currentGroup', 'inner', 'title'));
+        $model = preg_quote(get_class($this->links->getModel()), '\\');
+
+        return view('anomaly.module.navigation::links.index',
+            compact('link', 'links', 'groups', 'currentGroup', 'type', 'model')
+        );
     }
 
-    public function form(LinkFormBuilder $form, $group, $type, $id = null)
+    public function form(LinkFormBuilder $form, Request $request, $id = null)
     {
-        if (!$extension = $this->dispatch(new GetLinkType($type))) {
-            return redirect()->back();
-        }
-
-        return $form->setGroup($this->groups->active($group))->setExtension($extension)->render($id);
+        return $request->get('type') ? $form->render($id) : redirect()->back();
     }
 
-    public function search(LinkTypeRepositoryInterface $extensions, $type = null)
+    public function search(LinkTypeRepositoryInterface $extensions)
     {
         $results = [];
 
+        $type = $this->request->get('type');
         $query = $this->request->get('q');
 
         if (($extension = $extensions->findByType($type))) {

@@ -36,6 +36,7 @@ class GroupRepository implements GroupRepositoryInterface
     }
 
     /**
+     * @param null $slug
      * @return GroupModel
      */
     public function active($slug = null)
@@ -54,5 +55,26 @@ class GroupRepository implements GroupRepositoryInterface
     public function findBySlug($slug)
     {
         return $this->groups->findBySlug($slug);
+    }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        /** @var GroupModel $group */
+        $group = $this->groups->find($id);
+        return $group ? $group->delete() : false;
+    }
+
+    /**
+     * @param $id
+     * @param $maxDepth
+     * @return mixed
+     */
+    public function updateMaxDepth($id, $maxDepth)
+    {
+        return $this->groups->where('id', $id)->update(['max_depth' => $maxDepth]);
     }
 }

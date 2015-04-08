@@ -1,20 +1,19 @@
 <?php namespace Anomaly\NavigationModule;
 
-
-use Anomaly\NavigationModule\Command\GetLinkTypeButtons;
-use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\LinkType\Command\GetLinkTypeButtons;
 use Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanelBuilder;
 use Illuminate\Foundation\Bus\DispatchesCommands;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
+/**
+ * Class NavigationModuleSectionsHandler
+ * @package Anomaly\NavigationModule
+ */
 class NavigationModuleSectionsHandler
 {
     use DispatchesCommands;
 
     public function handle(ControlPanelBuilder $builder)
     {
-
         $buttons = [];
 
         $linkTypeButtons = $this->dispatch(new GetLinkTypeButtons());
@@ -27,14 +26,15 @@ class NavigationModuleSectionsHandler
             ];
         }
 
-        $buttons[] = [
+/*        $buttons[] = [
             'button' => 'new',
             'text'   => 'New Group',
             'href'   => route('admin.navigation.groups.create'),
-        ];
+        ];*/
 
         $builder->setSections([
-            'links' => [
+            'links'  => [
+                'href'    => route('admin.navigation'),
                 'buttons' => $buttons
             ],
             'groups' => [

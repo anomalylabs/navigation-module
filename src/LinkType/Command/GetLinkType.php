@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Command;
+<?php namespace Anomaly\NavigationModule\LinkType\Command;
 
 
 use Anomaly\NavigationModule\Link\Contract\LinkTypeRepositoryInterface;

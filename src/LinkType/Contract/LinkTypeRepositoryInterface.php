@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Link\Contract;
+<?php namespace Anomaly\NavigationModule\LinkType\Contract;
 
 
 use Anomaly\Streams\Platform\Addon\Extension\Extension;

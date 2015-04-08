@@ -1,6 +1,6 @@
-<?php namespace Anomaly\NavigationModule\Link;
+<?php namespace Anomaly\NavigationModule\LinkType;
 
-use Anomaly\NavigationModule\Link\Contract\LinkTypeRepositoryInterface;
+use Anomaly\NavigationModule\LinkType\Contract\LinkTypeRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 
 /**

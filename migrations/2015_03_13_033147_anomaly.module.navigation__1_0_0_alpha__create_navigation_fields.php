@@ -11,25 +11,39 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationFields extends Migrati
      * @var array
      */
     protected $fields = [
-        'title'     => 'anomaly.field_type.text',
-        'linkable'  => 'anomaly.field_type.polymorphic',
-        'group'     => [
+        'title'    => 'anomaly.field_type.text',
+        'slug'     => [
+            'type'   => 'anomaly.field_type.slug',
+            'config' => [
+                'slugify' => 'title'
+            ]
+        ],
+        'linkable' => 'anomaly.field_type.polymorphic',
+        'group'    => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Group\GroupModel'
             ]
         ],
-        'scope'     => [
-            'type'   => 'anomaly.field_type.text',
+        'parent'   => [
+            'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'default_value' => 'default',
+                'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
         ],
-        'slug'      => 'anomaly.field_type.slug',
-        'parent_id' => 'anomaly.field_type.integer',
-        'left'      => 'anomaly.field_type.integer',
-        'right'     => 'anomaly.field_type.integer',
-        'depth'     => 'anomaly.field_type.integer',
+        'type'     => [
+            'type'   => 'anomaly.field_type.text',
+            'config' => [
+                'default_value' => 'url',
+            ]
+        ],
+        'hidden'   => [
+            'type'   => 'anomaly.field_type.boolean',
+            'config' => [
+                'default_value' => false,
+            ]
+        ],
+        'max_depth' => 'anomaly.field_type.integer'
     ];
 
 }

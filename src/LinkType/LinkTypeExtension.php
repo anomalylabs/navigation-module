@@ -1,6 +1,6 @@
-<?php namespace Anomaly\NavigationModule\Link;
+<?php namespace Anomaly\NavigationModule\LinkType;
 
-use Anomaly\NavigationModule\Link\Contract\LinkTypeExtensionInterface;
+use Anomaly\NavigationModule\LinkType\Contract\LinkTypeExtensionInterface;
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\DispatchesCommands;

@@ -1,9 +1,10 @@
 <?php namespace Anomaly\NavigationModule\Group;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationGroupsEntryModel;
 
 
-class GroupModel extends NavigationGroupsEntryModel
+class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
 {
 
     /**
@@ -20,5 +21,12 @@ class GroupModel extends NavigationGroupsEntryModel
         return $this->where('slug', $slug)->first();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMaxDepth()
+    {
+        return $this->getAttribute('max_depth');
+    }
 
 }

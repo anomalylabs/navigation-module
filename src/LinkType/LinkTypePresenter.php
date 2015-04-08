@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Link;
+<?php namespace Anomaly\NavigationModule\LinkType;
 
 use Anomaly\Streams\Platform\Addon\AddonPresenter;
 

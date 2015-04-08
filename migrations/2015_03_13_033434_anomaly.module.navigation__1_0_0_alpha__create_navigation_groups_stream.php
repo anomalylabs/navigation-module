@@ -11,8 +11,9 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationGroupsStream extends M
      * @var array
      */
     protected $stream = [
-        'slug' => 'groups',
-        'locked' => true,
+        'namespace' => 'navigation',
+        'slug'      => 'groups',
+        'locked'    => true,
     ];
 
     /**
@@ -21,13 +22,14 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationGroupsStream extends M
      * @var array
      */
     protected $assignments = [
-        'title' => [
+        'title'     => [
             'required' => true
         ],
-        'slug' => [
+        'slug'      => [
             'required' => true,
-            'unique' => true,
+            'unique'   => true,
         ],
+        'max_depth' => []
     ];
 
 }

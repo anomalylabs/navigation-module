@@ -11,9 +11,19 @@ use Illuminate\Routing\Router;
 class NavigationModuleServiceProvider extends AddonServiceProvider
 {
 
+    /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\NavigationModule\NavigationModulePlugin'
+    ];
+
     protected $bindings = [
-        'Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface'   => 'Anomaly\NavigationModule\Group\GroupRepository',
-        'Anomaly\NavigationModule\Link\Contract\LinkTypeRepositoryInterface' => 'Anomaly\NavigationModule\Link\LinkTypeRepository',
+        'Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface'       => 'Anomaly\NavigationModule\Group\GroupRepository',
+        'Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface'         => 'Anomaly\NavigationModule\Link\LinkRepository',
+        'Anomaly\NavigationModule\LinkType\Contract\LinkTypeRepositoryInterface' => 'Anomaly\NavigationModule\LinkType\LinkTypeRepository',
     ];
 
     public function map(Router $router)
@@ -30,23 +40,32 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
             /**
              * Links
              */
+            $router->get('/', [
+                'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
+                'as'   => 'admin.navigation'
+            ]);
 
-            $router->get('links/{group?}', [
+            $router->get('links', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
                 'as'   => 'admin.navigation.links'
-            ])->where('group', $patterns['slug']);
+            ]);
 
-            $router->any('links/{group}/{type}/{id?}', [
+            $router->any('links', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@form',
                 'as'   => 'admin.navigation.links.create'
-            ])->where('group', $patterns['slug'])->where('type', $patterns['slug']);
+            ])->where('group', $patterns['slug']);
 
-            $router->any('links/{id}/delete', [
+            $router->any('links/edit/{id}', [
+                'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@form',
+                'as'   => 'admin.navigation.links.edit'
+            ])->where('group', $patterns['slug']);
+
+            $router->any('links/delete/{id}', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@delete',
                 'as'   => 'admin.navigation.links.delete'
             ])->where('type', $patterns['numeric']);
 
-            $router->any('link_type/search', [
+            $router->any('link_type/search/{type}', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@search',
                 'as'   => 'admin.navigation.link_type.search'
             ]);
@@ -64,12 +83,12 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
                 'as'   => 'admin.navigation.groups.create'
             ]);
 
-            $router->any('groups/{id}', [
+            $router->any('groups/edit/{id}', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@form',
                 'as'   => 'admin.navigation.groups.edit'
             ])->where('id', $patterns['numeric']);
 
-            $router->any('links/{id}/delete', [
+            $router->any('links/delete/{id}', [
                 'uses' => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@delete',
                 'as'   => 'admin.navigation.groups.delete'
             ])->where('id', $patterns['numeric']);

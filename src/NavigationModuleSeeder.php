@@ -1,8 +1,7 @@
 <?php namespace Anomaly\NavigationModule;
 
-use Anomaly\NavigationModule\Link\LinkModel;
+use Anomaly\NavigationModule\Group\GroupModel;
 use Illuminate\Database\Seeder;
-use Obrignoni\NavigationModule\Group\GroupModel;
 
 /**
  * Class NavigationModuleSeeder
@@ -13,12 +12,14 @@ class NavigationModuleSeeder extends Seeder
 
     public function run()
     {
-        $group = 'Top';
+        $groups = ['Header', 'Footer'];
 
-        GroupModel::create([
-            'slug' => str_slug($group),
-            'title' => $group,
-        ]);
+        foreach ($groups as $group) {
+            GroupModel::create([
+                'slug'  => str_slug($group),
+                'title' => $group,
+            ]);
+        }
     }
 
 }
