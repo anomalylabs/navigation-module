@@ -6,10 +6,12 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
  * Class GroupPresenter
+ *
  * @package Anomaly\NavigationModule\Group
  */
 class GroupPresenter extends EloquentPresenter
 {
+
     use DispatchesCommands;
 
     public function presentAdminUrl()
@@ -20,7 +22,7 @@ class GroupPresenter extends EloquentPresenter
     public function presentActive()
     {
         $activeGroup = $this->dispatch(new GetActiveGroup());
+
         return ($this->object->slug == $activeGroup->slug) ? 'active' : null;
     }
-
 }

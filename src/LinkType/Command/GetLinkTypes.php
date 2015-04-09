@@ -19,11 +19,11 @@ class GetLinkTypes implements SelfHandling
         foreach ($linkTypes as $type) {
 //            $type = $type->getPresenter();
 
-            $slug = $type->getSlug();
+            $slug        = $type->getSlug();
             $type->title = trans("anomaly.extension.{$slug}::addon.option.name");
-            $type->uri = $slug;
+            $type->uri   = $slug;
         }
+
         return $linkTypes;
     }
-
 }

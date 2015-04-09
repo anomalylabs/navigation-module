@@ -2,7 +2,6 @@
 
 
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 
 class GroupFieldOptionsHandler
 {
@@ -11,11 +10,10 @@ class GroupFieldOptionsHandler
     {
         $options = [];
 
-        foreach($repository->all() as $group) {
+        foreach ($repository->all() as $group) {
             $options[$group->getKey()] = $group->title;
         }
 
         return $options;
     }
-
 }

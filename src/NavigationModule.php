@@ -5,19 +5,26 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 /**
  * Class NavigationModule
  *
- * @package Anomaly\NavigationModule
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\NavigationModule
  */
 class NavigationModule extends Module
 {
 
     /**
+     * The module icon.
+     *
      * @var string
      */
-    protected $navigation = 'streams.navigation.structure';
+    protected $icon = 'sitemap';
 
     /**
+     * The sections handler.
+     *
      * @var string
      */
-    protected $sections = 'Anomaly\NavigationModule\NavigationModuleSectionsHandler@handle';
+    protected $sections = 'Anomaly\NavigationModule\NavigationModuleSections@handle';
 
 }

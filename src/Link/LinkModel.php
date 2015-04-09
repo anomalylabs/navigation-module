@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class LinkModel
+ *
  * @package Anomaly\NavigationModule\Link
  */
 class LinkModel extends NavigationLinksEntryModel implements LinkInterface
@@ -27,7 +28,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     /**
      * Find children links by a parent link slug.
      *
-     * @param $slug
+     * @param     $slug
      * @param int $maxDepth
      * @return array|EloquentCollection
      */
@@ -38,14 +39,15 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         if ($link = $this->where('slug', $slug)->first(['id', 'slug'])) {
             $children = $this->findChildren($link->getKey(), $maxDepth ?: $link->getMaxDepth());
         }
+
         return $children;
     }
 
     /**
      * Find children links by a parent link id.
      *
-     * @param $id
-     * @param int $maxDepth
+     * @param      $id
+     * @param int  $maxDepth
      * @param bool $showHidden
      * @return EloquentCollection
      */
@@ -71,8 +73,8 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 
     /**
      * @param GroupInterface $group
-     * @param int $maxDepth
-     * @param bool $showHidden
+     * @param int            $maxDepth
+     * @param bool           $showHidden
      * @return EloquentCollection
      */
     public function findRootByGroup(GroupInterface $group, $maxDepth = 0, $showHidden = false)
@@ -171,5 +173,4 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 
         return $eager;
     }
-
 }

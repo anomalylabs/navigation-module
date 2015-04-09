@@ -1,7 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Group;
 
 
-use Anomaly\Streams\Platform\Ui\Form\Form;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 class GroupFormBuilder extends FormBuilder

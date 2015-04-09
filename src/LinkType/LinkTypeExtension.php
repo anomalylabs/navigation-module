@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
  */
 abstract class LinkTypeExtension extends Extension implements LinkTypeExtensionInterface
 {
+
     use DispatchesCommands;
 
     /**
@@ -80,6 +81,7 @@ abstract class LinkTypeExtension extends Extension implements LinkTypeExtensionI
     public function getLinkType()
     {
         $segments = explode('.', $this->getProvides());
+
         return $segments[count($segments) - 1];
     }
 
@@ -90,5 +92,4 @@ abstract class LinkTypeExtension extends Extension implements LinkTypeExtensionI
     {
         return $this->descriptionHandler;
     }
-
 }

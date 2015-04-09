@@ -22,8 +22,8 @@ interface LinkRepositoryInterface
     /**
      * Find children links by a parent link slug.
      *
-     * @param $slug
-     * @param int $maxDepth
+     * @param      $slug
+     * @param int  $maxDepth
      * @param bool $showHidden
      * @return EloquentCollection|array
      */
@@ -32,8 +32,8 @@ interface LinkRepositoryInterface
     /**
      * Find children links by a parent link id.
      *
-     * @param $id
-     * @param int $maxDepth
+     * @param      $id
+     * @param int  $maxDepth
      * @param bool $showHidden
      * @return EloquentCollection
      */
@@ -41,8 +41,8 @@ interface LinkRepositoryInterface
 
     /**
      * @param GroupInterface $group
-     * @param int $maxDepth
-     * @param bool $showHidden
+     * @param int            $maxDepth
+     * @param bool           $showHidden
      * @return EloquentCollection
      */
     public function findRootByGroup(GroupInterface $group, $maxDepth = 0, $showHidden = false);

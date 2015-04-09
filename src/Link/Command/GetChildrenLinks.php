@@ -19,13 +19,11 @@ class GetChildrenLinks implements SelfHandling
 
     public function __construct($link, $maxDepth = 0)
     {
-        $this->link = $link;
+        $this->link     = $link;
         $this->maxDepth = $maxDepth;
     }
 
     public function handle(LinkRepositoryInterface $links)
     {
-
     }
-
 }

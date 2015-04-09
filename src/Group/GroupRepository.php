@@ -4,6 +4,7 @@ use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 
 /**
  * Class GroupRepository
+ *
  * @package Anomaly\NavigationModule\Group
  */
 class GroupRepository implements GroupRepositoryInterface
@@ -65,6 +66,7 @@ class GroupRepository implements GroupRepositoryInterface
     {
         /** @var GroupModel $group */
         $group = $this->groups->find($id);
+
         return $group ? $group->delete() : false;
     }
 

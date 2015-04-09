@@ -1,7 +1,6 @@
 <?php namespace Anomaly\NavigationModule\LinkType\Contract;
 
 
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 
 interface LinkTypeRepositoryInterface
@@ -17,5 +16,4 @@ interface LinkTypeRepositoryInterface
      * @return LinkTypeExtensionInterface|null
      */
     public function findByType($type);
-
 }

@@ -20,30 +20,30 @@ class LinksController extends AdminController
      * @var Request
      */
     private $request;
+
     /**
      * @var LinkModel
      */
     private $links;
 
     /**
-     * @param Request $request
+     * @param Request                  $request
      * @param GroupRepositoryInterface $groups
-     * @param LinkRepositoryInterface $links
+     * @param LinkRepositoryInterface  $links
      */
     public function __construct(
         Request $request,
         GroupRepositoryInterface $groups,
         LinkRepositoryInterface $links
-    )
-    {
-        $this->groups = $groups;
+    ) {
+        $this->groups  = $groups;
         $this->request = $request;
-        $this->links = $links;
+        $this->links   = $links;
     }
 
     public function index()
     {
-        $id = $this->request->get('id');
+        $id    = $this->request->get('id');
         $group = $this->request->get('group');
 
         $groups = $this->groups->all();
@@ -51,7 +51,7 @@ class LinksController extends AdminController
         $currentGroup = $this->groups->active($group);
 
         if ($id) {
-            $link = $this->links->find($id);
+            $link  = $this->links->find($id);
             $links = $this->links->findChildren($id, 0, true);
         } elseif ($currentGroup) {
             $links = $this->links->findRootByGroup($currentGroup, 0, true);
@@ -59,7 +59,8 @@ class LinksController extends AdminController
 
         $model = preg_quote(get_class($this->links->getModel()), '\\');
 
-        return view('anomaly.module.navigation::links.index',
+        return view(
+            'anomaly.module.navigation::links.index',
             compact('link', 'links', 'groups', 'currentGroup', 'type', 'model')
         );
     }
@@ -73,7 +74,7 @@ class LinksController extends AdminController
     {
         $results = [];
 
-        $type = $this->request->get('type');
+        $type  = $this->request->get('type');
         $query = $this->request->get('q');
 
         if (($extension = $extensions->findByType($type))) {
@@ -83,7 +84,6 @@ class LinksController extends AdminController
             if ($query) {
 
                 $collection = $model->where($extension->getSearchField(), 'like', "%{$query}%")->take(10)->get();
-
             } else {
 
                 $collection = $model->take(10)->get();
@@ -106,10 +106,8 @@ class LinksController extends AdminController
 
                 $results[] = $result;
             }
-
         }
 
         return response()->json(['results' => $results]);
     }
-
 }

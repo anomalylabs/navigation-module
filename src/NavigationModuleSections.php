@@ -5,15 +5,23 @@ use Anomaly\Streams\Platform\Ui\ControlPanel\ControlPanelBuilder;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
- * Class NavigationModuleSectionsHandler
+ * Class NavigationModuleSections
  *
- * @package Anomaly\NavigationModule
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\NavigationModule
  */
-class NavigationModuleSectionsHandler
+class NavigationModuleSections
 {
 
     use DispatchesCommands;
 
+    /**
+     * Handle the module sections.
+     *
+     * @param ControlPanelBuilder $builder
+     */
     public function handle(ControlPanelBuilder $builder)
     {
         $builder->setSections(

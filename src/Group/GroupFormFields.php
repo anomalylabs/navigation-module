@@ -2,6 +2,7 @@
 
 /**
  * Class GroupFormFields
+ *
  * @package Anomaly\NavigationModule\Group
  */
 class GroupFormFields
@@ -12,15 +13,17 @@ class GroupFormFields
      */
     public function handle(GroupFormBuilder $builder)
     {
-        $builder->setFormOption('sections', [
+        $builder->setFormOption(
+            'sections',
             [
-                'title'  => trans('anomaly.module.navigation::button.new_group'),
-                'fields' => [
-                    'title',
-                    'slug',
-                ],
+                [
+                    'title'  => trans('anomaly.module.navigation::button.new_group'),
+                    'fields' => [
+                        'title',
+                        'slug',
+                    ],
+                ]
             ]
-        ]);
+        );
     }
-
 }

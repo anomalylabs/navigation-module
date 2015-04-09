@@ -3,6 +3,7 @@
 
 interface GroupInterface
 {
+
     /**
      * Get the group id
      *
@@ -16,5 +17,4 @@ interface GroupInterface
      * @return int
      */
     public function getMaxDepth();
-
 }

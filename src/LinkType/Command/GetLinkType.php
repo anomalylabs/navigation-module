@@ -6,6 +6,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 
 class GetLinkType implements SelfHandling
 {
+
     /**
      * @var
      */
@@ -27,5 +28,4 @@ class GetLinkType implements SelfHandling
     {
         return $linkTypes->findByType($this->type);
     }
-
 }

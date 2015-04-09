@@ -30,5 +30,4 @@ interface LinkInterface
      * @return int
      */
     public function getMaxDepth();
-
 }

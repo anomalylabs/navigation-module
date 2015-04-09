@@ -10,5 +10,4 @@ interface LinkableInterface
      * @return string
      */
     public function getUrl();
-
 }

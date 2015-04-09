@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class GetLinkTypeButtons
+ *
  * @package Anomaly\NavigationModule\Command
  */
 class GetLinkTypeButtons implements SelfHandling
@@ -15,8 +16,8 @@ class GetLinkTypeButtons implements SelfHandling
 
     /**
      * @param LinkTypeRepositoryInterface $repository
-     * @param GroupRepositoryInterface $groups
-     * @param Request $request
+     * @param GroupRepositoryInterface    $groups
+     * @param Request                     $request
      * @return array
      */
     public function handle(LinkTypeRepositoryInterface $repository, GroupRepositoryInterface $groups, Request $request)
@@ -30,18 +31,19 @@ class GetLinkTypeButtons implements SelfHandling
             foreach ($repository->all() as $linkType) {
                 $buttons[] = [
                     'type' => 'new',
-                    'icon'   => 'fa fa-link',
-                    'text'   => trans($linkType->getNamespace('addon.label')),
-                    'href'   => route('admin.navigation.links.create', [
-                        'group' => $activeGroup->slug,
-                        'type'  => $linkType->getLinkType(),
-                    ]),
+                    'icon' => 'fa fa-link',
+                    'text' => trans($linkType->getNamespace('addon.label')),
+                    'href' => route(
+                        'admin.navigation.links.create',
+                        [
+                            'group' => $activeGroup->slug,
+                            'type'  => $linkType->getLinkType(),
+                        ]
+                    ),
                 ];
             }
         }
 
         return $buttons;
     }
-
-
 }

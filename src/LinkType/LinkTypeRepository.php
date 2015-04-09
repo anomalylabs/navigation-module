@@ -5,6 +5,7 @@ use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 
 /**
  * Class LinkTypeRepository
+ *
  * @package Anomaly\NavigationModule\Link
  */
 class LinkTypeRepository implements LinkTypeRepositoryInterface
@@ -41,5 +42,4 @@ class LinkTypeRepository implements LinkTypeRepositoryInterface
     {
         return $this->extensions->find("{$this->providesPrefix}.{$type}");
     }
-
 }

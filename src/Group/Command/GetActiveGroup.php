@@ -12,5 +12,4 @@ class GetActiveGroup implements SelfHandling
     {
         return $groups->active($request->segment('group'));
     }
-
 }

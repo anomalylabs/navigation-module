@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class NavigationModuleSeeder
+ *
  * @package Anomaly\NavigationModule
  */
 class NavigationModuleSeeder extends Seeder
@@ -15,11 +16,12 @@ class NavigationModuleSeeder extends Seeder
         $groups = ['Header', 'Footer'];
 
         foreach ($groups as $group) {
-            GroupModel::create([
-                'slug'  => str_slug($group),
-                'title' => $group,
-            ]);
+            GroupModel::create(
+                [
+                    'slug'  => str_slug($group),
+                    'title' => $group,
+                ]
+            );
         }
     }
-
 }

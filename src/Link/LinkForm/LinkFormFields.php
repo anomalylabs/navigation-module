@@ -12,8 +12,8 @@ class LinkFormFields
         LinkFormBuilder $builder,
         LinkTypeRepositoryInterface $linkTypes,
         GroupRepositoryInterface $groups,
-        Request $request)
-    {
+        Request $request
+    ) {
         $fields = [];
 
         if ($extension = $linkTypes->findByType($request->get('type'))) {
@@ -24,7 +24,7 @@ class LinkFormFields
                 'group'    => [
                     'accessor' => 'Anomaly\NavigationModule\Link\LinkForm\Accessor\GroupAccessor',
                     'config'   => [
-                        'default_value' => function() use($group) {
+                        'default_value' => function () use ($group) {
                             return $group ? $group->getKey() : null;
                         },
                     ],
@@ -35,30 +35,37 @@ class LinkFormFields
                     'instructions' => $extension->getInstructions(),
                     'config'       => [
                         'title_field' => $extension->getTitleField(),
-                        'url'         => route('admin.navigation.link_type.search', ['type' => $extension->getLinkType()]),
+                        'url'         => route(
+                            'admin.navigation.link_type.search',
+                            ['type' => $extension->getLinkType()]
+                        ),
                         'related'     => get_class($extension->getModel()),
                     ],
                 ],
                 'hidden'
             ];
 
-            $builder->setFormOption('sections', [
+            $builder->setFormOption(
+                'sections',
                 [
-                    'title'  => trans('anomaly.module.navigation::link_type.new_link', ['resource' => trans($extension->getLabel())]),
-                    'fields' => [
-                        'title',
-                        'linkable',
-                        'group',
-                        'hidden'
-                    ],
+                    [
+                        'title'  => trans(
+                            'anomaly.module.navigation::link_type.new_link',
+                            ['resource' => trans($extension->getLabel())]
+                        ),
+                        'fields' => [
+                            'title',
+                            'linkable',
+                            'group',
+                            'hidden'
+                        ],
 
+                    ]
                 ]
-            ]);
-
+            );
         }
 
         $builder->setFields($fields);
         $builder->setFormOption('eager', ['linkable']);
     }
-
 }

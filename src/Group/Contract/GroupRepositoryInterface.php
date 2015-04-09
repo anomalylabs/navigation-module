@@ -1,9 +1,11 @@
 <?php namespace Anomaly\NavigationModule\Group\Contract;
+
 use Anomaly\NavigationModule\Group\GroupModel;
 use Illuminate\Support\Collection;
 
 /**
  * Interface GroupRepositoryInterface
+ *
  * @package Anomaly\NavigationModule\Group\Contract
  */
 interface GroupRepositoryInterface
@@ -38,5 +40,4 @@ interface GroupRepositoryInterface
      * @return mixed
      */
     public function updateMaxDepth($id, $maxDepth);
-
 }

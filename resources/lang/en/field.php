@@ -1,24 +1,24 @@
 <?php
 
 return [
-    'slug' => [
-        'name' => 'Slug',
+    'slug'     => [
+        'name'         => 'Slug',
         'instructions' => 'The unique group slug.',
-        'placeholder' => '.i.e about',
+        'placeholder'  => '.i.e about',
     ],
-    'title' => [
-        'name' => 'Title',
+    'title'    => [
+        'name'         => 'Title',
         'instructions' => '',
-        'placeholder' => '',
+        'placeholder'  => '',
     ],
     'linkable' => [
-        'name' => 'Linkable',
+        'name'         => 'Linkable',
         'instructions' => 'The linkable resource.',
-        'placeholder' => '',
+        'placeholder'  => '',
     ],
-    'group' => [
-        'name' => 'Group',
+    'group'    => [
+        'name'         => 'Group',
         'instructions' => 'Select the navigation group.',
-        'placeholder' => '',
+        'placeholder'  => '',
     ],
 ];

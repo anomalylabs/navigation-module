@@ -4,6 +4,7 @@ use Anomaly\Streams\Platform\Addon\AddonPresenter;
 
 /**
  * Class LinkTypePresenter
+ *
  * @package Anomaly\NavigationModule\Link
  */
 class LinkTypePresenter extends AddonPresenter
@@ -18,5 +19,4 @@ class LinkTypePresenter extends AddonPresenter
     {
         return 'llala';
     }
-
 }

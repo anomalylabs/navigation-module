@@ -20,23 +20,23 @@ class GetRootLinks implements SelfHandling
 
     /**
      * @param string $group
-     * @param int $maxDepth
+     * @param int    $maxDepth
      */
     public function __construct($group, $maxDepth = 0)
     {
-        $this->group = $group;
+        $this->group    = $group;
         $this->maxDepth = $maxDepth;
     }
 
     /**
-     * @param LinkRepositoryInterface $links
+     * @param LinkRepositoryInterface  $links
      * @param GroupRepositoryInterface $groups
      * @return \Anomaly\Streams\Platform\Model\EloquentCollection|array
      */
     public function handle(LinkRepositoryInterface $links, GroupRepositoryInterface $groups)
     {
         $group = $groups->findBySlug($this->group);
+
         return $group ? $links->findRootByGroup($group) : [];
     }
-
 }

@@ -6,10 +6,12 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
  * Class NavigationModulePlugin
+ *
  * @package Anomaly\NavigationModule
  */
 class NavigationModulePlugin extends Plugin
 {
+
     use DispatchesCommands;
 
     /**
@@ -26,8 +28,8 @@ class NavigationModulePlugin extends Plugin
     }
 
     /**
-     * @param $groupSlug
-     * @param int $maxDepth
+     * @param      $groupSlug
+     * @param int  $maxDepth
      * @param bool $showHidden
      * @return mixed
      */
@@ -37,12 +39,11 @@ class NavigationModulePlugin extends Plugin
     }
 
     /**
-     * @param $linkSlug
+     * @param     $linkSlug
      * @param int $maxDepth
      */
     public function children($linkSlug, $maxDepth = 0)
     {
         //return $this->
     }
-
 }

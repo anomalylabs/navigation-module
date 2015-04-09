@@ -19,17 +19,19 @@ class SetFormOptions implements SelfHandling
 
     public function handle()
     {
-        $this->builder->setFormOption('sections', [
+        $this->builder->setFormOption(
+            'sections',
             [
                 [
-                    'title'  => 'module::section.new_link',
-                    'fields' => [
+                    [
+                        'title'  => 'module::section.new_link',
+                        'fields' => [
 
-                        'title',
+                            'title',
+                        ]
                     ]
                 ]
             ]
-        ]);
+        );
     }
-
 }

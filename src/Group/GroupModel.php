@@ -28,5 +28,4 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
     {
         return $this->getAttribute('max_depth');
     }
-
 }

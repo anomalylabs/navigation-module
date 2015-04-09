@@ -50,5 +50,4 @@ interface LinkTypeExtensionInterface extends ExtensionInterface
      * @return string
      */
     public function getDescriptionHandler();
-
 }

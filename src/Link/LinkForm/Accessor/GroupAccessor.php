@@ -5,6 +5,7 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 class GroupAccessor
 {
+
     public function __construct($fieldType)
     {
         dd($fieldType);
@@ -15,5 +16,4 @@ class GroupAccessor
     {
         dd($entry);
     }
-
 }

@@ -32,7 +32,7 @@ class AnomalyModuleNavigation_1_0_0_alpha_CreateNavigationLinksStream extends Mi
         'linkable'  => [],
         'group'     => [],
         'parent'    => [],
-        'type'    => [],
+        'type'      => [],
         'hidden'    => [],
         'max_depth' => [],
     ];

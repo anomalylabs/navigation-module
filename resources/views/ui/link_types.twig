@@ -9,6 +9,7 @@
             <p>
                 Select a link type, search and select a resource.
             </p>
+
             <div class="grouped inline fields">
                 {% for type in linkTypes %}
                     <div class="field">
@@ -25,10 +26,10 @@
             {{ type.getForm()|raw }}
         {% endfor %}
 
-{#        <div class="ui search">
-            <input class="prompt" type="text" placeholder="Find a Url">
-            <div class="results"></div>
-        </div>#}
+        {#        <div class="ui search">
+                    <input class="prompt" type="text" placeholder="Find a Url">
+                    <div class="results"></div>
+                </div>#}
     </div>
     <div class="actions">
         <div class="ui button">Cancel</div>
