@@ -30,7 +30,15 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
-        ]
+        ],
+        'type'   => [
+            'type'   => 'anomaly.field_type.addon',
+            'config' => [
+                'type'      => 'extensions',
+                'providing' => 'anomaly.module.navigation::link_type.*'
+            ]
+        ],
+        'entry'  => 'anomaly.field_type.polymorphic'
     ];
 
 }
