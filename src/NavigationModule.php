@@ -18,13 +18,19 @@ class NavigationModule extends Module
      *
      * @var string
      */
-    protected $icon = 'sitemap';
+    protected $icon = 'link';
 
     /**
-     * The sections handler.
+     * The module sections.
      *
-     * @var string
+     * @var array
      */
-    protected $sections = 'Anomaly\NavigationModule\NavigationModuleSections@handle';
+    protected $sections = [
+        'groups' => [
+            'buttons' => [
+                'new_group'
+            ]
+        ]
+    ];
 
 }

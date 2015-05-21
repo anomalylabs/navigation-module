@@ -2,9 +2,8 @@
 
 return [
     'name'        => 'Navigation',
-    'description' => 'Manage navigation links.',
+    'description' => 'Navigation management.',
     'section'     => [
-        'links'  => 'Links',
-        'groups' => 'Groups',
-    ],
+        'groups' => 'Groups'
+    ]
 ];
