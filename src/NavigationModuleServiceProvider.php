@@ -19,9 +19,10 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'admin/navigation'           => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@index',
-        'admin/navigation/create'    => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@create',
-        'admin/navigation/edit/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@edit'
+        'admin/navigation'                       => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@index',
+        'admin/navigation/create'                => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@create',
+        'admin/navigation/edit/{id}'             => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@edit',
+        'admin/navigation/ajax/choose_link_type' => 'Anomaly\NavigationModule\Http\Controller\Admin\AjaxController@chooseLinkType'
     ];
 
 }

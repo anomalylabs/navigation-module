@@ -28,10 +28,13 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
      * @var array
      */
     protected $assignments = [
-        'type'  => [
+        'type'   => [
             'required' => true
         ],
-        'entry' => [
+        'entry'  => [
+            'required' => true
+        ],
+        'target' => [
             'required' => true
         ]
     ];

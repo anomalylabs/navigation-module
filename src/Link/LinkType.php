@@ -13,4 +13,13 @@ use Anomaly\Streams\Platform\Addon\Extension\Extension;
 class LinkType extends Extension
 {
 
+    /**
+     * Get the label.
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->getNamespace('addon.label');
+    }
 }

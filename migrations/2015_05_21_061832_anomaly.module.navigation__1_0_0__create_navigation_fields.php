@@ -38,7 +38,16 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                 'providing' => 'anomaly.module.navigation::link_type.*'
             ]
         ],
-        'entry'  => 'anomaly.field_type.polymorphic'
+        'entry'  => 'anomaly.field_type.polymorphic',
+        'target' => [
+            'type'   => 'anomaly.field_type.select',
+            'config' => [
+                'options' => [
+                    '_self'  => 'anomaly.module.navigation::field.target.option.self',
+                    '_blank' => 'anomaly.module.navigation::field.target.option.blank'
+                ]
+            ]
+        ]
     ];
 
 }
