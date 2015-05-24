@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
+use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
  * Class LinkType
@@ -26,7 +27,7 @@ class LinkType extends Extension
     /**
      * Get the form builder
      *
-     * @return \Illuminate\Foundation\Application|mixed
+     * @return FormBuilder
      */
     public function getFormBuilder()
     {

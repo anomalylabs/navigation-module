@@ -32,12 +32,16 @@ class NavigationModule extends Module
             ]
         ],
         'links'  => [
-            'new_link' => [
-                'text'        => 'module::button.new_link',
-                'data-toggle' => 'modal',
-                'data-target' => '#modal',
-                'enabled'     => 'admin/navigation/links/*',
-                'href'        => 'admin/navigation/ajax/choose_link_type/{route.parameters.group}'
+            'buttons' => [
+                'new_group' => [
+                    'href' => 'admin/navigation/create'
+                ],
+                'new_link'  => [
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal',
+                    'text'        => 'module::button.new_link',
+                    'href'        => 'admin/navigation/ajax/choose_link_type/{route.parameters.group}'
+                ]
             ]
         ]
     ];

@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 
 /**
@@ -28,5 +29,16 @@ class LinkRepository implements LinkRepositoryInterface
     public function __construct(LinkModel $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Find a link by it's ID.
+     *
+     * @param $id
+     * @return null|LinkInterface
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
     }
 }

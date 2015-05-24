@@ -11,4 +11,11 @@
 interface LinkRepositoryInterface
 {
 
+    /**
+     * Find a link by it's ID.
+     *
+     * @param $id
+     * @return null|LinkInterface
+     */
+    public function find($id);
 }

@@ -23,6 +23,18 @@ class LinkTreeBuilder extends TreeBuilder
     protected $group = null;
 
     /**
+     * The tree buttons.
+     *
+     * @var array
+     */
+    protected $buttons = [
+        'edit' => [
+            'href' => 'admin/navigation/links/{route.parameters.group}/edit/{entry.id}'
+        ],
+        'delete'
+    ];
+
+    /**
      * The tree options.
      *
      * @var array

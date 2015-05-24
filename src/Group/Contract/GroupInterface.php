@@ -1,5 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Group\Contract;
 
+use Anomaly\NavigationModule\Link\LinkCollection;
+
 /**
  * Interface GroupInterface
  *
@@ -31,4 +33,18 @@ interface GroupInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * Get the related links.
+     *
+     * @return LinkCollection
+     */
+    public function getLinks();
+
+    /**
+     * Return the links relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links();
 }

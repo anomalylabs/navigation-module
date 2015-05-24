@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Link\Form\LinkEntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
@@ -70,6 +71,37 @@ class LinksController extends AdminController
 
         $form->addForm('type', $type->getFormBuilder());
         $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
+
+        $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+
+        return $form->render();
+    }
+
+    /**
+     * Return the form for editing an existing link.
+     *
+     * @param LinkFormBuilder          $link
+     * @param GroupRepositoryInterface $groups
+     * @param ExtensionCollection      $extensions
+     * @param                          $group
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(
+        LinkFormBuilder $link,
+        LinkEntryFormBuilder $form,
+        LinkRepositoryInterface $links,
+        GroupRepositoryInterface $groups,
+        BreadcrumbCollection $breadcrumbs,
+        $group,
+        $id
+    ) {
+        $entry = $links->find($id);
+
+        $form->addForm('type', $entry->getType()->getFormBuilder()->setEntry($entry->getId()));
+        $form->addForm(
+            'link',
+            $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
+        );
 
         $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 

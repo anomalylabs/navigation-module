@@ -37,6 +37,8 @@ class NavigationPlugin extends Plugin
      */
     public function getFunctions()
     {
-        return [];
+        return [
+            new \Twig_SimpleFunction('navigation_render', [$this->functions, 'render'], ['is_safe' => ['html']])
+        ];
     }
 }

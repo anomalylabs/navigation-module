@@ -34,6 +34,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
+        'Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface'   => 'Anomaly\NavigationModule\Link\LinkRepository',
         'Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface' => 'Anomaly\NavigationModule\Group\GroupRepository'
     ];
 
