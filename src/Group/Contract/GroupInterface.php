@@ -11,4 +11,17 @@
 interface GroupInterface
 {
 
+    /**
+     * Get the ID.
+     *
+     * @return null|int
+     */
+    public function getId();
+
+    /**
+     * Get the slug.
+     *
+     * @return string
+     */
+    public function getSlug();
 }

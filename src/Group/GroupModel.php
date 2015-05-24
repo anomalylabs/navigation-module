@@ -14,4 +14,13 @@ use Anomaly\Streams\Platform\Model\Navigation\NavigationGroupsEntryModel;
 class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
 {
 
+    /**
+     * Get the slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }
