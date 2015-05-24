@@ -19,13 +19,13 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        'admin/navigation'                         => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@index',
-        'admin/navigation/create'                  => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@create',
-        'admin/navigation/edit/{id}'               => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@edit',
-        'admin/navigation/links/{group}'           => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
-        'admin/navigation/links/{group}/create'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
-        'admin/navigation/links/{group}/edit/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
-        'admin/navigation/ajax/choose_link_type'   => 'Anomaly\NavigationModule\Http\Controller\Admin\AjaxController@chooseLinkType'
+        'admin/navigation'                               => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@index',
+        'admin/navigation/create'                        => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@create',
+        'admin/navigation/edit/{id}'                     => 'Anomaly\NavigationModule\Http\Controller\Admin\GroupsController@edit',
+        'admin/navigation/links/{group?}'                => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
+        'admin/navigation/links/{group}/create'          => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
+        'admin/navigation/links/{group}/edit/{id}'       => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
+        'admin/navigation/ajax/choose_link_type/{group}' => 'Anomaly\NavigationModule\Http\Controller\Admin\AjaxController@chooseLinkType'
     ];
 
     /**
@@ -35,6 +35,15 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      */
     protected $singletons = [
         'Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface' => 'Anomaly\NavigationModule\Group\GroupRepository'
+    ];
+
+    /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\NavigationModule\NavigationPlugin'
     ];
 
 }

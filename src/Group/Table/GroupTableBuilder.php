@@ -19,7 +19,10 @@ class GroupTableBuilder extends TableBuilder
      * @var array
      */
     protected $columns = [
-        'entry.view_link',
+        [
+            'heading' => 'entry.name',
+            'wrapper' => '<strong>{entry.name}</strong><br><small>{entry.description}</small>'
+        ],
         'slug'
     ];
 
@@ -29,6 +32,12 @@ class GroupTableBuilder extends TableBuilder
      * @var array
      */
     protected $buttons = [
+        [
+            'type' => 'info',
+            'icon' => 'link',
+            'text' => 'Links',
+            'href' => 'admin/navigation/links/{entry.slug}'
+        ],
         'edit'
     ];
 

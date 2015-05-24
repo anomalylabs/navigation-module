@@ -4,6 +4,7 @@ return [
     'name'        => 'Navigation',
     'description' => 'Navigation management.',
     'section'     => [
-        'groups' => 'Groups'
+        'groups' => 'Groups',
+        'links'  => 'Links'
     ]
 ];

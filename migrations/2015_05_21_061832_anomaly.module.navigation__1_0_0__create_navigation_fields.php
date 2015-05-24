@@ -18,34 +18,35 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
      * @var array
      */
     protected $fields = [
-        'name'   => 'anomaly.field_type.text',
-        'slug'   => [
+        'name'        => 'anomaly.field_type.text',
+        'description' => 'anomaly.field_type.textarea',
+        'slug'        => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
                 'slugify' => 'name'
             ]
         ],
-        'group'  => [
+        'group'       => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Group\GroupModel'
             ]
         ],
-        'parent' => [
+        'parent'      => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
         ],
-        'type'   => [
+        'type'        => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
                 'type'      => 'extensions',
                 'providing' => 'anomaly.module.navigation::link_type.*'
             ]
         ],
-        'entry'  => 'anomaly.field_type.polymorphic',
-        'target' => [
+        'entry'       => 'anomaly.field_type.polymorphic',
+        'target'      => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
                 'options' => [

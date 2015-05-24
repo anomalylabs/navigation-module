@@ -1,13 +1,16 @@
 <?php
 
 return [
-    'name'   => [
+    'name'        => [
         'name' => 'Name'
     ],
-    'slug'   => [
+    'slug'        => [
         'name' => 'Slug'
     ],
-    'target' => [
+    'description' => [
+        'name' => 'Description'
+    ],
+    'target'      => [
         'name'   => 'Target',
         'option' => [
             'self'  => 'Load in the current window.',

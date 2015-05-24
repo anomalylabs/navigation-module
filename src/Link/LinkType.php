@@ -22,4 +22,18 @@ class LinkType extends Extension
     {
         return $this->getNamespace('addon.label');
     }
+
+    /**
+     * Get the form builder
+     *
+     * @return \Illuminate\Foundation\Application|mixed
+     */
+    public function getFormBuilder()
+    {
+        $builder = explode('\\', get_class($this));
+
+        $extension = array_pop($builder);
+
+        return app(implode('\\', $builder) . '\Form\\' . substr($extension, 0, -9) . 'FormBuilder');
+    }
 }

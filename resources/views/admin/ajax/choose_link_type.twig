@@ -10,7 +10,7 @@
         <ul class="nav nav-stacked">
             {% for link_type in link_types %}
                 <li>
-                    <a href="{{ url_to('admin/navigation/links/create?link_type=' ~ link_type.namespace) }}">
+                    <a href="{{ url_to('admin/navigation/links/' ~ group ~ '/create?link_type=' ~ link_type.namespace) }}">
                         <strong>{{ trans(link_type.label) }}</strong>
                         <br>
                         <small>{{ trans(link_type.description) }}</small>

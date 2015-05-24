@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Form;
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Link\LinkType;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
@@ -15,7 +16,14 @@ class LinkFormBuilder extends FormBuilder
 {
 
     /**
-     * The group instance.
+     * The related link type.
+     *
+     * @var null|LinkType
+     */
+    protected $type = null;
+
+    /**
+     * The related group.
      *
      * @var null|GroupInterface
      */
@@ -40,6 +48,10 @@ class LinkFormBuilder extends FormBuilder
      */
     public function onReady()
     {
+        if (!$this->getType() && !$this->getEntry()) {
+            throw new \Exception('The $type parameter is required when creating a link.');
+        }
+
         if (!$this->getGroup() && !$this->getEntry()) {
             throw new \Exception('The $group parameter is required when creating a link.');
         }
@@ -55,6 +67,33 @@ class LinkFormBuilder extends FormBuilder
         if (!$entry->group_id && $group = $this->getGroup()) {
             $entry->group_id = $group->getId();
         }
+
+        if (!$entry->type && $type = $this->getType()) {
+            $entry->type = $type->getNamespace();
+        }
+    }
+
+    /**
+     * Get the type.
+     *
+     * @return LinkType|null
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set the type.
+     *
+     * @param LinkType $type
+     * @return $this
+     */
+    public function setType(LinkType $type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**

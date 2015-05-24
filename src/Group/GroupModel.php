@@ -23,4 +23,14 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
     {
         return $this->slug;
     }
+
+    /**
+     * Get the name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }

@@ -28,13 +28,16 @@ class NavigationModule extends Module
     protected $sections = [
         'groups' => [
             'buttons' => [
-                'new_group',
-                [
-                    'text'        => 'New Link',
-                    'data-toggle' => 'modal',
-                    'data-target' => '#modal',
-                    'href'        => 'admin/navigation/ajax/choose_link_type'
-                ]
+                'new_group'
+            ]
+        ],
+        'links'  => [
+            'new_link' => [
+                'text'        => 'module::button.new_link',
+                'data-toggle' => 'modal',
+                'data-target' => '#modal',
+                'enabled'     => 'admin/navigation/links/*',
+                'href'        => 'admin/navigation/ajax/choose_link_type/{route.parameters.group}'
             ]
         ]
     ];

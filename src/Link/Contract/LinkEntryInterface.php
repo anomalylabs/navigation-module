@@ -1,17 +1,16 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\NavigationModule\Link\LinkType;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
- * Interface LinkInterface
+ * Interface LinkEntryInterface
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Link\Contract
  */
-interface LinkInterface
+interface LinkEntryInterface extends EntryInterface
 {
 
     /**
@@ -20,25 +19,4 @@ interface LinkInterface
      * @return string
      */
     public function getUrl();
-
-    /**
-     * Get the type.
-     *
-     * @return LinkType
-     */
-    public function getType();
-
-    /**
-     * Get the related entry.
-     *
-     * @return EntryInterface
-     */
-    public function getEntry();
-
-    /**
-     * Get the title.
-     *
-     * @return string
-     */
-    public function getTitle();
 }

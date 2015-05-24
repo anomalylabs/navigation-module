@@ -24,4 +24,11 @@ interface GroupInterface
      * @return string
      */
     public function getSlug();
+
+    /**
+     * Get the name.
+     *
+     * @return string
+     */
+    public function getName();
 }

@@ -18,13 +18,14 @@ class AjaxController extends AdminController
      * Return the modal for choosing a link type.
      *
      * @param ExtensionCollection $extensions
+     * @param string              $group
      * @return \Illuminate\View\View
      */
-    public function chooseLinkType(ExtensionCollection $extensions)
+    public function chooseLinkType(ExtensionCollection $extensions, $group)
     {
         return view(
             'module::admin/ajax/choose_link_type',
-            ['link_types' => $extensions->search('anomaly.module.navigation::link_type.*')]
+            ['link_types' => $extensions->search('anomaly.module.navigation::link_type.*'), 'group' => $group]
         );
     }
 }

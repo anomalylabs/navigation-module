@@ -23,6 +23,15 @@ class LinkTreeBuilder extends TreeBuilder
     protected $group = null;
 
     /**
+     * The tree options.
+     *
+     * @var array
+     */
+    protected $options = [
+        'item_value' => 'entry.view_link'
+    ];
+
+    /**
      * Fired when the builder is ready to build.
      *
      * @throws \Exception
