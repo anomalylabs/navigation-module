@@ -97,7 +97,7 @@ class LinksController extends AdminController
     ) {
         $entry = $links->find($id);
 
-        $form->addForm('type', $entry->getType()->getFormBuilder()->setEntry($entry->getId()));
+        $form->addForm('type', $entry->getType()->getFormBuilder()->setEntry($entry->getEntry()->getId()));
         $form->addForm(
             'link',
             $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
