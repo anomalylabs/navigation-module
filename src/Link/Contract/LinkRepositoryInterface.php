@@ -18,4 +18,12 @@ interface LinkRepositoryInterface
      * @return null|LinkInterface
      */
     public function find($id);
+
+    /**
+     * Delete a link.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function delete(LinkInterface $link);
 }

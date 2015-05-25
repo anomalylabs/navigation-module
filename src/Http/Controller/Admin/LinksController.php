@@ -8,6 +8,7 @@ use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 
 /**
@@ -106,5 +107,22 @@ class LinksController extends AdminController
         $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 
         return $form->render();
+    }
+
+    /**
+     * Delete a link and go back.
+     *
+     * @param LinkRepositoryInterface $links
+     * @param Authorizer              $authorizer
+     * @param                         $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(LinkRepositoryInterface $links, Authorizer $authorizer, $id)
+    {
+        $authorizer->authorize('anomaly.module.navigation::links.delete');
+
+        $links->delete($links->find($id));
+
+        return redirect()->back();
     }
 }

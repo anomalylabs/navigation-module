@@ -25,6 +25,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
         'admin/navigation/links/{group?}'                => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
         'admin/navigation/links/{group}/create'          => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
         'admin/navigation/links/{group}/edit/{id}'       => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
+        'admin/navigation/links/delete/{id}'             => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@delete',
         'admin/navigation/ajax/choose_link_type/{group}' => 'Anomaly\NavigationModule\Http\Controller\Admin\AjaxController@chooseLinkType'
     ];
 

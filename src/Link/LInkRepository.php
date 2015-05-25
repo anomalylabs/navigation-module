@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 
 /**
  * Class LinkRepository
@@ -40,5 +41,16 @@ class LinkRepository implements LinkRepositoryInterface
     public function find($id)
     {
         return $this->model->find($id);
+    }
+
+    /**
+     * Delete a link.
+     *
+     * @param LinkInterface|EntryModel $link
+     * @return bool
+     */
+    public function delete(LinkInterface $link)
+    {
+        return $link->delete();
     }
 }
