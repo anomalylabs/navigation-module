@@ -1,4 +1,4 @@
-{% macro links(links, collection) %}
+{% macro links(links, collection, group, options) %}
     {% for link in links %}
         <li class="{{ link.current ? 'current' }} {{ link.active ? 'active' }}">
             <a href="{{ link.url }}" target="{{ link.target }}">
@@ -7,7 +7,7 @@
 
             {% if not collection.children(link.getObject()).isEmpty() %}
                 <ul>
-                    {{ _self.links(collection.children(link.getObject()), collection) }}
+                    {{ _self.links(collection.children(link.getObject()), collection, group, options) }}
                 </ul>
             {% endif %}
         </li>

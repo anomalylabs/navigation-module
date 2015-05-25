@@ -1,7 +1,9 @@
 <?php namespace Anomaly\NavigationModule;
 
+use Anomaly\NavigationModule\Group\Command\GetGroupLinks;
 use Anomaly\NavigationModule\Group\Command\RenderGroup;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Link\LinkCollection;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 
 /**
@@ -44,5 +46,16 @@ class NavigationPluginFunctions
     public function render($group, $options = [])
     {
         return $this->dispatch(new RenderGroup($this->groups->findBySlug($group), $options));
+    }
+
+    /**
+     * Return the processed links for a group.
+     *
+     * @param       $group
+     * @return LinkCollection
+     */
+    public function links($group)
+    {
+        return $this->dispatch(new GetGroupLinks($this->groups->findBySlug($group)));
     }
 }
