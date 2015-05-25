@@ -47,7 +47,7 @@ class SetActiveLinks implements SelfHandling
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-            if ($link->getParentId() == $current->getId()) {
+            if ($current->getParentId() == $link->getId()) {
                 $link->setActive(true);
             }
         }
