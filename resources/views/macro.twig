@@ -1,7 +1,7 @@
 {% macro links(links, collection) %}
     {% for link in links %}
         <li class="{{ link.current ? 'current' }} {{ link.active ? 'active' }}">
-            <a href="{{ link.url }}">
+            <a href="{{ link.url }}" target="{{ link.target }}">
                 {{ link.title }}
             </a>
 
