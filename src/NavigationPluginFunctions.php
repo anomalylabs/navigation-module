@@ -41,21 +41,29 @@ class NavigationPluginFunctions
      *
      * @param       $group
      * @param array $options
-     * @return string
+     * @return null|string
      */
     public function render($group, $options = [])
     {
-        return $this->dispatch(new RenderGroup($this->groups->findBySlug($group), $options));
+        if (!$group = $this->groups->findBySlug($group)) {
+            return null;
+        }
+
+        return $this->dispatch(new RenderGroup($group, $options));
     }
 
     /**
      * Return the processed links for a group.
      *
      * @param       $group
-     * @return LinkCollection
+     * @return null|LinkCollection
      */
     public function links($group)
     {
-        return $this->dispatch(new GetGroupLinks($this->groups->findBySlug($group)));
+        if (!$group = $this->groups->findBySlug($group)) {
+            return null;
+        }
+
+        return $this->dispatch(new GetGroupLinks($group));
     }
 }
