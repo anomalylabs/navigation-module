@@ -16,5 +16,9 @@ return [
             'self'  => 'Load in the current window.',
             'blank' => 'Load in a new window.'
         ]
+    ],
+    'classes'     => [
+        'name'        => 'Classes',
+        'placeholder' => 'Any additional classes (separated by spaces)'
     ]
 ];
