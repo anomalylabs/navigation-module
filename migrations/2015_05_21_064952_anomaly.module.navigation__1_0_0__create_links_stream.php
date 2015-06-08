@@ -40,6 +40,7 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
         'target' => [
             'required' => true
         ],
+        'class',
         'parent'
     ];
 
