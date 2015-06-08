@@ -17,8 +17,8 @@ return [
             'blank' => 'Load in a new window.'
         ]
     ],
-    'classes'     => [
-        'name'        => 'Classes',
+    'class'     => [
+        'name'        => 'Class',
         'placeholder' => 'Any additional classes (separated by spaces)'
     ]
 ];
