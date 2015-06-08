@@ -45,7 +45,7 @@ class LinkCollection extends EntryCollection
 
         /* @var LinkInterface $item */
         foreach ($this->items as $item) {
-            if ($item->getParentId() === $parent->getId()) {
+            if ($item->getParentId() == $parent->getId()) {
                 $children[] = $item;
             }
         }
