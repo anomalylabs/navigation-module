@@ -21,7 +21,7 @@ class LinkEntryFormBuilder extends MultipleFormBuilder
      */
     protected $actions = [
         'save' => [
-            'redirect' => 'admin/navigation/links/{route.parameters.group}'
+            'redirect' => 'admin/navigation/links/{request.route.parameters.group}'
         ]
     ];
 
