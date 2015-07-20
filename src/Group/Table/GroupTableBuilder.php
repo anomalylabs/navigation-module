@@ -20,8 +20,10 @@ class GroupTableBuilder extends TableBuilder
      */
     protected $columns = [
         [
-            'heading' => 'entry.name',
-            'wrapper' => '<strong>{entry.name}</strong><br><small>{entry.description}</small>'
+            'sortable'    => true,
+            'sort_column' => 'name',
+            'heading'     => 'entry.name',
+            'wrapper'     => '<strong>{entry.name}</strong><br>{entry.description}'
         ],
         'slug'
     ];

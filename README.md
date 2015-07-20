@@ -1,3 +1,3 @@
 # Navigation Module
 
-Navigation module.
+Easily manage groups of dynamic navigation menus.

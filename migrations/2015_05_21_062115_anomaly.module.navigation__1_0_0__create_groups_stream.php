@@ -19,8 +19,7 @@ class AnomalyModuleNavigation_1_0_0_CreateGroupsStream extends Migration
      */
     protected $stream = [
         'slug'         => 'groups',
-        'title_column' => 'name',
-        'locked'       => true
+        'title_column' => 'name'
     ];
 
     /**

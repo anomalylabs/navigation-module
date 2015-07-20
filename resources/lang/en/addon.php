@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'name'        => 'Navigation',
-    'description' => 'Navigation management.',
+    'title'       => 'Navigation',
+    'name'        => 'Navigation Module',
+    'description' => 'Easily manage groups of dynamic navigation menus.',
     'section'     => [
         'groups' => 'Groups',
         'links'  => 'Links'
