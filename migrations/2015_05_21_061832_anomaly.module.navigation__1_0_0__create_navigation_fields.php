@@ -19,6 +19,7 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
      */
     protected $fields = [
         'name'        => 'anomaly.field_type.text',
+        'class'       => 'anomaly.field_type.text',
         'description' => 'anomaly.field_type.textarea',
         'slug'        => [
             'type'   => 'anomaly.field_type.slug',
@@ -26,7 +27,6 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                 'slugify' => 'name'
             ]
         ],
-        'class'       => 'anomaly.field_type.text',
         'group'       => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
@@ -42,11 +42,10 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
         'type'        => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
-                'type'      => 'extensions',
-                'providing' => 'anomaly.module.navigation::link_type.*'
+                'type'   => 'extension',
+                'search' => 'anomaly.module.navigation::link_type.*'
             ]
         ],
-        'entry'       => 'anomaly.field_type.polymorphic',
         'target'      => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
