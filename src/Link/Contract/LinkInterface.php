@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\LinkType;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryCollection;
 
 /**
  * Interface LinkInterface
@@ -48,6 +49,13 @@ interface LinkInterface
      * @return string
      */
     public function getTitle();
+
+    /**
+     * Get the related roles.
+     *
+     * @return EntryCollection
+     */
+    public function getRoles();
 
     /**
      * Get the related parent.

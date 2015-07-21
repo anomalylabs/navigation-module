@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkEntryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
+use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
 
 /**
@@ -36,7 +37,8 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $with = [
         'entry',
-        'parent'
+        'parent',
+        'roles'
     ];
 
     /**
@@ -87,6 +89,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         $entry = $this->getEntry();
 
         return $entry->getTitle();
+    }
+
+    /**
+     * Get the related roles.
+     *
+     * @return EntryCollection
+     */
+    public function getRoles()
+    {
+        return $this->roles;
     }
 
     /**

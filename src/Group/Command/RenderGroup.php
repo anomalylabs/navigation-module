@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Group\Command;
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Link\Command\RemoveRolesLinks;
 use Anomaly\NavigationModule\Link\Command\SetActiveLinks;
 use Anomaly\NavigationModule\Link\Command\SetCurrentLink;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -57,6 +58,7 @@ class RenderGroup implements SelfHandling
 
         $links = $this->group->getLinks();
 
+        $this->dispatch(new RemoveRolesLinks($links));
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
 

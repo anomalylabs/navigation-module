@@ -40,6 +40,12 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                 'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
         ],
+        'roles'       => [
+            'type'   => 'anomaly.field_type.multiple',
+            'config' => [
+                'related' => 'Anomaly\UsersModule\Role\RoleModel'
+            ]
+        ],
         'type'        => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
