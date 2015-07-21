@@ -1,17 +1,17 @@
-<?php namespace Anomaly\NavigationModule\Link\Form;
+<?php namespace Anomaly\NavigationModule\Entry\Form;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
 
 /**
- * Class LinkEntryFormBuilder
+ * Class EntryFormBuilder
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Link\Form
+ * @package       Anomaly\NavigationModule\Entry\Form
  */
-class LinkEntryFormBuilder extends MultipleFormBuilder
+class EntryFormBuilder extends MultipleFormBuilder
 {
 
     /**

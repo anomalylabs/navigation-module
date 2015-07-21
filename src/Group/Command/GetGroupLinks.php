@@ -5,7 +5,7 @@ use Anomaly\NavigationModule\Link\Command\SetActiveLinks;
 use Anomaly\NavigationModule\Link\Command\SetCurrentLink;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Robbo\Presenter\Decorator;
 
 /**
@@ -19,7 +19,7 @@ use Robbo\Presenter\Decorator;
 class GetGroupLinks implements SelfHandling
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * The group to render.

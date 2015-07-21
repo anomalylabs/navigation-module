@@ -1,5 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Group\Contract;
 
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+
 /**
  * Interface GroupRepositoryInterface
  *
@@ -8,7 +10,7 @@
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Group\Contract
  */
-interface GroupRepositoryInterface
+interface GroupRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**

@@ -14,18 +14,24 @@ class GroupTableBuilder extends TableBuilder
 {
 
     /**
+     * The table filters.
+     *
+     * @var array
+     */
+    protected $filters = [
+        'name',
+        'slug'
+    ];
+
+    /**
      * The table columns.
      *
      * @var array
      */
     protected $columns = [
-        [
-            'sortable'    => true,
-            'sort_column' => 'name',
-            'heading'     => 'entry.name',
-            'wrapper'     => '<strong>{entry.name}</strong><br>{entry.description}'
-        ],
-        'slug'
+        'name',
+        'slug',
+        'description'
     ];
 
     /**

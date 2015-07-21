@@ -1,8 +1,8 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
+use Anomaly\NavigationModule\Entry\Form\EntryFormBuilder;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
-use Anomaly\NavigationModule\Link\Form\LinkEntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
@@ -52,6 +52,21 @@ class LinksController extends AdminController
     }
 
     /**
+     * Return the modal for choosing a link type.
+     *
+     * @param ExtensionCollection $extensions
+     * @param string              $group
+     * @return \Illuminate\View\View
+     */
+    public function choose(ExtensionCollection $extensions, $group)
+    {
+        return view(
+            'module::admin/ajax/choose_link_type',
+            ['link_types' => $extensions->search('anomaly.module.navigation::link_type.*'), 'group' => $group]
+        );
+    }
+
+    /**
      * Return the form for creating a new link.
      *
      * @param LinkFormBuilder          $link
@@ -62,7 +77,7 @@ class LinksController extends AdminController
      */
     public function create(
         LinkFormBuilder $link,
-        LinkEntryFormBuilder $form,
+        EntryFormBuilder $form,
         GroupRepositoryInterface $groups,
         ExtensionCollection $extensions,
         BreadcrumbCollection $breadcrumbs,
@@ -89,7 +104,7 @@ class LinksController extends AdminController
      */
     public function edit(
         LinkFormBuilder $link,
-        LinkEntryFormBuilder $form,
+        EntryFormBuilder $form,
         LinkRepositoryInterface $links,
         GroupRepositoryInterface $groups,
         BreadcrumbCollection $breadcrumbs,

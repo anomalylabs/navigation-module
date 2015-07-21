@@ -29,7 +29,7 @@ class LinkTreeBuilder extends TreeBuilder
      */
     protected $buttons = [
         'edit' => [
-            'href' => 'admin/navigation/links/{route.parameters.group}/edit/{entry.id}'
+            'href' => 'admin/navigation/links/{request.route.parameters.group}/edit/{entry.id}'
         ],
         'delete'
     ];

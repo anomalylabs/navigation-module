@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
  * Class GroupRepository
@@ -11,7 +12,7 @@ use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Group
  */
-class GroupRepository implements GroupRepositoryInterface
+class GroupRepository extends EntryRepository implements GroupRepositoryInterface
 {
 
     /**

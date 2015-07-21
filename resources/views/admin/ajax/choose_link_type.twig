@@ -2,7 +2,7 @@
     <button class="close" data-dismiss="modal">
         <span>&times;</span>
     </button>
-    <h4 class="modal-title">{{ trans('module::admin.choose_link_type') }}</h4>
+    <h4 class="modal-title">{{ trans('module::message.choose_link_type') }}</h4>
 </div>
 
 <div class="modal-body">
@@ -11,9 +11,9 @@
             {% for link_type in link_types %}
                 <li>
                     <a href="{{ url_to('admin/navigation/links/' ~ group ~ '/create?link_type=' ~ link_type.namespace) }}">
-                        <strong>{{ trans(link_type.label) }}</strong>
+                        <strong>{{ trans(link_type.object.title) }}</strong>
                         <br>
-                        <small>{{ trans(link_type.description) }}</small>
+                        <small>{{ trans(link_type.object.description) }}</small>
                     </a>
                 </li>
             {% endfor %}

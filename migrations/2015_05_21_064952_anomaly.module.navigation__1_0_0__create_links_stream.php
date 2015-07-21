@@ -18,9 +18,7 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug'         => 'links',
-        'title_column' => 'title',
-        'translatable' => true
+        'slug' => 'links'
     ];
 
     /**
@@ -33,6 +31,9 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
             'required' => true
         ],
         'type'   => [
+            'required' => true
+        ],
+        'entry'  => [
             'required' => true
         ],
         'target' => [

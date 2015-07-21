@@ -4,7 +4,7 @@ use Anomaly\NavigationModule\Group\Command\GetGroupLinks;
 use Anomaly\NavigationModule\Group\Command\RenderGroup;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class NavigationPluginFunctions
@@ -17,7 +17,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 class NavigationPluginFunctions
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * The group repository.

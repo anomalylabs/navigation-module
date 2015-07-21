@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Group\Contract;
 
 use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
  * Interface GroupInterface
@@ -10,15 +11,8 @@ use Anomaly\NavigationModule\Link\LinkCollection;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Group\Contract
  */
-interface GroupInterface
+interface GroupInterface extends EntryInterface
 {
-
-    /**
-     * Get the ID.
-     *
-     * @return null|int
-     */
-    public function getId();
 
     /**
      * Get the slug.
@@ -40,11 +34,4 @@ interface GroupInterface
      * @return LinkCollection
      */
     public function getLinks();
-
-    /**
-     * Return the links relation.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function links();
 }

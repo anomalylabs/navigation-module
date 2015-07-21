@@ -21,6 +21,7 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
         'name'        => 'anomaly.field_type.text',
         'class'       => 'anomaly.field_type.text',
         'description' => 'anomaly.field_type.textarea',
+        'entry'       => 'anomaly.field_type.polymorphic',
         'slug'        => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
