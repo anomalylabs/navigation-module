@@ -25,12 +25,22 @@ class EntryFormSections
             [
                 'type' => [
                     'fields' => function () use ($type) {
-                        return $type->getAssignmentFieldSlugs();
+                        return array_map(
+                            function ($slug) {
+                                return 'type_' . $slug;
+                            },
+                            $type->getAssignmentFieldSlugs()
+                        );
                     }
                 ],
                 'link' => [
                     'fields' => function () use ($link) {
-                        return $link->getAssignmentFieldSlugs();
+                        return array_map(
+                            function ($slug) {
+                                return 'link_' . $slug;
+                            },
+                            $link->getAssignmentFieldSlugs()
+                        );
                     }
                 ]
             ]
