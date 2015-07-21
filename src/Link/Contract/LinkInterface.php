@@ -58,6 +58,13 @@ interface LinkInterface
     public function getAllowedRoles();
 
     /**
+     * Get the related child links.
+     *
+     * @return EntryCollection
+     */
+    public function getChildren();
+
+    /**
      * Get the related parent.
      *
      * @return null|LinkInterface

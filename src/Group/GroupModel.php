@@ -16,6 +16,23 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
 {
 
     /**
+     * The cache minutes.
+     *
+     * @var int
+     */
+    protected $cacheMinutes = 99999;
+
+    /**
+     * Boot the model.
+     */
+    protected static function boot()
+    {
+        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
+
+        parent::boot();
+    }
+
+    /**
      * Get the slug.
      *
      * @return string
