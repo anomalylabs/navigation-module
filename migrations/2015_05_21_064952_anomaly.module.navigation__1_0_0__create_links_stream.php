@@ -41,7 +41,7 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
         ],
         'class',
         'parent',
-        'roles'
+        'allowed_roles'
     ];
 
 }

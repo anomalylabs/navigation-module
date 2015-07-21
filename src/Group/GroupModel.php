@@ -36,6 +36,16 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
     }
 
     /**
+     * Get the class.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
      * Get the related links.
      *
      * @return LinkCollection

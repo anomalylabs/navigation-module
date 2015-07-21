@@ -51,11 +51,11 @@ interface LinkInterface
     public function getTitle();
 
     /**
-     * Get the related roles.
+     * Get the related allowed roles.
      *
      * @return EntryCollection
      */
-    public function getRoles();
+    public function getAllowedRoles();
 
     /**
      * Get the related parent.

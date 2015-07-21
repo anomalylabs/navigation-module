@@ -18,42 +18,36 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
      * @var array
      */
     protected $fields = [
-        'name'        => 'anomaly.field_type.text',
-        'class'       => 'anomaly.field_type.text',
-        'description' => 'anomaly.field_type.textarea',
-        'entry'       => 'anomaly.field_type.polymorphic',
-        'slug'        => [
+        'name'          => 'anomaly.field_type.text',
+        'class'         => 'anomaly.field_type.text',
+        'description'   => 'anomaly.field_type.textarea',
+        'entry'         => 'anomaly.field_type.polymorphic',
+        'slug'          => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
                 'slugify' => 'name'
             ]
         ],
-        'group'       => [
+        'group'         => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Group\GroupModel'
             ]
         ],
-        'parent'      => [
+        'parent'        => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
         ],
-        'roles'       => [
-            'type'   => 'anomaly.field_type.multiple',
-            'config' => [
-                'related' => 'Anomaly\UsersModule\Role\RoleModel'
-            ]
-        ],
-        'type'        => [
+        'type'          => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
                 'type'   => 'extension',
                 'search' => 'anomaly.module.navigation::link_type.*'
             ]
         ],
-        'target'      => [
+        'target'        => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
                 'default_option' => '_self',
@@ -62,7 +56,13 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                     '_blank' => 'anomaly.module.navigation::field.target.option.blank'
                 ]
             ]
-        ]
+        ],
+        'allowed_roles' => [
+            'type'   => 'anomaly.field_type.multiple',
+            'config' => [
+                'related' => 'Anomaly\UsersModule\Role\RoleModel'
+            ]
+        ],
     ];
 
 }
