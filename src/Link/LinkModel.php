@@ -31,6 +31,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     protected $current = false;
 
     /**
+     * The cache minutes.
+     *
+     * @var int
+     */
+    protected $cacheMinutes = 99999;
+
+    /**
      * Eager load these relationships.
      *
      * @var array
@@ -40,6 +47,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         'parent',
         'allowedRoles'
     ];
+
+    /**
+     * Boot the model.
+     */
+    protected static function boot()
+    {
+        self::observe(app(substr(__CLASS__, 0, -5) . 'Observer'));
+
+        parent::boot();
+    }
 
     /**
      * Get the URL.
@@ -99,6 +116,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     public function getAllowedRoles()
     {
         return $this->allowed_roles;
+    }
+
+    /**
+     * Get the related child links.
+     *
+     * @return EntryCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**
@@ -165,5 +192,15 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         $this->current = $current;
 
         return $this;
+    }
+
+    /**
+     * Return the children links relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'parent_id');
     }
 }
