@@ -38,7 +38,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     protected $with = [
         'entry',
         'parent',
-        'roles'
+        'allowedRoles'
     ];
 
     /**
@@ -92,13 +92,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Get the related roles.
+     * Get the related allowed roles.
      *
      * @return EntryCollection
      */
-    public function getRoles()
+    public function getAllowedRoles()
     {
-        return $this->roles;
+        return $this->allowed_roles;
     }
 
     /**

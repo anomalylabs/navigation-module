@@ -36,7 +36,8 @@ class AnomalyModuleNavigation_1_0_0_CreateGroupsStream extends Migration
             'required' => true,
             'unique'   => true
         ],
-        'description'
+        'description',
+        'class'
     ];
 
 }

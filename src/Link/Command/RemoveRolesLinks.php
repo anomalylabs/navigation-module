@@ -47,7 +47,7 @@ class RemoveRolesLinks implements SelfHandling
         /* @var LinkInterface $link */
         foreach ($this->links as $key => $link) {
 
-            $roles = $link->getRoles()->lists('slug')->all();
+            $roles = $link->getAllowedRoles()->lists('slug')->all();
 
             if ($roles && !$user) {
                 $this->links->forget($key);
