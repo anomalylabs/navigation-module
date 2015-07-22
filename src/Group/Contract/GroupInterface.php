@@ -29,13 +29,6 @@ interface GroupInterface extends EntryInterface
     public function getName();
 
     /**
-     * Get the class.
-     *
-     * @return string
-     */
-    public function getClass();
-
-    /**
      * Get the related links.
      *
      * @return LinkCollection

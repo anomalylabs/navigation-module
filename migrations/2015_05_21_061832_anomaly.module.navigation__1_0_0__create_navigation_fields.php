@@ -40,6 +40,12 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                 'related' => 'Anomaly\NavigationModule\Link\LinkModel'
             ]
         ],
+        'allowed_roles' => [
+            'type'   => 'anomaly.field_type.multiple',
+            'config' => [
+                'related' => 'Anomaly\UsersModule\Role\RoleModel'
+            ]
+        ],
         'type'          => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
@@ -56,13 +62,7 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
                     '_blank' => 'anomaly.module.navigation::field.target.option.blank'
                 ]
             ]
-        ],
-        'allowed_roles' => [
-            'type'   => 'anomaly.field_type.multiple',
-            'config' => [
-                'related' => 'Anomaly\UsersModule\Role\RoleModel'
-            ]
-        ],
+        ]
     ];
 
 }

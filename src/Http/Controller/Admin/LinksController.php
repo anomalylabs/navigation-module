@@ -39,7 +39,7 @@ class LinksController extends AdminController
     ) {
         if (!$group) {
 
-            $messages->warning('anomaly.module.navigation::warning.choose_group_first');
+            $messages->warning('Please choose a group first.');
 
             return redirect('admin/navigation');
         }
