@@ -4,8 +4,7 @@ return [
     'groups' => [
         'read',
         'write',
-        'delete',
-        'links'
+        'delete'
     ],
     'links'  => [
         'read',
