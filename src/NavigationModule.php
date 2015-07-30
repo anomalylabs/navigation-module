@@ -36,7 +36,7 @@ class NavigationModule extends Module
                 'new_link' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'href'        => 'admin/navigation/links/choose/{route.parameters.group}'
+                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.group}'
                 ]
             ]
         ]

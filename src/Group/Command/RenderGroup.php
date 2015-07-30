@@ -62,6 +62,9 @@ class RenderGroup implements SelfHandling
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
 
-        return view('anomaly.module.navigation::links', compact('group', 'links', 'options'))->render();
+        return view(
+            array_get($options, 'view', 'anomaly.module.navigation::links'),
+            compact('group', 'links', 'options')
+        )->render();
     }
 }

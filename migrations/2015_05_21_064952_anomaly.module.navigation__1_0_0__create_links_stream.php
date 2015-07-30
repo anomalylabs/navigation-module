@@ -39,9 +39,9 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
         'target' => [
             'required' => true
         ],
-        'allowed_roles',
         'class',
-        'parent'
+        'parent',
+        'allowed_roles'
     ];
 
 }

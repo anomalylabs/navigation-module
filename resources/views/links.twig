@@ -1,5 +1,5 @@
 {% import "anomaly.module.navigation::macro" as macro %}
 
-<ul {{ html_attributes(options.attributes) }}>
+<ul class="{{ options.list_class }}">
     {{ macro.links(links.root(), links, group, options) }}
 </ul>
