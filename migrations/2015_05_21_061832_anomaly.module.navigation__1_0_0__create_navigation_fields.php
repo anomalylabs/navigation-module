@@ -25,7 +25,8 @@ class AnomalyModuleNavigation_1_0_0_CreateNavigationFields extends Migration
         'slug'          => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
-                'slugify' => 'name'
+                'slugify' => 'name',
+                'type'    => '_'
             ]
         ],
         'group'         => [
