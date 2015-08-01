@@ -3,13 +3,13 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModuleNavigation_1_0_0_CreateLinksStream
+ * Class AnomalyModuleNavigationCreateGroupsStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
+class AnomalyModuleNavigationCreateGroupsStream extends Migration
 {
 
     /**
@@ -18,7 +18,8 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug' => 'links'
+        'slug'         => 'groups',
+        'title_column' => 'name'
     ];
 
     /**
@@ -27,21 +28,15 @@ class AnomalyModuleNavigation_1_0_0_CreateLinksStream extends Migration
      * @var array
      */
     protected $assignments = [
-        'group'  => [
-            'required' => true
+        'name' => [
+            'required' => true,
+            'unique'   => true
         ],
-        'type'   => [
-            'required' => true
+        'slug' => [
+            'required' => true,
+            'unique'   => true
         ],
-        'entry'  => [
-            'required' => true
-        ],
-        'target' => [
-            'required' => true
-        ],
-        'class',
-        'parent',
-        'allowed_roles'
+        'description'
     ];
 
 }

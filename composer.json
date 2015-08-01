@@ -2,7 +2,6 @@
     "name": "anomaly/navigation-module",
     "type": "streams-addon",
     "description": "Easily manage groups of dynamic navigation menus.",
-    "version": "1.0.0",
     "license": "MIT",
     "keywords": [
         "navigation",
