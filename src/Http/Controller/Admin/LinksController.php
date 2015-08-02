@@ -85,7 +85,12 @@ class LinksController extends AdminController
     ) {
         $type = $extensions->get($_GET['link_type']);
 
-        $form->addForm('type', $type->getFormBuilder());
+        $builder = explode('\\', get_class($type));
+        $extension = array_pop($builder);
+
+        $builder = app(implode('\\', $builder) . '\Form\\' . substr($extension, 0, -9) . 'FormBuilder');
+
+        $form->addForm('type', $builder);
         $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
 
         $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
@@ -113,7 +118,12 @@ class LinksController extends AdminController
     ) {
         $entry = $links->find($id);
 
-        $form->addForm('type', $entry->getType()->getFormBuilder()->setEntry($entry->getEntry()->getId()));
+        $builder = explode('\\', get_class($entry->getType()));
+        $extension = array_pop($builder);
+
+        $builder = app(implode('\\', $builder) . '\Form\\' . substr($extension, 0, -9) . 'FormBuilder');
+
+        $form->addForm('type', $builder->setEntry($entry->getEntry()->getId()));
         $form->addForm(
             'link',
             $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))

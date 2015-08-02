@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkEntryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
+use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
 
@@ -62,7 +63,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     /**
      * Get the type.
      *
-     * @return LinkType
+     * @return Extension
      */
     public function getType()
     {

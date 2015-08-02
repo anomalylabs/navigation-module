@@ -1,6 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\NavigationModule\Link\LinkType;
+use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 
@@ -32,7 +32,7 @@ interface LinkInterface
     /**
      * Get the type.
      *
-     * @return LinkType
+     * @return Extension
      */
     public function getType();
 
