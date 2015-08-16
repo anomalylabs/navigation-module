@@ -12,7 +12,7 @@
             </a>
 
             {% if not collection.children(link.getObject()).isEmpty() %}
-                <ul>
+                <ul class="{{ options.child_list_class }}">
                     {{ _self.links(collection.children(link.getObject()), collection, group, options) }}
                 </ul>
             {% endif %}
