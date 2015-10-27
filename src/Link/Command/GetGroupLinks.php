@@ -1,21 +1,22 @@
-<?php namespace Anomaly\NavigationModule\Group\Command;
+<?php namespace Anomaly\NavigationModule\Link\Type\Command;
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
-use Anomaly\NavigationModule\Link\Command\RemoveRolesLinks;
 use Anomaly\NavigationModule\Link\Command\SetActiveLinks;
 use Anomaly\NavigationModule\Link\Command\SetCurrentLink;
+use Anomaly\NavigationModule\Link\LinkCollection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Robbo\Presenter\Decorator;
 
 /**
- * Class RenderGroup
+ * Class GetGroupLinks
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Command
  */
-class RenderGroup implements SelfHandling
+class GetGroupLinks implements SelfHandling
 {
 
     use DispatchesJobs;
@@ -35,7 +36,7 @@ class RenderGroup implements SelfHandling
     protected $options;
 
     /**
-     * Create a new RenderGroup instance.
+     * Create a new GetGroupLinks instance.
      *
      * @param GroupInterface $group
      * @param array          $options
@@ -49,22 +50,16 @@ class RenderGroup implements SelfHandling
     /**
      * Handle the command.
      *
-     * @return string
+     * @param Decorator $decorator
+     * @return LinkCollection
      */
-    public function handle()
+    public function handle(Decorator $decorator)
     {
-        $group   = $this->group;
-        $options = $this->options;
-
         $links = $this->group->getLinks();
 
-        $this->dispatch(new RemoveRolesLinks($links));
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
 
-        return view(
-            array_get($options, 'view', 'anomaly.module.navigation::links'),
-            compact('group', 'links', 'options')
-        )->render();
+        return $decorator->decorate($links);
     }
 }

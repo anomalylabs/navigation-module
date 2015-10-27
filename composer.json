@@ -6,8 +6,7 @@
     "keywords": [
         "navigation",
         "streams",
-        "pyrocms",
-        "laravel"
+        "module"
     ],
     "homepage": "http://anomaly.is/",
     "authors": [
@@ -24,9 +23,7 @@
         }
     ],
     "support": {
-        "email": "support@anomaly.is",
-        "source": "https://github.com/anomalylabs/addons-module",
-        "issues": "https://github.com/anomalylabs/addons-module/issues"
+        "email": "support@anomaly.is"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -37,11 +34,6 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\NavigationModule\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-1.0/master": "1.0.x-dev"
         }
     }
 }

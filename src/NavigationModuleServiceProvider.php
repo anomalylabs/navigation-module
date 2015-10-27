@@ -14,6 +14,15 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\NavigationModule\Group\Plugin\GroupPlugin'
+    ];
+
+    /**
      * The addon routes.
      *
      * @var array
@@ -25,6 +34,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
         'admin/navigation/links/{group?}'          => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
         'admin/navigation/links/{group}/create'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
         'admin/navigation/links/{group}/edit/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
+        'admin/navigation/links/view/{id}'         => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@view',
         'admin/navigation/links/delete/{id}'       => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@delete',
         'admin/navigation/links/choose/{group}'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@choose'
     ];
@@ -37,15 +47,6 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
     protected $singletons = [
         'Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface'   => 'Anomaly\NavigationModule\Link\LinkRepository',
         'Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface' => 'Anomaly\NavigationModule\Group\GroupRepository'
-    ];
-
-    /**
-     * The addon plugins.
-     *
-     * @var array
-     */
-    protected $plugins = [
-        'Anomaly\NavigationModule\NavigationPlugin'
     ];
 
 }

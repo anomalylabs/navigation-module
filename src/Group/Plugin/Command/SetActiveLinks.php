@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Link\Command;
+<?php namespace Anomaly\NavigationModule\Group\Plugin\Command;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Link\Command
+ * @package       Anomaly\NavigationModule\Group\Plugin\Command
  */
 class SetActiveLinks implements SelfHandling
 {
@@ -43,12 +43,12 @@ class SetActiveLinks implements SelfHandling
             return;
         }
 
-        $current->setActive(true);
+        //$current->setActive(true);
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
             if ($current->getParentId() == $link->getId()) {
-                $link->setActive(true);
+                //$link->setActive(true);
             }
         }
     }

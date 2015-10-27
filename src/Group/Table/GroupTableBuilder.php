@@ -43,7 +43,7 @@ class GroupTableBuilder extends TableBuilder
         [
             'type' => 'info',
             'icon' => 'link',
-            'text' => 'Links',
+            'text' => 'module::button.links',
             'href' => 'admin/navigation/links/{entry.slug}'
         ],
         'edit'

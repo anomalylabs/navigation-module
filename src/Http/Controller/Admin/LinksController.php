@@ -2,14 +2,14 @@
 
 use Anomaly\NavigationModule\Entry\Form\EntryFormBuilder;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
+use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Message\MessageBag;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 
 /**
  * Class LinksController
@@ -27,26 +27,21 @@ class LinksController extends AdminController
      *
      * @param LinkTreeBuilder          $tree
      * @param GroupRepositoryInterface $groups
-     * @param                          $group
-     * @return \Illuminate\Http\Response
+     * @param null                     $group
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function index(
-        LinkTreeBuilder $tree,
-        GroupRepositoryInterface $groups,
-        BreadcrumbCollection $breadcrumbs,
-        MessageBag $messages,
-        $group = null
-    ) {
+    public function index(LinkTreeBuilder $tree, GroupRepositoryInterface $groups, $group = null)
+    {
         if (!$group) {
 
-            $messages->warning('Please choose a group first.');
+            $this->messages->warning('Please choose a group first.');
 
-            return redirect('admin/navigation');
+            return $this->response->redirectTo('admin/navigation');
         }
 
         $tree->setGroup($group = $groups->findBySlug($group));
 
-        $breadcrumbs->add($group->getName());
+        $this->breadcrumbs->add($group->getName());
 
         return $tree->render();
     }
@@ -61,8 +56,11 @@ class LinksController extends AdminController
     public function choose(ExtensionCollection $extensions, $group)
     {
         return view(
-            'module::admin/ajax/choose_link_type',
-            ['link_types' => $extensions->search('anomaly.module.navigation::link_type.*'), 'group' => $group]
+            'module::ajax/choose_link_type',
+            [
+                'link_types' => $extensions->search('anomaly.module.navigation::link_type.*'),
+                'group'      => $group
+            ]
         );
     }
 
@@ -70,6 +68,8 @@ class LinksController extends AdminController
      * Return the form for creating a new link.
      *
      * @param LinkFormBuilder          $link
+     * @param EntryFormBuilder         $form
+     * @param LinkRepositoryInterface  $links
      * @param GroupRepositoryInterface $groups
      * @param ExtensionCollection      $extensions
      * @param                          $group
@@ -78,22 +78,22 @@ class LinksController extends AdminController
     public function create(
         LinkFormBuilder $link,
         EntryFormBuilder $form,
+        LinkRepositoryInterface $links,
         GroupRepositoryInterface $groups,
         ExtensionCollection $extensions,
-        BreadcrumbCollection $breadcrumbs,
         $group
     ) {
+        /* @var LinkTypeInterface $type */
         $type = $extensions->get($_GET['link_type']);
 
-        $builder = explode('\\', get_class($type));
-        $extension = array_pop($builder);
+        if ($parent = $links->find($this->request->get('parent'))) {
+            $link->setParent($parent);
+        }
 
-        $builder = app(implode('\\', $builder) . '\Form\\' . substr($extension, 0, -9) . 'FormBuilder');
-
-        $form->addForm('type', $builder);
+        $form->addForm('type', $type->builder());
         $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
 
-        $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 
         return $form->render();
     }
@@ -102,9 +102,11 @@ class LinksController extends AdminController
      * Return the form for editing an existing link.
      *
      * @param LinkFormBuilder          $link
+     * @param EntryFormBuilder         $form
+     * @param LinkRepositoryInterface  $links
      * @param GroupRepositoryInterface $groups
-     * @param ExtensionCollection      $extensions
      * @param                          $group
+     * @param                          $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(
@@ -112,26 +114,38 @@ class LinksController extends AdminController
         EntryFormBuilder $form,
         LinkRepositoryInterface $links,
         GroupRepositoryInterface $groups,
-        BreadcrumbCollection $breadcrumbs,
         $group,
         $id
     ) {
+        /* @var LinkInterface $entry */
         $entry = $links->find($id);
 
-        $builder = explode('\\', get_class($entry->getType()));
-        $extension = array_pop($builder);
+        $type = $entry->getType();
 
-        $builder = app(implode('\\', $builder) . '\Form\\' . substr($extension, 0, -9) . 'FormBuilder');
-
-        $form->addForm('type', $builder->setEntry($entry->getEntry()->getId()));
+        $form->addForm('type', $type->builder()->setEntry($entry->getEntry()->getId()));
         $form->addForm(
             'link',
             $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
         );
 
-        $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 
         return $form->render();
+    }
+
+    /**
+     * View the link destination.
+     *
+     * @param LinkRepositoryInterface $links
+     * @param                         $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function view(LinkRepositoryInterface $links, $id)
+    {
+        /* @var LinkInterface $link */
+        $link = $links->find($id);
+
+        return $this->response->redirectTo($link->getUrl());
     }
 
     /**

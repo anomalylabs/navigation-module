@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Form;
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
@@ -28,6 +29,13 @@ class LinkFormBuilder extends FormBuilder
      * @var null|GroupInterface
      */
     protected $group = null;
+
+    /**
+     * The parent link.
+     *
+     * @var null|LinkInterface
+     */
+    protected $parent = null;
 
     /**
      * The skipped fields.
@@ -62,7 +70,8 @@ class LinkFormBuilder extends FormBuilder
      */
     public function onSaving()
     {
-        $entry = $this->getFormEntry();
+        $parent = $this->getParent();
+        $entry  = $this->getFormEntry();
 
         if (!$entry->group_id && $group = $this->getGroup()) {
             $entry->group_id = $group->getId();
@@ -70,6 +79,10 @@ class LinkFormBuilder extends FormBuilder
 
         if (!$entry->type && $type = $this->getType()) {
             $entry->type = $type->getNamespace();
+        }
+
+        if ($parent) {
+            $entry->parent_id = $parent->getId();
         }
     }
 
@@ -115,6 +128,29 @@ class LinkFormBuilder extends FormBuilder
     public function setGroup(GroupInterface $group)
     {
         $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get the parent link.
+     *
+     * @return null|LinkInterface
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set the parent link.
+     *
+     * @param LinkInterface $parent
+     * @return $this
+     */
+    public function setParent(LinkInterface $parent)
+    {
+        $this->parent = $parent;
 
         return $this;
     }

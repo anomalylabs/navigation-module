@@ -1,7 +1,7 @@
-{% macro links(links, collection, group, options) %}
+{% macro links(links, collection, options) %}
     {% for link in links %}
         <li class="
-            {{ collection.children(link.getObject()).isEmpty() ? '' : 'has_children' }}
+            {{ collection.children(link.getObject()).isEmpty() ? '' : 'has-children' }}
             {{ link.current ? (options.current_class ?: 'current') }}
             {{ link.active ? (options.active_class ?: 'active') }}
             {{ link.class }}
@@ -13,7 +13,7 @@
 
             {% if not collection.children(link.getObject()).isEmpty() %}
                 <ul class="{{ options.child_list_class }}">
-                    {{ _self.links(collection.children(link.getObject()), collection, group, options) }}
+                    {{ _self.links(collection.children(link.getObject()), collection, options) }}
                 </ul>
             {% endif %}
         </li>
