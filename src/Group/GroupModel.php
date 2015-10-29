@@ -52,6 +52,8 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
      */
     public function links()
     {
-        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'group_id');
+        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'group_id')
+            ->orderBy('sort_order', 'ASC')
+            ->orderBy('parent_id', 'ASC');
     }
 }
