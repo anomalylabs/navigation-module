@@ -1,5 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+
 /**
  * Interface LinkRepositoryInterface
  *
@@ -8,22 +10,7 @@
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Link\Contract
  */
-interface LinkRepositoryInterface
+interface LinkRepositoryInterface extends EntryRepositoryInterface
 {
 
-    /**
-     * Find a link by it's ID.
-     *
-     * @param $id
-     * @return null|LinkInterface
-     */
-    public function find($id);
-
-    /**
-     * Delete a link.
-     *
-     * @param LinkInterface $link
-     * @return bool
-     */
-    public function delete(LinkInterface $link);
 }

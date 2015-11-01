@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
+use Anomaly\Streams\Platform\Support\Decorator;
 
 /**
  * Class LinkPresenter
@@ -23,18 +24,12 @@ class LinkPresenter extends EntryPresenter
     protected $object;
 
     /**
-     * Return the view link.
+     * Return the related children.
      *
-     * @return string
+     * @return LinkCollection
      */
-    public function viewLink()
+    public function children()
     {
-        return app('html')->link(
-            $this->object->getUrl(),
-            $this->object->getTitle(),
-            [
-                'target' => '_blank'
-            ]
-        );
+        return (new Decorator())->decorate($this->object->getChildren());
     }
 }

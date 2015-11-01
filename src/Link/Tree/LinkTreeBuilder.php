@@ -28,8 +28,14 @@ class LinkTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'edit' => [
-            'href' => 'admin/navigation/links/{request.route.parameters.group}/edit/{entry.id}'
+        'add'  => [
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'text'        => 'anomaly.module.navigation::button.create_child_link',
+            'href'        => 'admin/navigation/links/choose/{request.route.parameters.group}?parent={entry.id}'
+        ],
+        'view' => [
+            'target' => '_blank'
         ],
         'delete'
     ];
@@ -39,8 +45,8 @@ class LinkTreeBuilder extends TreeBuilder
      *
      * @var array
      */
-    protected $options = [
-        'item_value' => 'entry.view_link'
+    protected $segments = [
+        '<a href="/admin/navigation/links/{request.route.parameters.group}/edit/{entry.id}">{entry.title}</a>'
     ];
 
     /**

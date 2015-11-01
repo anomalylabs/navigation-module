@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Link\Command;
+<?php namespace Anomaly\NavigationModule\Group\Plugin\Command;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Link\Command
+ * @package       Anomaly\NavigationModule\Group\Plugin\Command
  */
 class SetCurrentLink implements SelfHandling
 {
@@ -83,7 +83,7 @@ class SetCurrentLink implements SelfHandling
          * then mark it as such.
          */
         if ($current && $current instanceof LinkInterface) {
-            $current->setCurrent(true);
+            //$current->setCurrent(true);
         }
     }
 }

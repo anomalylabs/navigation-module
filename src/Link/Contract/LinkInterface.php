@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
+use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 
@@ -12,15 +13,8 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Link\Contract
  */
-interface LinkInterface
+interface LinkInterface extends EntryInterface
 {
-
-    /**
-     * Get the ID.
-     *
-     * @return null|int
-     */
-    public function getId();
 
     /**
      * Get the URL.
@@ -30,9 +24,16 @@ interface LinkInterface
     public function getUrl();
 
     /**
+     * Get the title.
+     *
+     * @return string
+     */
+    public function getTitle();
+
+    /**
      * Get the type.
      *
-     * @return Extension
+     * @return LinkTypeInterface
      */
     public function getType();
 
@@ -42,13 +43,6 @@ interface LinkInterface
      * @return EntryInterface
      */
     public function getEntry();
-
-    /**
-     * Get the title.
-     *
-     * @return string
-     */
-    public function getTitle();
 
     /**
      * Get the related allowed roles.
@@ -72,32 +66,16 @@ interface LinkInterface
     public function getParentId();
 
     /**
-     * Return the active flag.
+     * Get the related child links.
      *
-     * @return bool
+     * @return LinkCollection
      */
-    public function isActive();
+    public function getChildren();
 
     /**
-     * Set the active flag.
+     * Return the child links relationship.
      *
-     * @param $active
-     * @return $this
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function setActive($active);
-
-    /**
-     * Get the current flag.
-     *
-     * @return bool
-     */
-    public function isCurrent();
-
-    /**
-     * Set the current flag.
-     *
-     * @param $current
-     * @return $this
-     */
-    public function setCurrent($current);
+    public function children();
 }

@@ -62,9 +62,9 @@ class LinkCollection extends EntryCollection
     {
         /* @var LinkInterface $item */
         foreach ($this->items as $item) {
-            if ($item->isCurrent()) {
+            /*if ($item->isCurrent()) {
                 return $item;
-            }
+            }*/
         }
 
         return null;

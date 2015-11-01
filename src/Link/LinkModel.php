@@ -1,8 +1,8 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
-use Anomaly\NavigationModule\Link\Contract\LinkEntryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
+use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
 
@@ -37,9 +37,18 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      * @var array
      */
     protected $with = [
-        'entry',
         'parent',
         'allowedRoles'
+    ];
+
+    /**
+     * The arrayable methods.
+     *
+     * @var array
+     */
+    protected $arrayable = [
+        'url'   => 'getUrl',
+        'title' => 'getTitle'
     ];
 
     /**
@@ -49,35 +58,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getUrl()
     {
-        $entry = $this->getEntry();
+        $type = $this->getType();
 
-        $url = $entry->getUrl();
-
-        if (!starts_with($url, ['http://', 'https://', '//'])) {
-            $url = url($url);
+        if (!$type) {
+            return null;
         }
 
-        return $url;
-    }
-
-    /**
-     * Get the type.
-     *
-     * @return Extension
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Get the related entry.
-     *
-     * @return LinkEntryInterface
-     */
-    public function getEntry()
-    {
-        return $this->entry;
+        return $type->url($this);
     }
 
     /**
@@ -87,9 +74,33 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getTitle()
     {
-        $entry = $this->getEntry();
+        $type = $this->getType();
 
-        return $entry->getTitle();
+        if (!$type) {
+            return null;
+        }
+
+        return $type->title($this);
+    }
+
+    /**
+     * Get the type.
+     *
+     * @return LinkTypeInterface
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get the related entry.
+     *
+     * @return EntryInterface
+     */
+    public function getEntry()
+    {
+        return $this->entry;
     }
 
     /**
@@ -123,48 +134,22 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Return the active flag.
+     * Get the related child links.
      *
-     * @return bool
+     * @return LinkCollection
      */
-    public function isActive()
+    public function getChildren()
     {
-        return $this->active;
+        return $this->children;
     }
 
     /**
-     * Set the active flag.
+     * Return the child links relationship.
      *
-     * @param $active
-     * @return $this
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function setActive($active)
+    public function children()
     {
-        $this->active = $active;
-
-        return $this;
-    }
-
-    /**
-     * Get the current flag.
-     *
-     * @return bool
-     */
-    public function isCurrent()
-    {
-        return $this->current;
-    }
-
-    /**
-     * Set the current flag.
-     *
-     * @param $current
-     * @return $this
-     */
-    public function setCurrent($current)
-    {
-        $this->current = $current;
-
-        return $this;
+        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'parent_id', 'id');
     }
 }

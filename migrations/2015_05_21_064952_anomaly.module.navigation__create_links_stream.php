@@ -18,7 +18,8 @@ class AnomalyModuleNavigationCreateLinksStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug' => 'links'
+        'slug'     => 'links',
+        'sortable' => true
     ];
 
     /**
