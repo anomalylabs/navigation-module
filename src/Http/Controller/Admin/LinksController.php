@@ -1,9 +1,9 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
-use Anomaly\NavigationModule\Entry\Form\EntryFormBuilder;
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\NavigationModule\Link\Entry\EntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
 use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
@@ -158,10 +158,15 @@ class LinksController extends AdminController
      */
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer, $id)
     {
-        $authorizer->authorize('anomaly.module.navigation::links.delete');
+        if (!$authorizer->authorize('anomaly.module.navigation::links.delete')) {
+
+            $this->messages->error('streams::message.access_denied');
+
+            return $this->redirect->back();
+        }
 
         $links->delete($links->find($id));
 
-        return redirect()->back();
+        return $this->redirect->back();
     }
 }

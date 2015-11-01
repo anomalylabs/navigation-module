@@ -1,7 +1,7 @@
 {
     "name": "anomaly/navigation-module",
     "type": "streams-addon",
-    "description": "Easily manage groups of dynamic navigation menus.",
+    "description": "Powerful navigation management made easy.",
     "license": "MIT",
     "keywords": [
         "navigation",
@@ -34,6 +34,11 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\NavigationModule\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.x-dev"
         }
     }
 }

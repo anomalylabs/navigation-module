@@ -47,14 +47,30 @@ class RemoveRolesLinks implements SelfHandling
         /* @var LinkInterface $link */
         foreach ($this->links as $key => $link) {
 
-            $roles = $link->getAllowedRoles()->lists('slug')->all();
+            $roles = $link->getAllowedRoles();
 
-            if ($roles && !$user) {
+            /**
+             * If there are role restrictions
+             * but no user is signed in then
+             * we can't authorize anything!
+             */
+            if (!$roles->isEmpty() && !$user) {
+
                 $this->links->forget($key);
+
+                continue;
             }
 
-            if ($roles && !$user->hasAnyRole($roles)) {
+            /**
+             * If there are role restrictions
+             * and the user does not belong to
+             * any of them then don't show it.
+             */
+            if (!$roles->isEmpty() && !$user->hasAnyRole($roles)) {
+
                 $this->links->forget($key);
+
+                continue;
             }
         }
     }

@@ -2,15 +2,19 @@
 
 return [
     'groups' => [
-        'title'  => 'Groups',
-        'read'   => 'Can read groups?',
-        'write'  => 'Can create and edit groups?',
-        'delete' => 'Can delete groups?'
+        'name'   => 'Groups',
+        'option' => [
+            'read'   => 'Can access groups section.',
+            'write'  => 'Can create and edit groups.',
+            'delete' => 'Can delete groups.'
+        ]
     ],
     'links'  => [
-        'title'  => 'Links',
-        'read'   => 'Can read links?',
-        'write'  => 'Can create and edit links?',
-        'delete' => 'Can delete links?'
+        'name'   => 'Links',
+        'option' => [
+            'read'   => 'Can access links section.',
+            'write'  => 'Can create and edit links.',
+            'delete' => 'Can delete links.'
+        ]
     ]
 ];

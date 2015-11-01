@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Entry\Form;
+<?php namespace Anomaly\NavigationModule\Link\Entry;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
@@ -9,7 +9,7 @@ use Anomaly\Streams\Platform\Ui\Form\Multiple\MultipleFormBuilder;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Entry\Form
+ * @package       Anomaly\NavigationModule\Link\Entry
  */
 class EntryFormBuilder extends MultipleFormBuilder
 {

@@ -2,7 +2,7 @@
 
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
-use Anomaly\Streams\Platform\Addon\Extension\Extension;
+use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
@@ -19,7 +19,7 @@ class LinkFormBuilder extends FormBuilder
     /**
      * The related link type.
      *
-     * @var null|Extension
+     * @var null|LinkTypeExtension
      */
     protected $type = null;
 
@@ -89,7 +89,7 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Get the type.
      *
-     * @return Extension|null
+     * @return null|LinkTypeExtension
      */
     public function getType()
     {
@@ -99,10 +99,10 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Set the type.
      *
-     * @param Extension $type
+     * @param LinkTypeExtension $type
      * @return $this
      */
-    public function setType(Extension $type)
+    public function setType(LinkTypeExtension $type)
     {
         $this->type = $type;
 

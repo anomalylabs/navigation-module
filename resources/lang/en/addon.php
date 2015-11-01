@@ -3,7 +3,7 @@
 return [
     'title'       => 'Navigation',
     'name'        => 'Navigation Module',
-    'description' => 'Easily manage groups of dynamic navigation menus.',
+    'description' => 'Powerful navigation management made easy.',
     'section'     => [
         'groups' => 'Groups',
         'links'  => 'Links'

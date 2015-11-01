@@ -17,7 +17,7 @@ return [
             'blank' => 'Abrir en una nueva ventana.'
         ]
     ],
-    'class'     => [
+    'class'       => [
         'name'        => 'Clase',
         'placeholder' => 'Alguna clase adicional? (separadas por espacio)'
     ]

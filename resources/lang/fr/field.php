@@ -17,7 +17,7 @@ return [
             'blank' => 'Ouvrir dans une nouvelle fenêtre.'
         ]
     ],
-    'class'     => [
+    'class'       => [
         'name'        => 'Classe CSS',
         'placeholder' => 'Classes CSS supplémentaires (séparées par des espaces)'
     ]
