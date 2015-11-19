@@ -42,16 +42,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     ];
 
     /**
-     * The arrayable methods.
-     *
-     * @var array
-     */
-    protected $arrayable = [
-        'url'   => 'getUrl',
-        'title' => 'getTitle'
-    ];
-
-    /**
      * Get the URL.
      *
      * @return string
@@ -151,5 +141,20 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     public function children()
     {
         return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'parent_id', 'id');
+    }
+
+    /**
+     * Return the model as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['url']   = $this->getUrl();
+        $array['title'] = $this->getTitle();
+
+        return $array;
     }
 }
