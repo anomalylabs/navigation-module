@@ -1,17 +1,17 @@
-<?php namespace Anomaly\NavigationModule\Group\Plugin;
+<?php namespace Anomaly\NavigationModule;
 
-use Anomaly\NavigationModule\Group\Plugin\Command\RenderGroup;
+use Anomaly\NavigationModule\Group\Command\RenderGroup;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
- * Class GroupPlugin
+ * Class NavigationModulePlugin
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Plugin
+ * @package       Anomaly\NavigationModule
  */
-class GroupPlugin extends Plugin
+class NavigationModulePlugin extends Plugin
 {
 
     /**

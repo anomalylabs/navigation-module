@@ -19,7 +19,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\NavigationModule\Group\Plugin\GroupPlugin'
+        'Anomaly\NavigationModule\NavigationModulePlugin'
     ];
 
     /**

@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Group\Plugin\Command;
+<?php namespace Anomaly\NavigationModule\Group\Command;
 
 use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Command
+ * @package       Anomaly\NavigationModule\Group\Command
  */
 class RenderGroup implements SelfHandling
 {
