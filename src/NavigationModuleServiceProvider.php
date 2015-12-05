@@ -40,6 +40,16 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
+     * The class bindings.
+     *
+     * @var array
+     */
+    protected $bindings = [
+        'Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel'  => 'Anomaly\NavigationModule\Link\LinkModel',
+        'Anomaly\Streams\Platform\Model\Navigation\NavigationGroupsEntryModel' => 'Anomaly\NavigationModule\Group\GroupModel'
+    ];
+
+    /**
      * The singleton bindings.
      *
      * @var array
