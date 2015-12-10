@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 
@@ -29,5 +30,17 @@ class LinkRepository extends EntryRepository implements LinkRepositoryInterface
     public function __construct(LinkModel $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * Return links belonging to
+     * the provided group.
+     *
+     * @param GroupInterface $group
+     * @return LinkCollection
+     */
+    public function findAllByGroup(GroupInterface $group)
+    {
+        return $this->model->where('group_id', $group->getId())->get();
     }
 }

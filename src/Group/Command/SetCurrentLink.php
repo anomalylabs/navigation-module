@@ -1,7 +1,9 @@
 <?php namespace Anomaly\NavigationModule\Group\Command;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
-use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\Streams\Platform\View\ViewTemplate;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 
@@ -17,32 +19,35 @@ class SetCurrentLink implements SelfHandling
 {
 
     /**
-     * The link collection.
+     * The group interface.
      *
-     * @var LinkCollection
+     * @var GroupInterface
      */
-    protected $links;
+    protected $group;
 
     /**
      * Create a new SetCurrentLink instance.
      *
-     * @param LinkCollection $links
+     * @param GroupInterface $group
      */
-    public function __construct(LinkCollection $links)
+    public function __construct(GroupInterface $group)
     {
-        $this->links = $links;
+        $this->group = $group;
     }
 
     /**
      * Handle the command.
      *
-     * @param Request $request
+     * @param Request                 $request
+     * @param ViewTemplate            $template
+     * @param LinkRepositoryInterface $links
      */
-    public function handle(Request $request)
+    public function handle(Request $request, ViewTemplate $template, LinkRepositoryInterface $links)
     {
         $current = null;
 
-        foreach ($this->links as $link) {
+        /* @var LinkInterface $link */
+        foreach ($links->findAllByGroup($this->group) as $link) {
 
             /**
              * Get the HREF for both the current
@@ -83,7 +88,7 @@ class SetCurrentLink implements SelfHandling
          * then mark it as such.
          */
         if ($current && $current instanceof LinkInterface) {
-            //$current->setCurrent(true);
+            $template->set('link', $current);
         }
     }
 }

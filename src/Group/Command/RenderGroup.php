@@ -60,8 +60,7 @@ class RenderGroup implements SelfHandling
         $links = $group->getLinks();
 
         $this->dispatch(new RemoveRolesLinks($links));
-        $this->dispatch(new SetCurrentLink($links));
-        $this->dispatch(new SetActiveLinks($links));
+        $this->dispatch(new SetCurrentLink($group));
 
         return $view->make(
             array_get($options, 'view', 'anomaly.module.navigation::links'),
