@@ -100,7 +100,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getAllowedRoles()
     {
-        return $this->allowedRoles()->get();
+        return $this->allowed_roles;
     }
 
     /**
