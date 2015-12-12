@@ -66,6 +66,14 @@ interface LinkInterface extends EntryInterface
     public function getParentId();
 
     /**
+     * Set the parent ID.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function setParentId($id);
+
+    /**
      * Get the related child links.
      *
      * @return LinkCollection

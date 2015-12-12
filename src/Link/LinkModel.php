@@ -124,6 +124,19 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Set the parent ID.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function setParentId($id)
+    {
+        $this->parent_id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get the related child links.
      *
      * @return LinkCollection
