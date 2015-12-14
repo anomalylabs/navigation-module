@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Group\Command;
+<?php namespace Anomaly\NavigationModule\Link\Command;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
@@ -6,14 +6,14 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 
 /**
- * Class SetCurrentLink
+ * Class SetActiveLink
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Command
+ * @package       Anomaly\NavigationModule\Link\Command
  */
-class SetCurrentLink implements SelfHandling
+class SetActiveLink implements SelfHandling
 {
 
     /**
@@ -24,7 +24,7 @@ class SetCurrentLink implements SelfHandling
     protected $links;
 
     /**
-     * Create a new SetCurrentLink instance.
+     * Create a new SetActiveLink instance.
      *
      * @param LinkCollection $links
      */
@@ -40,8 +40,12 @@ class SetCurrentLink implements SelfHandling
      */
     public function handle(Request $request)
     {
-        $current = null;
+        $active = null;
 
+<<<<<<< Updated upstream:src/Group/Command/SetCurrentLink.php
+=======
+        /* @var LinkInterface $link */
+>>>>>>> Stashed changes:src/Link/Command/SetActiveLink.php
         foreach ($this->links as $link) {
 
             /**
@@ -51,8 +55,8 @@ class SetCurrentLink implements SelfHandling
             $url        = $link->getUrl();
             $currentUrl = '';
 
-            if ($current && $current instanceof LinkInterface) {
-                $currentUrl = $current->getUrl();
+            if ($active && $active instanceof LinkInterface) {
+                $currentUrl = $active->getUrl();
             }
 
             /**
@@ -74,16 +78,23 @@ class SetCurrentLink implements SelfHandling
             $currentUrlLength = strlen($currentUrl);
 
             if ($urlLength > $currentUrlLength) {
-                $current = $link;
+                $active = $link;
             }
         }
 
         /**
          * If we have an current link determined
          * then mark it as such.
+         *
+         * @var LinkInterface $active
          */
+<<<<<<< Updated upstream:src/Group/Command/SetCurrentLink.php
         if ($current && $current instanceof LinkInterface) {
             //$current->setCurrent(true);
+=======
+        if ($active) {
+            $active->setActive(true);
+>>>>>>> Stashed changes:src/Link/Command/SetActiveLink.php
         }
     }
 }

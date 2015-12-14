@@ -52,6 +52,19 @@ interface LinkInterface extends EntryInterface
     public function getAllowedRoles();
 
     /**
+     * et the active flag.
+     * @param $true
+     * @return $this
+     */
+    public function setActive($active);
+
+    /**
+     * Return the active flag.
+     * @return bool
+     */
+    public function isActive();
+
+    /**
      * Get the related parent.
      *
      * @return null|LinkInterface
