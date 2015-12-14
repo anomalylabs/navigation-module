@@ -42,10 +42,7 @@ class SetActiveLink implements SelfHandling
     {
         $active = null;
 
-<<<<<<< Updated upstream:src/Group/Command/SetCurrentLink.php
-=======
         /* @var LinkInterface $link */
->>>>>>> Stashed changes:src/Link/Command/SetActiveLink.php
         foreach ($this->links as $link) {
 
             /**
@@ -88,13 +85,8 @@ class SetActiveLink implements SelfHandling
          *
          * @var LinkInterface $active
          */
-<<<<<<< Updated upstream:src/Group/Command/SetCurrentLink.php
-        if ($current && $current instanceof LinkInterface) {
-            //$current->setCurrent(true);
-=======
         if ($active) {
             $active->setActive(true);
->>>>>>> Stashed changes:src/Link/Command/SetActiveLink.php
         }
     }
 }
