@@ -1,5 +1,5 @@
 {% macro links(links, collection, options, depth) %}
-    {% if depth <= options.get('max_depth', 999) %}
+    {% if depth <= options.get('depth', 999) %}
         {% for link in links %}
 
             {% set children = collection.children(link) %}
@@ -7,7 +7,7 @@
             <li class="
             {{ children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
             {{ link.active ? options.get('active_class', 'active') }}
-            {{ collection.hasActive(link) ? options.get('has_active_class', 'active') }}
+            {#{{ collection.hasActive(link) ? options.get('has_active_class', 'active') }}#}
             {{ options.item_class }}
             {{ link.class }}">
 
