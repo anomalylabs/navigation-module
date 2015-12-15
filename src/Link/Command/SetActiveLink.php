@@ -42,39 +42,15 @@ class SetActiveLink implements SelfHandling
     {
         $active = null;
 
+        $route        = $request->route();
+        $compiled     = $route->getCompiled();
+        $staticPrefix = $compiled->getStaticPrefix();
+
+        $match = $request->getUriForPath($staticPrefix);
+
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-
-            /**
-             * Get the HREF for both the current
-             * and loop iteration link.
-             */
-            $url        = $link->getUrl();
-            $currentUrl = '';
-
-            if ($active && $active instanceof LinkInterface) {
-                $currentUrl = $active->getUrl();
-            }
-
-            /**
-             * If the request URL does not even
-             * contain the HREF then skip it.
-             */
-            if (!str_contains($request->url(), $url)) {
-                continue;
-            }
-
-            /**
-             * Compare the length of the current HREF
-             * and loop iteration HREF. The longer the
-             * HREF the more detailed and exact it is and
-             * the more likely it is the current HREF and
-             * therefore the current link.
-             */
-            $urlLength        = strlen($url);
-            $currentUrlLength = strlen($currentUrl);
-
-            if ($urlLength > $currentUrlLength) {
+            if ($link->getUrl() == $match) {
                 $active = $link;
             }
         }
