@@ -58,8 +58,8 @@ class RenderNavigation implements SelfHandling
             return null;
         }
 
-        if ($path = $options->get('start_path')) {
-            if ($link = $this->dispatch(new GetParentLink($path, $links))) {
+        if ($root = $options->get('root')) {
+            if ($link = $this->dispatch(new GetParentLink($root, $links))) {
                 $options->put('parent', $link);
             }
         }

@@ -95,13 +95,11 @@ class LinkCollection extends EntryCollection
 
             $children = $this->children($parent);
 
-            if ($children->isEmpty()) {
-                continue;
-            }
-
-            foreach ($children as $child) {
-                if ($this->hasActive($child)) {
-                    return true;
+            if (!$children->isEmpty()) {
+                foreach ($children as $child) {
+                    if ($children->hasActive($child)) {
+                        return true;
+                    }
                 }
             }
         }

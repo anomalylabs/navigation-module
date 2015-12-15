@@ -17,11 +17,11 @@ class GetParentLink implements SelfHandling
 {
 
     /**
-     * The starting path.
+     * The root path.
      *
      * @var string
      */
-    private $path;
+    private $root;
 
     /**
      * The link collection.
@@ -33,12 +33,12 @@ class GetParentLink implements SelfHandling
     /**
      * Create a new GetParentLink instance.
      *
-     * @param string         $string
+     * @param string         $root
      * @param LinkCollection $links
      */
-    public function __construct($path, LinkCollection $links)
+    public function __construct($root, LinkCollection $links)
     {
-        $this->path  = $path;
+        $this->root  = $root;
         $this->links = $links;
     }
 
@@ -52,7 +52,7 @@ class GetParentLink implements SelfHandling
     {
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-            if ($url->to($this->path) == $link->getUrl()) {
+            if ($url->to($this->root) == $link->getUrl()) {
                 return $link;
             }
         }

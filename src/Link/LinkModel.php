@@ -93,7 +93,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getAllowedRoles()
     {
-        return $this->allowedRoles()->get();
+        return $this->allowed_roles;
     }
 
     /**
@@ -117,8 +117,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-<<<<<<< Updated upstream
-=======
      * Set the parent ID.
      *
      * @param $id
@@ -129,6 +127,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         $this->parent_id = $id;
 
         return $this;
+    }
+
+    /**
+     * Get the related child links.
+     *
+     * @return LinkCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**
@@ -152,17 +160,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     public function isActive()
     {
         return $this->active;
-    }
-
-    /**
->>>>>>> Stashed changes
-     * Get the related child links.
-     *
-     * @return LinkCollection
-     */
-    public function getChildren()
-    {
-        return $this->children;
     }
 
     /**
