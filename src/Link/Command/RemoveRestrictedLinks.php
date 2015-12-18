@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Group\Command;
+<?php namespace Anomaly\NavigationModule\Link\Command;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
@@ -7,14 +7,14 @@ use Illuminate\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class RemoveRolesLinks
+ * Class RemoveRestrictedLinks
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Command
+ * @package       Anomaly\NavigationModule\Link\Command
  */
-class RemoveRolesLinks implements SelfHandling
+class RemoveRestrictedLinks implements SelfHandling
 {
 
     /**
@@ -25,7 +25,7 @@ class RemoveRolesLinks implements SelfHandling
     protected $links;
 
     /**
-     * Create a new RemoveRolesLinks instance.
+     * Create a new RemoveRestrictedLinks instance.
      *
      * @param LinkCollection $links
      */

@@ -1,20 +1,25 @@
-{% macro links(links, collection, options) %}
+{% macro links(links, collection, options, depth) %}
     {% for link in links %}
+
+        {% set children = collection.children(link) %}
+
         <li class="
-            {{ collection.children(link.getObject()).isEmpty() ? '' : (options.active_class ?: 'dropdown') }}
-            {{ link.current ? (options.current_class ?: 'current') }}
-            {{ link.active ? (options.active_class ?: 'active') }}
-            {{ link.class }}
+            {{ children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
+            {{ collection.hasActive(link) ? options.get('has_active_class') }}
+            {{ link.active ? options.get('active_class', 'active') }}
             {{ options.item_class }}
-            ">
+            {{ link.class }}">
+
             <a href="{{ link.url }}" target="{{ link.target }}">
                 {{ link.title }}
             </a>
 
-            {% if not collection.children(link.getObject()).isEmpty() %}
-                <ul class="{{ options.child_list_class }}">
-                    {{ _self.links(collection.children(link.getObject()), collection, options) }}
-                </ul>
+            {% if not children.isEmpty() %}
+                {% if depth+1 <= options.get('depth', 999) %}
+                    <ul class="{{ options.child_list_class }}">
+                        {{ _self.links(children, collection, options, depth+1) }}
+                    </ul>
+                {% endif %}
             {% endif %}
         </li>
     {% endfor %}

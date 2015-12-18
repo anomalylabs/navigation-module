@@ -52,6 +52,19 @@ interface LinkInterface extends EntryInterface
     public function getAllowedRoles();
 
     /**
+     * et the active flag.
+     * @param $true
+     * @return $this
+     */
+    public function setActive($active);
+
+    /**
+     * Return the active flag.
+     * @return bool
+     */
+    public function isActive();
+
+    /**
      * Get the related parent.
      *
      * @return null|LinkInterface
@@ -64,6 +77,14 @@ interface LinkInterface extends EntryInterface
      * @return null|int
      */
     public function getParentId();
+
+    /**
+     * Set the parent ID.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function setParentId($id);
 
     /**
      * Get the related child links.

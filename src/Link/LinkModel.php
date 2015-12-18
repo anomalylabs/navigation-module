@@ -25,19 +25,12 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     protected $active = false;
 
     /**
-     * The current flag.
-     *
-     * @var bool
-     */
-    protected $current = false;
-
-    /**
      * Eager load these relationships.
      *
      * @var array
      */
     protected $with = [
-        'parent',
+        'entry',
         'allowedRoles'
     ];
 
@@ -124,6 +117,19 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Set the parent ID.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function setParentId($id)
+    {
+        $this->parent_id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get the related child links.
      *
      * @return LinkCollection
@@ -131,6 +137,29 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Set the active flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Return the active flag.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
     }
 
     /**

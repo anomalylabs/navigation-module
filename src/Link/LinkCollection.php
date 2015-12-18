@@ -15,58 +15,95 @@ class LinkCollection extends EntryCollection
 {
 
     /**
-     * Return only root items.
+     * Alias for $this->top()
      *
      * @return LinkCollection
      */
     public function root()
     {
-        $root = [];
+        return $this->top();
+    }
 
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
-            if (!$item->getParent()) {
-                $root[] = $item;
+    /**
+     * Return only top level links.
+     *
+     * @return LinkCollection
+     */
+    public function top()
+    {
+        return $this->filter(
+            function ($item) {
+
+                /* @var LinkInterface $item */
+                return !$item->getParentId();
             }
-        }
-
-        return new static($root);
+        );
     }
 
     /**
      * Return only children of the provided item.
      *
-     * @param LinkInterface $parent
+     * @param $parent
      * @return LinkCollection
      */
-    public function children(LinkInterface $parent)
+    public function children($parent)
     {
-        $children = [];
+        /* @var LinkInterface $parent */
+        return $this->filter(
+            function ($item) use ($parent) {
 
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
-            if ($item->getParentId() == $parent->getId()) {
-                $children[] = $item;
+                /* @var LinkInterface $item */
+                return $item->getParentId() == $parent->getId();
             }
-        }
-
-        return new static($children);
+        );
     }
 
     /**
-     * Return the current link.
+     * Return the active link.
      *
-     * @return LinkInterface
+     * @return LinkInterface|null
      */
-    public function current()
+    public function active()
     {
         /* @var LinkInterface $item */
         foreach ($this->items as $item) {
-            /*if ($item->isCurrent()) {
+
+            if ($item->isActive()) {
                 return $item;
-            }*/
+            }
         }
 
         return null;
+    }
+
+    /**
+     * Return whether the provided
+     * link has an active child.
+     *
+     * @param $parent
+     * @return bool
+     */
+    public function hasActive($parent)
+    {
+        /* @var LinkInterface $item */
+        foreach ($this->items as $item) {
+
+            /* @var LinkInterface $parent */
+            if ($item->isActive() && $item->getParentId() == $parent->getId()) {
+                return true;
+            }
+
+            $children = $this->children($parent);
+
+            if (!$children->isEmpty()) {
+                foreach ($children as $child) {
+                    if ($children->hasActive($child)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

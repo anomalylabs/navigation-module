@@ -1,5 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
@@ -13,4 +15,12 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 interface LinkRepositoryInterface extends EntryRepositoryInterface
 {
 
+    /**
+     * Return links belonging to
+     * the provided group.
+     *
+     * @param GroupInterface $group
+     * @return LinkCollection
+     */
+    public function findAllByGroup(GroupInterface $group);
 }
