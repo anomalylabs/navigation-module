@@ -41,15 +41,6 @@ class LinkTreeBuilder extends TreeBuilder
     ];
 
     /**
-     * The tree options.
-     *
-     * @var array
-     */
-    protected $segments = [
-        '<a href="/admin/navigation/links/{request.route.parameters.group}/edit/{entry.id}">{entry.title}</a>'
-    ];
-
-    /**
      * Fired when the builder is ready to build.
      *
      * @throws \Exception
