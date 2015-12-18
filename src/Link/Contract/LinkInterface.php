@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
@@ -31,6 +32,13 @@ interface LinkInterface extends EntryInterface
     public function getTitle();
 
     /**
+     * Get the broken flag.
+     *
+     * @return bool
+     */
+    public function isBroken();
+
+    /**
      * Get the type.
      *
      * @return LinkTypeExtension
@@ -53,6 +61,7 @@ interface LinkInterface extends EntryInterface
 
     /**
      * et the active flag.
+     *
      * @param $true
      * @return $this
      */
@@ -60,6 +69,7 @@ interface LinkInterface extends EntryInterface
 
     /**
      * Return the active flag.
+     *
      * @return bool
      */
     public function isActive();
@@ -85,6 +95,20 @@ interface LinkInterface extends EntryInterface
      * @return $this
      */
     public function setParentId($id);
+
+    /**
+     * Get the group.
+     *
+     * @return GroupInterface
+     */
+    public function getGroup();
+
+    /**
+     * Get the group slug.
+     *
+     * @return string
+     */
+    public function getGroupSlug();
 
     /**
      * Get the related child links.

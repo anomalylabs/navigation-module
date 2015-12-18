@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
+use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
@@ -64,6 +65,22 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         }
 
         return $type->title($this);
+    }
+
+    /**
+     * Get the broken flag.
+     *
+     * @return bool
+     */
+    public function isBroken()
+    {
+        $type = $this->getType();
+
+        if (!$type) {
+            return null;
+        }
+
+        return $type->broken($this);
     }
 
     /**
@@ -140,6 +157,28 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Get the group.
+     *
+     * @return GroupInterface
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Get the group slug.
+     *
+     * @return string
+     */
+    public function getGroupSlug()
+    {
+        $group = $this->getGroup();
+
+        return $group->getSlug();
+    }
+
+    /**
      * Set the active flag.
      *
      * @param $true
@@ -181,8 +220,9 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     {
         $array = parent::toArray();
 
-        $array['url']   = $this->getUrl();
-        $array['title'] = $this->getTitle();
+        $array['url']    = $this->getUrl();
+        $array['title']  = $this->getTitle();
+        $array['broken'] = $this->isBroken();
 
         return $array;
     }

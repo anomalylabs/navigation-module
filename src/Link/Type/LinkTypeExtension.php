@@ -39,6 +39,17 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     }
 
     /**
+     * Return if the link is broken or not.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function broken(LinkInterface $link)
+    {
+        return false;
+    }
+
+    /**
      * Return the form builder for
      * the link type entry.
      *

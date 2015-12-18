@@ -31,6 +31,14 @@ interface LinkTypeInterface
     public function title(LinkInterface $link);
 
     /**
+     * Return if the link is broken or not.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function broken(LinkInterface $link);
+
+    /**
      * Return the form builder for
      * the link type entry.
      *
