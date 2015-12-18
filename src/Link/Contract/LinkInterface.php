@@ -32,13 +32,6 @@ interface LinkInterface extends EntryInterface
     public function getTitle();
 
     /**
-     * Get the broken flag.
-     *
-     * @return bool
-     */
-    public function isBroken();
-
-    /**
      * Get the type.
      *
      * @return LinkTypeExtension

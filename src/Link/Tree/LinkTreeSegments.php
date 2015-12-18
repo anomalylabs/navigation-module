@@ -31,7 +31,10 @@ class LinkTreeSegments
                         'title' => 'module::message.broken'
                     ],
                     'enabled'     => function (LinkInterface $entry) {
-                        return $entry->isBroken();
+
+                        $type = $entry->getType();
+
+                        return !$type->exists($entry);
                     }
                 ]
             ]

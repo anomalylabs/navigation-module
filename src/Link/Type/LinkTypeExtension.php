@@ -39,14 +39,14 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     }
 
     /**
-     * Return if the link is broken or not.
+     * Return if the link exists or not.
      *
      * @param LinkInterface $link
      * @return bool
      */
-    public function broken(LinkInterface $link)
+    public function exists(LinkInterface $link)
     {
-        return false;
+        return true;
     }
 
     /**

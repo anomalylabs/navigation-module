@@ -220,9 +220,8 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     {
         $array = parent::toArray();
 
-        $array['url']    = $this->getUrl();
-        $array['title']  = $this->getTitle();
-        $array['broken'] = $this->isBroken();
+        $array['url']   = $this->getUrl();
+        $array['title'] = $this->getTitle();
 
         return $array;
     }
