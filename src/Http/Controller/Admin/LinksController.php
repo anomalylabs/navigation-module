@@ -90,8 +90,8 @@ class LinksController extends AdminController
             $link->setParent($parent);
         }
 
-        $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
         $form->addForm('type', $type->builder());
+        $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
 
         $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 
@@ -122,12 +122,12 @@ class LinksController extends AdminController
 
         $type = $entry->getType();
 
+        $form->addForm('type', $type->builder()->setEntry($entry->getEntry()->getId()));
+
         $form->addForm(
             'link',
             $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
         );
-        
-        $form->addForm('type', $type->builder()->setEntry($entry->getEntry()->getId()));
 
         $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
 
