@@ -42,7 +42,10 @@ class SetActiveLink implements SelfHandling
     {
         $active = null;
 
-        $route        = $request->route();
+        if (!$route = $request->route()) {
+            // No route / 404
+            return;
+        };
         $compiled     = $route->getCompiled();
         $staticPrefix = $compiled->getStaticPrefix();
 
