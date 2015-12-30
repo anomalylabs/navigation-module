@@ -46,11 +46,15 @@ class SetActiveLink implements SelfHandling
         $compiled     = $route->getCompiled();
         $staticPrefix = $compiled->getStaticPrefix();
 
-        $match = $request->getUriForPath($staticPrefix);
+        $exact   = $request->fullUrl();
+        $partial = $request->getUriForPath($staticPrefix);
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-            if ($link->getUrl() == $match) {
+
+            if ($link->getUrl() == $exact) {
+                $active = $link;
+            } elseif ($link->getUrl() == $partial) {
                 $active = $link;
             }
         }
