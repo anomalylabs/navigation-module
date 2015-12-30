@@ -41,7 +41,7 @@ class LinksController extends AdminController
 
         $tree->setGroup($group = $groups->findBySlug($group));
 
-        $this->breadcrumbs->add($group->getName());
+        $this->breadcrumbs->add($group->getName(), $this->request->fullUrl());
 
         return $tree->render();
     }
