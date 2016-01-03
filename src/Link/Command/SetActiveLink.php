@@ -42,15 +42,27 @@ class SetActiveLink implements SelfHandling
     {
         $active = null;
 
-        $route        = $request->route();
+        /**
+         * If the route does not exist,
+         * i.e. a 404 or 500 handling page.
+         * Then we don't have anything to do.
+         */
+        if (!$route = $request->route()) {
+            return;
+        };
+
         $compiled     = $route->getCompiled();
         $staticPrefix = $compiled->getStaticPrefix();
 
-        $match = $request->getUriForPath($staticPrefix);
+        $exact   = $request->fullUrl();
+        $partial = $request->getUriForPath($staticPrefix);
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-            if ($link->getUrl() == $match) {
+
+            if ($link->getUrl() == $exact) {
+                $active = $link;
+            } elseif ($link->getUrl() == $partial) {
                 $active = $link;
             }
         }

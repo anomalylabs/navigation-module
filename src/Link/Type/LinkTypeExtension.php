@@ -39,6 +39,17 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     }
 
     /**
+     * Return if the link exists or not.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function exists(LinkInterface $link)
+    {
+        return true;
+    }
+
+    /**
      * Return the form builder for
      * the link type entry.
      *

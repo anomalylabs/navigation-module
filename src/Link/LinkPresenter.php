@@ -24,6 +24,33 @@ class LinkPresenter extends EntryPresenter
     protected $object;
 
     /**
+     * Return the edit link.
+     *
+     * @return string
+     */
+    public function editLink()
+    {
+        return app('html')->link(
+            implode(
+                '/',
+                array_unique(
+                    array_filter(
+                        [
+                            'admin',
+                            $this->object->getStreamNamespace(),
+                            $this->object->getStreamSlug(),
+                            $this->object->getGroupSlug(),
+                            'edit',
+                            $this->object->getId()
+                        ]
+                    )
+                )
+            ),
+            $this->object->getTitle()
+        );
+    }
+
+    /**
      * Return the related children.
      *
      * @return LinkCollection
