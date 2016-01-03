@@ -11,7 +11,7 @@
             {{ link.class }}">
 
             <a href="{{ link.url }}" target="{{ link.target }}">
-                {{ link.title }}
+                {{ link.title|raw }}
             </a>
 
             {% if not children.isEmpty() %}
