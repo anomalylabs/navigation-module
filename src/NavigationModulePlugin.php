@@ -42,7 +42,10 @@ class NavigationModulePlugin extends Plugin
                             return $this->dispatch(new RenderNavigation($options->put('group', $group)));
                         }
                     );
-                }
+                },
+                [
+                    'is_safe' => ['html']
+                ]
             )
         ];
     }
