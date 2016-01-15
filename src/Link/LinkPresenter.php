@@ -33,17 +33,15 @@ class LinkPresenter extends EntryPresenter
         return app('html')->link(
             implode(
                 '/',
-                array_unique(
-                    array_filter(
-                        [
-                            'admin',
-                            $this->object->getStreamNamespace(),
-                            $this->object->getStreamSlug(),
-                            $this->object->getGroupSlug(),
-                            'edit',
-                            $this->object->getId()
-                        ]
-                    )
+                array_filter(
+                    [
+                        'admin',
+                        $this->object->getStreamNamespace(),
+                        $this->object->getStreamSlug(),
+                        $this->object->getGroupSlug(),
+                        'edit',
+                        $this->object->getId()
+                    ]
                 )
             ),
             $this->object->getTitle()
