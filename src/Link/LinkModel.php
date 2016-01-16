@@ -19,6 +19,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 {
 
     /**
+     * The cache minutes.
+     *
+     * @var int
+     */
+    protected $ttl = 99999;
+
+    /**
      * The active flag.
      *
      * @var bool

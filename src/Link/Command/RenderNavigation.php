@@ -65,6 +65,7 @@ class RenderNavigation implements SelfHandling
         }
 
         $this->dispatch(new RemoveRestrictedLinks($links));
+        $this->dispatch(new SetParentRelations($links));
         $this->dispatch(new SetActiveLink($links));
 
         return $view->make(
