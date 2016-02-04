@@ -6,14 +6,14 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 
 /**
- * Class SetActiveLink
+ * Class SetCurrentLink
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Link\Command
  */
-class SetActiveLink implements SelfHandling
+class SetCurrentLink implements SelfHandling
 {
 
     /**
@@ -24,7 +24,7 @@ class SetActiveLink implements SelfHandling
     protected $links;
 
     /**
-     * Create a new SetActiveLink instance.
+     * Create a new SetCurrentLink instance.
      *
      * @param LinkCollection $links
      */
@@ -40,7 +40,7 @@ class SetActiveLink implements SelfHandling
      */
     public function handle(Request $request)
     {
-        $active = null;
+        $current = null;
 
         /**
          * If the route does not exist,
@@ -61,9 +61,9 @@ class SetActiveLink implements SelfHandling
         foreach ($this->links as $link) {
 
             if ($link->getUrl() == $exact) {
-                $active = $link;
+                $current = $link;
             } elseif ($link->getUrl() == $partial) {
-                $active = $link;
+                $current = $link;
             }
         }
 
@@ -71,10 +71,10 @@ class SetActiveLink implements SelfHandling
          * If we have an current link determined
          * then mark it as such.
          *
-         * @var LinkInterface $active
+         * @var LinkInterface $current
          */
-        if ($active) {
-            $active->setActive(true);
+        if ($current) {
+            $current->setCurrent(true);
         }
     }
 }

@@ -66,7 +66,9 @@ class RenderNavigation implements SelfHandling
 
         $this->dispatch(new RemoveRestrictedLinks($links));
         $this->dispatch(new SetParentRelations($links));
-        $this->dispatch(new SetActiveLink($links));
+        $this->dispatch(new SetChildrenRelations($links));
+        $this->dispatch(new SetCurrentLink($links));
+        $this->dispatch(new SetActiveLinks($links));
 
         return $view->make(
             $options->get('view', 'anomaly.module.navigation::links'),

@@ -68,6 +68,21 @@ interface LinkInterface extends EntryInterface
     public function isActive();
 
     /**
+     * Set the current flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setCurrent($current);
+
+    /**
+     * Return the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent();
+
+    /**
      * Get the related parent.
      *
      * @return null|LinkInterface

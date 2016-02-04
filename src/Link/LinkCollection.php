@@ -59,16 +59,16 @@ class LinkCollection extends EntryCollection
     }
 
     /**
-     * Return the active link.
+     * Return the current link.
      *
      * @return LinkInterface|null
      */
-    public function active()
+    public function current()
     {
         /* @var LinkInterface $item */
         foreach ($this->items as $item) {
 
-            if ($item->isActive()) {
+            if ($item->isCurrent()) {
                 return $item;
             }
         }
@@ -77,33 +77,19 @@ class LinkCollection extends EntryCollection
     }
 
     /**
-     * Return whether the provided
-     * link has an active child.
+     * Return only active links.
      *
-     * @param $parent
-     * @return bool
+     * @param bool $active
+     * @return LinkCollection
      */
-    public function hasActive($parent)
+    public function active($active = true)
     {
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
+        return $this->filter(
+            function ($item) use ($active) {
 
-            /* @var LinkInterface $parent */
-            if ($item->isActive() && $item->getParentId() == $parent->getId()) {
-                return true;
+                /* @var LinkInterface $item */
+                return $item->isActive() == $active;
             }
-
-            $children = $this->children($parent);
-
-            if (!$children->isEmpty()) {
-                foreach ($children as $child) {
-                    if ($children->hasActive($child)) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
+        );
     }
 }

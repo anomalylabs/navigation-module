@@ -1,0 +1,46 @@
+<?php namespace Anomaly\NavigationModule\Link\Command;
+
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
+use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\Streams\Platform\Model\EloquentModel;
+use Illuminate\Contracts\Bus\SelfHandling;
+
+/**
+ * Class SetChildrenRelations
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\NavigationModule\Link\Command
+ */
+class SetChildrenRelations implements SelfHandling
+{
+
+    /**
+     * The link collection.
+     *
+     * @var LinkCollection
+     */
+    protected $links;
+
+    /**
+     * Create a new SetChildrenRelations instance.
+     *
+     * @param LinkCollection $links
+     */
+    public function __construct(LinkCollection $links)
+    {
+        $this->links = $links;
+    }
+
+    /**
+     * Handle the command.
+     */
+    public function handle()
+    {
+        /* @var LinkInterface|EloquentModel $link */
+        foreach ($this->links as $link) {
+            $link->setRelation('children', $this->links->children($link));
+        }
+    }
+}

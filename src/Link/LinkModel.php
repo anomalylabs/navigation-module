@@ -33,6 +33,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     protected $active = false;
 
     /**
+     * The current flag.
+     *
+     * @var bool
+     */
+    protected $current = false;
+
+    /**
      * Eager load these relationships.
      *
      * @var array
@@ -206,6 +213,29 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     public function isActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set the current flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+
+        return $this;
+    }
+
+    /**
+     * Return the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent()
+    {
+        return $this->current;
     }
 
     /**

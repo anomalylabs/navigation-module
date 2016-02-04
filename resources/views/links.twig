@@ -1,5 +1,5 @@
 {% import options.get('macro', 'anomaly.module.navigation::macro') as macro %}
 
 <ul class="{{ options.list_class }}">
-    {{ macro.links(options.parent ? links.children(options.parent) : links.top(), links, options, 1) }}
+    {{ macro.links(options.parent ? options.parent.children : links.top(), links, options, 1) }}
 </ul>
