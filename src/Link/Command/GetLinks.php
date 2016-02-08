@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
+use Anomaly\NavigationModule\Group\Command\GetGroup;
 use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -19,6 +20,13 @@ class GetLinks implements SelfHandling
     use DispatchesJobs;
 
     /**
+     * The options.
+     *
+     * @var Collection
+     */
+    protected $options;
+
+    /**
      * The group object.
      *
      * @var GroupInterface
@@ -26,11 +34,16 @@ class GetLinks implements SelfHandling
     protected $group;
 
     /**
-     * The options.
+     * Create a new GetLinks instance.
      *
-     * @var Collection
+     * @param Collection          $options
+     * @param GroupInterface|null $group
      */
-    protected $options;
+    public function __construct(Collection $options, GroupInterface $group = null)
+    {
+        $this->options = $options;
+        $this->group   = $group;
+    }
 
     /**
      * Handle the command.
@@ -39,6 +52,10 @@ class GetLinks implements SelfHandling
      */
     public function handle()
     {
+        if (!$this->group) {
+            $this->group = $this->dispatch(new GetGroup($this->options->get('group')));
+        }
+
         if ($this->group) {
             $links = $this->group->getLinks();
         } else {
@@ -55,9 +72,14 @@ class GetLinks implements SelfHandling
             }
         }
 
+        // Remove restricted for security purposes.
         $this->dispatch(new RemoveRestrictedLinks($links));
+
+        // Set the relationships manually.
         $this->dispatch(new SetParentRelations($links));
         $this->dispatch(new SetChildrenRelations($links));
+
+        // Flag appropriate links.
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
 

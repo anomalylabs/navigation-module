@@ -45,7 +45,7 @@ class RenderNavigation implements SelfHandling
     public function handle(Factory $view)
     {
         $group = $this->dispatch(new GetGroup($this->options->get('group')));
-        $links = $this->dispatch(new GetLinks($group, $this->options));
+        $links = $this->dispatch(new GetLinks($this->options, $group));
 
         return $view->make(
             $this->options->get('view', 'anomaly.module.navigation::links'),
