@@ -44,35 +44,16 @@ class RenderNavigation implements SelfHandling
      */
     public function handle(Factory $view)
     {
-        $options = $this->options;
-
-        $group = $this->dispatch(new GetGroup($options->get('group')));
-
-        if ($group) {
-            $links = $group->getLinks();
-        } else {
-            $links = $options->get('links');
-        }
-
-        if (!$links) {
-            return null;
-        }
-
-        if ($root = $options->get('root')) {
-            if ($link = $this->dispatch(new GetParentLink($root, $links))) {
-                $options->put('parent', $link);
-            }
-        }
-
-        $this->dispatch(new RemoveRestrictedLinks($links));
-        $this->dispatch(new SetParentRelations($links));
-        $this->dispatch(new SetChildrenRelations($links));
-        $this->dispatch(new SetCurrentLink($links));
-        $this->dispatch(new SetActiveLinks($links));
+        $group = $this->dispatch(new GetGroup($this->options->get('group')));
+        $links = $this->dispatch(new GetLinks($group, $this->options));
 
         return $view->make(
-            $options->get('view', 'anomaly.module.navigation::links'),
-            compact('group', 'links', 'options')
+            $this->options->get('view', 'anomaly.module.navigation::links'),
+            [
+                'group'   => $group,
+                'links'   => $links,
+                'options' => $this->options
+            ]
         )->render();
     }
 }

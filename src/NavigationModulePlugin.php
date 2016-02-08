@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule;
 
+use Anomaly\NavigationModule\Link\Command\GetLinks;
 use Anomaly\NavigationModule\Link\Command\RenderNavigation;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 use Anomaly\Streams\Platform\Addon\Plugin\PluginCriteria;
@@ -46,6 +47,31 @@ class NavigationModulePlugin extends Plugin
                 [
                     'is_safe' => ['html']
                 ]
+            ),
+            new \Twig_SimpleFunction(
+                'menu',
+                function ($group = null) {
+                    return new PluginCriteria(
+                        'render',
+                        function (Collection $options) use ($group) {
+                            return $this->dispatch(new RenderNavigation($options->put('group', $group)));
+                        }
+                    );
+                },
+                [
+                    'is_safe' => ['html']
+                ]
+            ),
+            new \Twig_SimpleFunction(
+                'links',
+                function ($group = null) {
+                    return new PluginCriteria(
+                        'render',
+                        function (Collection $options) use ($group) {
+                            return $this->dispatch(new GetLinks($options->put('group', $group)));
+                        }
+                    );
+                }
             )
         ];
     }
