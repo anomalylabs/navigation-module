@@ -26,17 +26,17 @@ class NavigationModule extends Module
      * @var array
      */
     protected $sections = [
-        'groups' => [
+        'menus' => [
             'buttons' => [
-                'new_group'
+                'new_menu'
             ]
         ],
-        'links'  => [
+        'links' => [
             'buttons' => [
                 'new_link' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.group}'
+                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}'
                 ]
             ]
         ]

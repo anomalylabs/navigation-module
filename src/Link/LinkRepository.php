@@ -1,7 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 
 /**
@@ -34,13 +34,13 @@ class LinkRepository extends EntryRepository implements LinkRepositoryInterface
 
     /**
      * Return links belonging to
-     * the provided group.
+     * the provided menu.
      *
-     * @param GroupInterface $group
+     * @param MenuInterface $menu
      * @return LinkCollection
      */
-    public function findAllByGroup(GroupInterface $group)
+    public function findAllByMenu(MenuInterface $menu)
     {
-        return $this->model->where('group_id', $group->getId())->get();
+        return $this->model->where('menu_id', $menu->getId())->get();
     }
 }

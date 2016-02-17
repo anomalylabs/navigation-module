@@ -1,18 +1,18 @@
-<?php namespace Anomaly\NavigationModule\Group;
+<?php namespace Anomaly\NavigationModule\Menu;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
-use Anomaly\Streams\Platform\Model\Navigation\NavigationGroupsEntryModel;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
+use Anomaly\Streams\Platform\Model\Navigation\NavigationMenusEntryModel;
 
 /**
- * Class GroupModel
+ * Class MenuModel
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group
+ * @package       Anomaly\NavigationModule\Menu
  */
-class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
+class MenuModel extends NavigationMenusEntryModel implements MenuInterface
 {
 
     /**
@@ -52,7 +52,7 @@ class GroupModel extends NavigationGroupsEntryModel implements GroupInterface
      */
     public function links()
     {
-        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'group_id')
+        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'menu_id')
             ->orderBy('sort_order', 'ASC')
             ->orderBy('parent_id', 'ASC');
     }

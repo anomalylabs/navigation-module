@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'groups' => [
+    'menus' => [
         'read',
         'write',
         'delete'
     ],
-    'links'  => [
+    'links' => [
         'read',
         'write',
         'delete'

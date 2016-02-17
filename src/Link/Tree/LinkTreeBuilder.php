@@ -1,6 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Tree;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Ui\Tree\TreeBuilder;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,11 +16,11 @@ class LinkTreeBuilder extends TreeBuilder
 {
 
     /**
-     * The group instance.
+     * The menu instance.
      *
-     * @var null|GroupInterface
+     * @var null|MenuInterface
      */
-    protected $group = null;
+    protected $menu = null;
 
     /**
      * The tree buttons.
@@ -32,7 +32,7 @@ class LinkTreeBuilder extends TreeBuilder
             'data-toggle' => 'modal',
             'data-target' => '#modal',
             'text'        => 'anomaly.module.navigation::button.create_child_link',
-            'href'        => 'admin/navigation/links/choose/{request.route.parameters.group}?parent={entry.id}'
+            'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}?parent={entry.id}'
         ],
         'view' => [
             'target' => '_blank'
@@ -47,8 +47,8 @@ class LinkTreeBuilder extends TreeBuilder
      */
     public function onReady()
     {
-        if (!$this->getGroup()) {
-            throw new \Exception('The $group parameter is required.');
+        if (!$this->getMenu()) {
+            throw new \Exception('The $menu parameter is required.');
         }
     }
 
@@ -59,30 +59,30 @@ class LinkTreeBuilder extends TreeBuilder
      */
     public function onQuerying(Builder $query)
     {
-        $group = $this->getGroup();
+        $menu = $this->getMenu();
 
-        $query->where('group_id', $group->getId());
+        $query->where('menu_id', $menu->getId());
     }
 
     /**
-     * Get the group.
+     * Get the menu.
      *
-     * @return GroupInterface|null
+     * @return MenuInterface|null
      */
-    public function getGroup()
+    public function getMenu()
     {
-        return $this->group;
+        return $this->menu;
     }
 
     /**
-     * Set the group.
+     * Set the menu.
      *
-     * @param $group
+     * @param $menu
      * @return $this
      */
-    public function setGroup(GroupInterface $group)
+    public function setMenu(MenuInterface $menu)
     {
-        $this->group = $group;
+        $this->menu = $menu;
 
         return $this;
     }

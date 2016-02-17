@@ -3,13 +3,13 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModuleNavigationCreateGroupsStream
+ * Class AnomalyModuleNavigationCreateMenusStream
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModuleNavigationCreateGroupsStream extends Migration
+class AnomalyModuleNavigationCreateMenusStream extends Migration
 {
 
     /**
@@ -18,7 +18,7 @@ class AnomalyModuleNavigationCreateGroupsStream extends Migration
      * @var array
      */
     protected $stream = [
-        'slug'         => 'groups',
+        'slug'         => 'menus',
         'title_column' => 'name'
     ];
 

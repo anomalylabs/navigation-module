@@ -1,17 +1,17 @@
-<?php namespace Anomaly\NavigationModule\Group\Contract;
+<?php namespace Anomaly\NavigationModule\Menu\Contract;
 
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 
 /**
- * Interface GroupInterface
+ * Interface MenuInterface
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Contract
+ * @package       Anomaly\NavigationModule\Menu\Contract
  */
-interface GroupInterface extends EntryInterface
+interface MenuInterface extends EntryInterface
 {
 
     /**

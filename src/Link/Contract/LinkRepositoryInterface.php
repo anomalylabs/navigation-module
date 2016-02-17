@@ -1,7 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
 
 /**
@@ -17,10 +17,10 @@ interface LinkRepositoryInterface extends EntryRepositoryInterface
 
     /**
      * Return links belonging to
-     * the provided group.
+     * the provided menu.
      *
-     * @param GroupInterface $group
+     * @param MenuInterface $menu
      * @return LinkCollection
      */
-    public function findAllByGroup(GroupInterface $group);
+    public function findAllByMenu(MenuInterface $menu);
 }

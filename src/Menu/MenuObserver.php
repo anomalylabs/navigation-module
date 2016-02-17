@@ -1,18 +1,18 @@
-<?php namespace Anomaly\NavigationModule\Group;
+<?php namespace Anomaly\NavigationModule\Menu;
 
-use Anomaly\NavigationModule\Group\Command\DeleteGroupLinks;
+use Anomaly\NavigationModule\Menu\Command\DeleteMenuLinks;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 
 /**
- * Class GroupObserver
+ * Class MenuObserver
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group
+ * @package       Anomaly\NavigationModule\Menu
  */
-class GroupObserver extends EntryObserver
+class MenuObserver extends EntryObserver
 {
 
     /**
@@ -22,7 +22,7 @@ class GroupObserver extends EntryObserver
      */
     public function deleted(EntryInterface $entry)
     {
-        $this->dispatch(new DeleteGroupLinks($entry));
+        $this->dispatch(new DeleteMenuLinks($entry));
 
         parent::deleted($entry);
     }

@@ -27,9 +27,9 @@ class NavigationModulePlugin extends Plugin
     {
         return [
             new \Twig_SimpleFunction(
-                'nav_group',
-                function ($group, array $parameters = []) {
-                    return $this->dispatch(new RenderNavigation((new Collection($parameters))->put('group', $group)));
+                'nav_menu',
+                function ($menu, array $parameters = []) {
+                    return $this->dispatch(new RenderNavigation((new Collection($parameters))->put('menu', $menu)));
                 },
                 [
                     'is_safe' => ['html']
@@ -37,11 +37,11 @@ class NavigationModulePlugin extends Plugin
             ),
             new \Twig_SimpleFunction(
                 'nav',
-                function ($group = null) {
+                function ($menu = null) {
                     return new PluginCriteria(
                         'render',
-                        function (Collection $options) use ($group) {
-                            return $this->dispatch(new RenderNavigation($options->put('group', $group)));
+                        function (Collection $options) use ($menu) {
+                            return $this->dispatch(new RenderNavigation($options->put('menu', $menu)));
                         }
                     );
                 },
@@ -51,11 +51,11 @@ class NavigationModulePlugin extends Plugin
             ),
             new \Twig_SimpleFunction(
                 'menu',
-                function ($group = null) {
+                function ($menu = null) {
                     return new PluginCriteria(
                         'render',
-                        function (Collection $options) use ($group) {
-                            return $this->dispatch(new RenderNavigation($options->put('group', $group)));
+                        function (Collection $options) use ($menu) {
+                            return $this->dispatch(new RenderNavigation($options->put('menu', $menu)));
                         }
                     );
                 },
@@ -65,12 +65,12 @@ class NavigationModulePlugin extends Plugin
             ),
             new \Twig_SimpleFunction(
                 'links',
-                function ($group = null) {
+                function ($menu = null) {
                     return new PluginCriteria(
                         'get',
-                        function (Collection $options) use ($group) {
+                        function (Collection $options) use ($menu) {
                             return (new Decorator())->decorate(
-                                $this->dispatch(new GetLinks($options->put('group', $group)))
+                                $this->dispatch(new GetLinks($options->put('menu', $menu)))
                             );
                         }
                     );

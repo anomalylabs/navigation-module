@@ -1,8 +1,8 @@
 <?php namespace Anomaly\NavigationModule\Link\Form;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
@@ -24,11 +24,11 @@ class LinkFormBuilder extends FormBuilder
     protected $type = null;
 
     /**
-     * The related group.
+     * The related menu.
      *
-     * @var null|GroupInterface
+     * @var null|MenuInterface
      */
-    protected $group = null;
+    protected $menu = null;
 
     /**
      * The parent link.
@@ -46,7 +46,7 @@ class LinkFormBuilder extends FormBuilder
         'parent',
         'entry',
         'type',
-        'group'
+        'menu'
     ];
 
     /**
@@ -60,8 +60,8 @@ class LinkFormBuilder extends FormBuilder
             throw new \Exception('The $type parameter is required when creating a link.');
         }
 
-        if (!$this->getGroup() && !$this->getEntry()) {
-            throw new \Exception('The $group parameter is required when creating a link.');
+        if (!$this->getMenu() && !$this->getEntry()) {
+            throw new \Exception('The $menu parameter is required when creating a link.');
         }
     }
 
@@ -73,8 +73,8 @@ class LinkFormBuilder extends FormBuilder
         $parent = $this->getParent();
         $entry  = $this->getFormEntry();
 
-        if (!$entry->group_id && $group = $this->getGroup()) {
-            $entry->group_id = $group->getId();
+        if (!$entry->menu_id && $menu = $this->getMenu()) {
+            $entry->menu_id = $menu->getId();
         }
 
         if (!$entry->type && $type = $this->getType()) {
@@ -110,24 +110,24 @@ class LinkFormBuilder extends FormBuilder
     }
 
     /**
-     * Get the group.
+     * Get the menu.
      *
-     * @return GroupInterface|null
+     * @return MenuInterface|null
      */
-    public function getGroup()
+    public function getMenu()
     {
-        return $this->group;
+        return $this->menu;
     }
 
     /**
-     * Set the group.
+     * Set the menu.
      *
-     * @param $group
+     * @param $menu
      * @return $this
      */
-    public function setGroup(GroupInterface $group)
+    public function setMenu(MenuInterface $menu)
     {
-        $this->group = $group;
+        $this->menu = $menu;
 
         return $this;
     }

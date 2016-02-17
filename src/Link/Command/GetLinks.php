@@ -1,7 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
-use Anomaly\NavigationModule\Group\Command\GetGroup;
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
+use Anomaly\NavigationModule\Menu\Command\GetMenu;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -27,22 +27,22 @@ class GetLinks implements SelfHandling
     protected $options;
 
     /**
-     * The group object.
+     * The menu object.
      *
-     * @var GroupInterface
+     * @var MenuInterface
      */
-    protected $group;
+    protected $menu;
 
     /**
      * Create a new GetLinks instance.
      *
-     * @param Collection          $options
-     * @param GroupInterface|null $group
+     * @param Collection         $options
+     * @param MenuInterface|null $menu
      */
-    public function __construct(Collection $options, GroupInterface $group = null)
+    public function __construct(Collection $options, MenuInterface $menu = null)
     {
         $this->options = $options;
-        $this->group   = $group;
+        $this->menu    = $menu;
     }
 
     /**
@@ -52,12 +52,12 @@ class GetLinks implements SelfHandling
      */
     public function handle()
     {
-        if (!$this->group) {
-            $this->group = $this->dispatch(new GetGroup($this->options->get('group')));
+        if (!$this->menu) {
+            $this->menu = $this->dispatch(new GetMenu($this->options->get('menu')));
         }
 
-        if ($this->group) {
-            $links = $this->group->getLinks();
+        if ($this->menu) {
+            $links = $this->menu->getLinks();
         } else {
             $links = $this->options->get('links');
         }

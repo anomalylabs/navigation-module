@@ -5,7 +5,7 @@ return [
     'name'        => 'Navigation Module',
     'description' => 'Powerful navigation management made easy.',
     'section'     => [
-        'groups' => 'Groups',
-        'links'  => 'Links'
+        'menus' => 'Menus',
+        'links' => 'Links'
     ]
 ];

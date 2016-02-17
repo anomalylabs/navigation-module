@@ -1,30 +1,30 @@
-<?php namespace Anomaly\NavigationModule\Group\Command;
+<?php namespace Anomaly\NavigationModule\Menu\Command;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
-use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Support\Presenter;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class GetGroup
+ * Class GetMenu
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Command
+ * @package       Anomaly\NavigationModule\Menu\Command
  */
-class GetGroup implements SelfHandling
+class GetMenu implements SelfHandling
 {
 
     /**
-     * The group identifier.
+     * The menu identifier.
      *
      * @var mixed
      */
     protected $identifier;
 
     /**
-     * Create a new GetGroup instance.
+     * Create a new GetMenu instance.
      *
      * @param mixed $identifier
      */
@@ -36,17 +36,17 @@ class GetGroup implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param GroupRepositoryInterface $groups
-     * @return GroupInterface|null
+     * @param MenuRepositoryInterface $menus
+     * @return MenuInterface|null
      */
-    public function handle(GroupRepositoryInterface $groups)
+    public function handle(MenuRepositoryInterface $menus)
     {
         if (is_numeric($this->identifier)) {
-            return $groups->find($this->identifier);
+            return $menus->find($this->identifier);
         }
 
         if (is_string($this->identifier)) {
-            return $groups->findBySlug($this->identifier);
+            return $menus->findBySlug($this->identifier);
         }
 
         if ($this->identifier instanceof Presenter) {

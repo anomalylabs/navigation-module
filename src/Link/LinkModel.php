@@ -1,8 +1,8 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
@@ -171,25 +171,25 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Get the group.
+     * Get the menu.
      *
-     * @return GroupInterface
+     * @return MenuInterface
      */
-    public function getGroup()
+    public function getMenu()
     {
-        return $this->group;
+        return $this->menu;
     }
 
     /**
-     * Get the group slug.
+     * Get the menu slug.
      *
      * @return string
      */
-    public function getGroupSlug()
+    public function getMenuSlug()
     {
-        $group = $this->getGroup();
+        $menu = $this->getMenu();
 
-        return $group->getSlug();
+        return $menu->getSlug();
     }
 
     /**

@@ -28,10 +28,10 @@ class AnomalyModuleNavigationCreateNavigationFields extends Migration
                 'slugify' => 'name'
             ]
         ],
-        'group'         => [
+        'menu'          => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'related' => 'Anomaly\NavigationModule\Group\GroupModel'
+                'related' => 'Anomaly\NavigationModule\Menu\MenuModel'
             ]
         ],
         'parent'        => [

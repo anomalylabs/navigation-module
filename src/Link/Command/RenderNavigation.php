@@ -1,6 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
-use Anomaly\NavigationModule\Group\Command\GetGroup;
+use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\View\Factory;
@@ -44,13 +44,13 @@ class RenderNavigation implements SelfHandling
      */
     public function handle(Factory $view)
     {
-        $group = $this->dispatch(new GetGroup($this->options->get('group')));
-        $links = $this->dispatch(new GetLinks($this->options, $group));
+        $menu  = $this->dispatch(new GetMenu($this->options->get('menu')));
+        $links = $this->dispatch(new GetLinks($this->options, $menu));
 
         return $view->make(
             $this->options->get('view', 'anomaly.module.navigation::links'),
             [
-                'group'   => $group,
+                'menu'    => $menu,
                 'links'   => $links,
                 'options' => $this->options
             ]

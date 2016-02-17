@@ -1,12 +1,12 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
-use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Link\Entry\EntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
 use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\Streams\Platform\Support\Authorizer;
@@ -25,23 +25,23 @@ class LinksController extends AdminController
     /**
      * Return an index of existing links.
      *
-     * @param LinkTreeBuilder          $tree
-     * @param GroupRepositoryInterface $groups
-     * @param null                     $group
+     * @param LinkTreeBuilder         $tree
+     * @param MenuRepositoryInterface $menus
+     * @param null                    $menu
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function index(LinkTreeBuilder $tree, GroupRepositoryInterface $groups, $group = null)
+    public function index(LinkTreeBuilder $tree, MenuRepositoryInterface $menus, $menu = null)
     {
-        if (!$group) {
+        if (!$menu) {
 
-            $this->messages->warning('Please choose a group first.');
+            $this->messages->warning('Please choose a menu first.');
 
             return $this->response->redirectTo('admin/navigation');
         }
 
-        $tree->setGroup($group = $groups->findBySlug($group));
+        $tree->setMenu($menu = $menus->findBySlug($menu));
 
-        $this->breadcrumbs->add($group->getName(), $this->request->fullUrl());
+        $this->breadcrumbs->add($menu->getName(), $this->request->fullUrl());
 
         return $tree->render();
     }
@@ -50,16 +50,16 @@ class LinksController extends AdminController
      * Return the modal for choosing a link type.
      *
      * @param ExtensionCollection $extensions
-     * @param string              $group
+     * @param string              $menu
      * @return \Illuminate\View\View
      */
-    public function choose(ExtensionCollection $extensions, $group)
+    public function choose(ExtensionCollection $extensions, $menu)
     {
         return view(
             'module::ajax/choose_link_type',
             [
                 'link_types' => $extensions->search('anomaly.module.navigation::link_type.*'),
-                'group'      => $group
+                'menu'       => $menu
             ]
         );
     }
@@ -70,18 +70,18 @@ class LinksController extends AdminController
      * @param LinkFormBuilder          $link
      * @param EntryFormBuilder         $form
      * @param LinkRepositoryInterface  $links
-     * @param GroupRepositoryInterface $groups
+     * @param MenuRepositoryInterface  $menus
      * @param ExtensionCollection      $extensions
-     * @param                          $group
+     * @param                          $menu
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(
         LinkFormBuilder $link,
         EntryFormBuilder $form,
         LinkRepositoryInterface $links,
-        GroupRepositoryInterface $groups,
+        MenuRepositoryInterface $menus,
         ExtensionCollection $extensions,
-        $group
+        $menu
     ) {
         /* @var LinkTypeInterface $type */
         $type = $extensions->get($_GET['link_type']);
@@ -91,9 +91,9 @@ class LinksController extends AdminController
         }
 
         $form->addForm('type', $type->builder());
-        $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
+        $form->addForm('link', $link->setType($type)->setMenu($menu = $menus->findBySlug($menu)));
 
-        $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
 
         return $form->render();
     }
@@ -104,8 +104,8 @@ class LinksController extends AdminController
      * @param LinkFormBuilder          $link
      * @param EntryFormBuilder         $form
      * @param LinkRepositoryInterface  $links
-     * @param GroupRepositoryInterface $groups
-     * @param                          $group
+     * @param MenuRepositoryInterface  $menus
+     * @param                          $menu
      * @param                          $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -113,8 +113,8 @@ class LinksController extends AdminController
         LinkFormBuilder $link,
         EntryFormBuilder $form,
         LinkRepositoryInterface $links,
-        GroupRepositoryInterface $groups,
-        $group,
+        MenuRepositoryInterface $menus,
+        $menu,
         $id
     ) {
         /* @var LinkInterface $entry */
@@ -126,10 +126,10 @@ class LinksController extends AdminController
 
         $form->addForm(
             'link',
-            $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
+            $link->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($menu))
         );
 
-        $this->breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
 
         return $form->render();
     }

@@ -38,7 +38,7 @@ class LinkPresenter extends EntryPresenter
                         'admin',
                         $this->object->getStreamNamespace(),
                         $this->object->getStreamSlug(),
-                        $this->object->getGroupSlug(),
+                        $this->object->getMenuSlug(),
                         'edit',
                         $this->object->getId()
                     ]

@@ -1,8 +1,8 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 
@@ -105,18 +105,18 @@ interface LinkInterface extends EntryInterface
     public function setParentId($id);
 
     /**
-     * Get the group.
+     * Get the menu.
      *
-     * @return GroupInterface
+     * @return MenuInterface
      */
-    public function getGroup();
+    public function getMenu();
 
     /**
-     * Get the group slug.
+     * Get the menu slug.
      *
      * @return string
      */
-    public function getGroupSlug();
+    public function getMenuSlug();
 
     /**
      * Get the related child links.

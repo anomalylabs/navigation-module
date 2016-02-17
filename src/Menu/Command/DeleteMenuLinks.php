@@ -1,35 +1,35 @@
-<?php namespace Anomaly\NavigationModule\Group\Command;
+<?php namespace Anomaly\NavigationModule\Menu\Command;
 
-use Anomaly\NavigationModule\Group\Contract\GroupInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class DeleteGroupLinks
+ * Class DeleteMenuLinks
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Command
+ * @package       Anomaly\NavigationModule\Menu\Command
  */
-class DeleteGroupLinks implements SelfHandling
+class DeleteMenuLinks implements SelfHandling
 {
 
     /**
-     * The group instance.
+     * The menu instance.
      *
-     * @var GroupInterface
+     * @var MenuInterface
      */
-    protected $group;
+    protected $menu;
 
     /**
-     * Create a new DeleteGroupLinks instance.
+     * Create a new DeleteMenuLinks instance.
      *
-     * @param GroupInterface $group
+     * @param MenuInterface $menu
      */
-    public function __construct(GroupInterface $group)
+    public function __construct(MenuInterface $menu)
     {
-        $this->group = $group;
+        $this->menu = $menu;
     }
 
     /**
@@ -39,7 +39,7 @@ class DeleteGroupLinks implements SelfHandling
      */
     public function handle(LinkRepositoryInterface $links)
     {
-        foreach ($this->group->getLinks() as $link) {
+        foreach ($this->menu->getLinks() as $link) {
             $links->delete($link);
         }
     }

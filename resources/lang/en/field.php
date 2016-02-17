@@ -7,7 +7,7 @@ return [
     ],
     'slug'          => [
         'name'         => 'Slug',
-        'instructions' => 'The slug will be used when accessing navigation groups with the plugin.'
+        'instructions' => 'The slug will be used when accessing navigation menus with the plugin.'
     ],
     'description'   => [
         'name'         => 'Description',

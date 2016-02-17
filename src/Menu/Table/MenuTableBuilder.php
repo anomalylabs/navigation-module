@@ -1,16 +1,16 @@
-<?php namespace Anomaly\NavigationModule\Group\Table;
+<?php namespace Anomaly\NavigationModule\Menu\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 
 /**
- * Class GroupTableBuilder
+ * Class MenuTableBuilder
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Table
+ * @package       Anomaly\NavigationModule\Menu\Table
  */
-class GroupTableBuilder extends TableBuilder
+class MenuTableBuilder extends TableBuilder
 {
 
     /**

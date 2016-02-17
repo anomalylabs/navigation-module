@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'groups' => [
-        'name'   => 'Groups',
+    'menus' => [
+        'name'   => 'Menus',
         'option' => [
-            'read'   => 'Can access groups section.',
-            'write'  => 'Can create and edit groups.',
-            'delete' => 'Can delete groups.'
+            'read'   => 'Can access menus section.',
+            'write'  => 'Can create and edit menus.',
+            'delete' => 'Can delete menus.'
         ]
     ],
-    'links'  => [
+    'links' => [
         'name'   => 'Links',
         'option' => [
             'read'   => 'Can access links section.',

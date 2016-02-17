@@ -1,50 +1,50 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
-use Anomaly\NavigationModule\Group\Form\GroupFormBuilder;
-use Anomaly\NavigationModule\Group\Table\GroupTableBuilder;
+use Anomaly\NavigationModule\Menu\Form\MenuFormBuilder;
+use Anomaly\NavigationModule\Menu\Table\MenuTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
 /**
- * Class GroupsController
+ * Class MenusController
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\NavigationModule\Http\Controller\Admin
  */
-class GroupsController extends AdminController
+class MenusController extends AdminController
 {
 
     /**
-     * Return an index of existing navigation groups.
+     * Return an index of existing navigation menus.
      *
-     * @param GroupTableBuilder $table
+     * @param MenuTableBuilder $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(GroupTableBuilder $table)
+    public function index(MenuTableBuilder $table)
     {
         return $table->render();
     }
 
     /**
-     * Return the form for creating a new navigation group.
+     * Return the form for creating a new navigation menu.
      *
-     * @param GroupFormBuilder $form
+     * @param MenuFormBuilder $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function create(GroupFormBuilder $form)
+    public function create(MenuFormBuilder $form)
     {
         return $form->render();
     }
 
     /**
-     * Return the form for editing an existing navigation group.
+     * Return the form for editing an existing navigation menu.
      *
-     * @param GroupFormBuilder $form
+     * @param MenuFormBuilder  $form
      * @param                  $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(GroupFormBuilder $form, $id)
+    public function edit(MenuFormBuilder $form, $id)
     {
         return $form->render($id);
     }

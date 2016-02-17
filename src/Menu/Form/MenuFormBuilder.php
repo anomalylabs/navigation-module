@@ -1,16 +1,16 @@
-<?php namespace Anomaly\NavigationModule\Group\Form;
+<?php namespace Anomaly\NavigationModule\Menu\Form;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
- * Class GroupFormBuilder
+ * Class MenuFormBuilder
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\NavigationModule\Group\Form
+ * @package       Anomaly\NavigationModule\Menu\Form
  */
-class GroupFormBuilder extends FormBuilder
+class MenuFormBuilder extends FormBuilder
 {
 
 }
