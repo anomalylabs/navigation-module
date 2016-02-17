@@ -19,8 +19,13 @@ class MenuTableBuilder extends TableBuilder
      * @var array
      */
     protected $filters = [
-        'name',
-        'slug'
+        'search' => [
+            'columns' => [
+                'name',
+                'slug',
+                'description'
+            ]
+        ]
     ];
 
     /**
