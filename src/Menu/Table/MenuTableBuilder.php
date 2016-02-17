@@ -20,7 +20,7 @@ class MenuTableBuilder extends TableBuilder
      */
     protected $filters = [
         'search' => [
-            'columns' => [
+            'fields' => [
                 'name',
                 'slug',
                 'description'
@@ -35,7 +35,6 @@ class MenuTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'slug',
         'description'
     ];
 
@@ -45,13 +44,13 @@ class MenuTableBuilder extends TableBuilder
      * @var array
      */
     protected $buttons = [
+        'edit',
         [
             'type' => 'info',
             'icon' => 'link',
             'text' => 'module::button.links',
             'href' => 'admin/navigation/links/{entry.slug}'
-        ],
-        'edit'
+        ]
     ];
 
     /**
