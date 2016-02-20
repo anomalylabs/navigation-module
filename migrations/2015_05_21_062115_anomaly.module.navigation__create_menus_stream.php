@@ -19,7 +19,8 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
      */
     protected $stream = [
         'slug'         => 'menus',
-        'title_column' => 'name'
+        'title_column' => 'name',
+        'translatable' => true
     ];
 
     /**
@@ -28,15 +29,18 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
      * @var array
      */
     protected $assignments = [
-        'name' => [
+        'name'        => [
+            'translatable' => true,
+            'required'     => true,
+            'unique'       => true
+        ],
+        'slug'        => [
             'required' => true,
             'unique'   => true
         ],
-        'slug' => [
-            'required' => true,
-            'unique'   => true
-        ],
-        'description'
+        'description' => [
+            'translatable' => true
+        ]
     ];
 
 }
