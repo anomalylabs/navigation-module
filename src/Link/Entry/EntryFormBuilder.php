@@ -22,7 +22,8 @@ class EntryFormBuilder extends MultipleFormBuilder
     protected $actions = [
         'save' => [
             'redirect' => 'admin/navigation/links/{request.route.parameters.menu}'
-        ]
+        ],
+        'save_edit'
     ];
 
     /**

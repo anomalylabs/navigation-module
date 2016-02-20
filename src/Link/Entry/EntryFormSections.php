@@ -18,8 +18,8 @@ class EntryFormSections
      */
     public function handle(EntryFormBuilder $builder)
     {
-        $type = $builder->getChildFormStream('type');
-        $link = $builder->getChildFormStream('link');
+        $type = $builder->getChildForm('type');
+        $link = $builder->getChildForm('link');
 
         $builder->setSections(
             [
@@ -29,7 +29,7 @@ class EntryFormSections
                             function ($slug) {
                                 return 'type_' . $slug;
                             },
-                            $type->getAssignmentFieldSlugs()
+                            $type->getFormFieldSlugs()
                         );
                     }
                 ],
@@ -39,7 +39,7 @@ class EntryFormSections
                             function ($slug) {
                                 return 'link_' . $slug;
                             },
-                            $link->getAssignmentFieldSlugs()
+                            $link->getFormFieldSlugs()
                         );
                     }
                 ]
