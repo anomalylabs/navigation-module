@@ -27,29 +27,6 @@ class NavigationModulePlugin extends Plugin
     {
         return [
             new \Twig_SimpleFunction(
-                'nav_menu',
-                function ($menu, array $parameters = []) {
-                    return $this->dispatch(new RenderNavigation((new Collection($parameters))->put('menu', $menu)));
-                },
-                [
-                    'is_safe' => ['html']
-                ]
-            ),
-            new \Twig_SimpleFunction(
-                'nav',
-                function ($menu = null) {
-                    return new PluginCriteria(
-                        'render',
-                        function (Collection $options) use ($menu) {
-                            return $this->dispatch(new RenderNavigation($options->put('menu', $menu)));
-                        }
-                    );
-                },
-                [
-                    'is_safe' => ['html']
-                ]
-            ),
-            new \Twig_SimpleFunction(
                 'menu',
                 function ($menu = null) {
                     return new PluginCriteria(
