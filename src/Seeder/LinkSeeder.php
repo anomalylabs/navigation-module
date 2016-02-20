@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Seeder;
 
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Anomaly\UrlLinkTypeExtension\UrlLinkTypeModel;
@@ -24,13 +25,22 @@ class LinkSeeder extends Seeder
     protected $links;
 
     /**
+     * The menu repository.
+     *
+     * @var MenuRepositoryInterface
+     */
+    protected $menus;
+
+    /**
      * Create a new LinkSeeder instance.
      *
-     * @param $links
+     * @param LinkRepositoryInterface $links
+     * @param MenuRepositoryInterface $menus
      */
-    public function __construct(LinkRepositoryInterface $links)
+    public function __construct(LinkRepositoryInterface $links, MenuRepositoryInterface $menus)
     {
         $this->links = $links;
+        $this->menus = $menus;
     }
 
     /**
@@ -43,6 +53,8 @@ class LinkSeeder extends Seeder
         $repository->setModel(new UrlLinkTypeModel());
 
         $repository->truncate();
+
+        $menu = $this->menus->findBySlug('footer');
 
         $pyrocms = $repository->create(
             [
@@ -66,7 +78,7 @@ class LinkSeeder extends Seeder
 
         $this->links->create(
             [
-                'menu'   => 1,
+                'menu'   => $menu,
                 'target' => '_blank',
                 'entry'  => $pyrocms,
                 'type'   => 'anomaly.extension.url_link_type'
@@ -75,7 +87,7 @@ class LinkSeeder extends Seeder
 
         $this->links->create(
             [
-                'menu'   => 1,
+                'menu'   => $menu,
                 'target' => '_blank',
                 'entry'  => $documentation,
                 'type'   => 'anomaly.extension.url_link_type'
