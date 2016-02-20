@@ -30,6 +30,6 @@ return [
     'allowed_roles' => [
         'name'         => 'Allowed Roles',
         'instructions' => 'Specify which user roles can see this link.',
-        'warning'      => 'If no roles are specified then everyone can see it.'
+        'warning'      => 'If no roles are specified then everyone can see this link.'
     ]
 ];
