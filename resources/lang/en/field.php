@@ -3,30 +3,33 @@
 return [
     'name'          => [
         'name'         => 'Name',
-        'instructions' => 'Enter an easily identifiable name.'
+        'instructions' => [
+            'menus' => 'Specify a short descriptive name for this menu.'
+        ]
     ],
     'slug'          => [
         'name'         => 'Slug',
-        'instructions' => 'The slug will be used when accessing navigation menus with the plugin.'
+        'instructions' => 'The slug is used when displaying the menu.'
     ],
     'description'   => [
         'name'         => 'Description',
-        'instructions' => 'Briefly describe the entry and how it might be used.'
+        'instructions' => 'Briefly describe this navigation menu.'
     ],
     'target'        => [
         'name'         => 'Target',
         'instructions' => 'How does this link open when clicked?',
         'option'       => [
-            'self'  => 'Load in the current window.',
-            'blank' => 'Load in a new window.'
+            'self'  => 'Open in the current window.',
+            'blank' => 'Open in a new window.'
         ]
     ],
     'class'         => [
         'name'         => 'Class',
-        'instructions' => 'Add any additional classes (separated by spaces).'
+        'instructions' => 'Specify any additional link classes as instructed by your developer.'
     ],
     'allowed_roles' => [
         'name'         => 'Allowed Roles',
-        'instructions' => 'Which user roles are allowed to view this link?'
+        'instructions' => 'Specify which user roles can see this link.',
+        'warning'      => 'If no roles are specified then everyone can see it.'
     ]
 ];

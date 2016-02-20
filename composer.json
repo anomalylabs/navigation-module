@@ -23,7 +23,7 @@
         }
     ],
     "support": {
-        "email": "support@anomaly.is"
+        "email": "support@pyrocms.com"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
