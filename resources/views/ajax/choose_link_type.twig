@@ -7,10 +7,10 @@
 
 <div class="modal-body">
     {% if not link_types.isEmpty() %}
-        <ul class="nav nav-stacked">
+        <ul class="nav nav-pills nav-stacked">
             {% for link_type in link_types %}
-                <li>
-                    <a href="{{ url_to('admin/navigation/links/' ~ menu ~ '/create?link_type=' ~ link_type.namespace ~ '&parent=' ~ request_get('parent')) }}">
+                <li class="nav-item">
+                    <a href="{{ url_to('admin/navigation/links/' ~ menu ~ '/create?link_type=' ~ link_type.namespace ~ '&parent=' ~ request_get('parent')) }}" class="nav-link">
                         <strong>{{ trans(link_type.object.title) }}</strong>
                         <br>
                         <small>{{ trans(link_type.object.description) }}</small>
