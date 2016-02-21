@@ -20,7 +20,8 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
     protected $stream = [
         'slug'         => 'menus',
         'title_column' => 'name',
-        'translatable' => true
+        'translatable' => true,
+        'trashable'    => true
     ];
 
     /**

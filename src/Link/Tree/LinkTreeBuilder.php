@@ -28,16 +28,18 @@ class LinkTreeBuilder extends TreeBuilder
      * @var array
      */
     protected $buttons = [
-        'add'  => [
+        'add'    => [
             'data-toggle' => 'modal',
             'data-target' => '#modal',
             'text'        => 'anomaly.module.navigation::button.create_child_link',
             'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}?parent={entry.id}'
         ],
-        'view' => [
+        'view'   => [
             'target' => '_blank'
         ],
-        'delete'
+        'prompt' => [
+            'href' => 'admin/navigation/links/delete/{entry.id}'
+        ]
     ];
 
     /**

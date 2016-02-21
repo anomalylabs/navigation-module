@@ -166,7 +166,11 @@ class LinksController extends AdminController
             return $this->redirect->back();
         }
 
-        $links->delete($links->find($id));
+        /**
+         * Force delete until we get
+         * views into the tree UI.
+         */
+        $links->forceDelete($links->find($id));
 
         return $this->redirect->back();
     }
