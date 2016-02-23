@@ -32,6 +32,12 @@ class NavigationModule extends Module
             ]
         ],
         'links' => [
+            'slug'        => 'links',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'data-href'   => 'admin/navigation/links',
+            'href'        => 'admin/navigation/choose',
+
             'buttons' => [
                 'new_link' => [
                     'data-toggle' => 'modal',

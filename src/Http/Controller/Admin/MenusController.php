@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
+use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\NavigationModule\Menu\Form\MenuFormBuilder;
 use Anomaly\NavigationModule\Menu\Table\MenuTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
@@ -24,6 +25,22 @@ class MenusController extends AdminController
     public function index(MenuTableBuilder $table)
     {
         return $table->render();
+    }
+
+    /**
+     * Return the modal for choosing a menu.
+     *
+     * @param MenuRepositoryInterface $menus
+     * @return \Illuminate\View\View
+     */
+    public function choose(MenuRepositoryInterface $menus)
+    {
+        return view(
+            'module::ajax/choose_menu',
+            [
+                'menus' => $menus->all()
+            ]
+        );
     }
 
     /**

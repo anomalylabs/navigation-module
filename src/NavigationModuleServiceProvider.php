@@ -29,6 +29,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      */
     protected $routes = [
         'admin/navigation'                        => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@index',
+        'admin/navigation/choose'                 => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@choose',
         'admin/navigation/create'                 => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@create',
         'admin/navigation/edit/{id}'              => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@edit',
         'admin/navigation/links/{menu?}'          => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
