@@ -5,9 +5,9 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
 /**
  * Class NavigationModule
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule
  */
 class NavigationModule extends Module
@@ -26,21 +26,23 @@ class NavigationModule extends Module
      * @var array
      */
     protected $sections = [
-        'groups' => [
+        'menus' => [
             'buttons' => [
-                'new_group'
+                'new_menu'
             ]
         ],
-        'links'  => [
+        'links' => [
+            'slug'        => 'links',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'data-href'   => 'admin/navigation/links',
+            'href'        => 'admin/navigation/choose',
+
             'buttons' => [
-                'new_group' => [
-                    'href' => 'admin/navigation/create'
-                ],
-                'new_link'  => [
+                'new_link' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'text'        => 'module::button.new_link',
-                    'href'        => 'admin/navigation/ajax/choose_link_type/{route.parameters.group}'
+                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}'
                 ]
             ]
         ]

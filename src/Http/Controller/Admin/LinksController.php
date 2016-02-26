@@ -1,22 +1,22 @@
 <?php namespace Anomaly\NavigationModule\Http\Controller\Admin;
 
-use Anomaly\NavigationModule\Group\Contract\GroupRepositoryInterface;
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
-use Anomaly\NavigationModule\Link\Form\LinkEntryFormBuilder;
+use Anomaly\NavigationModule\Link\Entry\EntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
+use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Message\MessageBag;
 use Anomaly\Streams\Platform\Support\Authorizer;
-use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 
 /**
  * Class LinksController
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Http\Controller\Admin
  */
 class LinksController extends AdminController
@@ -25,55 +25,75 @@ class LinksController extends AdminController
     /**
      * Return an index of existing links.
      *
-     * @param LinkTreeBuilder          $tree
-     * @param GroupRepositoryInterface $groups
-     * @param                          $group
-     * @return \Illuminate\Http\Response
+     * @param LinkTreeBuilder         $tree
+     * @param MenuRepositoryInterface $menus
+     * @param null                    $menu
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
-    public function index(
-        LinkTreeBuilder $tree,
-        GroupRepositoryInterface $groups,
-        BreadcrumbCollection $breadcrumbs,
-        MessageBag $messages,
-        $group = null
-    ) {
-        if (!$group) {
+    public function index(LinkTreeBuilder $tree, MenuRepositoryInterface $menus, $menu = null)
+    {
+        if (!$menu) {
 
-            $messages->warning('Please choose a group first.');
+            $this->messages->warning('Please choose a menu first.');
 
-            return redirect('admin/navigation');
+            return $this->response->redirectTo('admin/navigation');
         }
 
-        $tree->setGroup($group = $groups->findBySlug($group));
+        $tree->setMenu($menu = $menus->findBySlug($menu));
 
-        $breadcrumbs->add($group->getName());
+        $this->breadcrumbs->add($menu->getName(), $this->request->fullUrl());
 
         return $tree->render();
+    }
+
+    /**
+     * Return the modal for choosing a link type.
+     *
+     * @param ExtensionCollection $extensions
+     * @param string              $menu
+     * @return \Illuminate\View\View
+     */
+    public function choose(ExtensionCollection $extensions, $menu)
+    {
+        return view(
+            'module::ajax/choose_link_type',
+            [
+                'link_types' => $extensions->search('anomaly.module.navigation::link_type.*'),
+                'menu'       => $menu
+            ]
+        );
     }
 
     /**
      * Return the form for creating a new link.
      *
      * @param LinkFormBuilder          $link
-     * @param GroupRepositoryInterface $groups
+     * @param EntryFormBuilder         $form
+     * @param LinkRepositoryInterface  $links
+     * @param MenuRepositoryInterface  $menus
      * @param ExtensionCollection      $extensions
-     * @param                          $group
+     * @param                          $menu
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(
         LinkFormBuilder $link,
-        LinkEntryFormBuilder $form,
-        GroupRepositoryInterface $groups,
+        EntryFormBuilder $form,
+        LinkRepositoryInterface $links,
+        MenuRepositoryInterface $menus,
         ExtensionCollection $extensions,
-        BreadcrumbCollection $breadcrumbs,
-        $group
+        $menu
     ) {
+        /* @var LinkTypeInterface $type */
         $type = $extensions->get($_GET['link_type']);
 
-        $form->addForm('type', $type->getFormBuilder());
-        $form->addForm('link', $link->setType($type)->setGroup($group = $groups->findBySlug($group)));
+        if ($parent = $links->find($this->request->get('parent'))) {
+            $link->setParent($parent);
+        }
 
-        $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $form->addForm('type', $type->builder());
+        $form->addForm('link', $link->setType($type)->setMenu($menu = $menus->findBySlug($menu)));
+
+        $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
 
         return $form->render();
     }
@@ -82,31 +102,51 @@ class LinksController extends AdminController
      * Return the form for editing an existing link.
      *
      * @param LinkFormBuilder          $link
-     * @param GroupRepositoryInterface $groups
-     * @param ExtensionCollection      $extensions
-     * @param                          $group
+     * @param EntryFormBuilder         $form
+     * @param LinkRepositoryInterface  $links
+     * @param MenuRepositoryInterface  $menus
+     * @param                          $menu
+     * @param                          $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(
         LinkFormBuilder $link,
-        LinkEntryFormBuilder $form,
+        EntryFormBuilder $form,
         LinkRepositoryInterface $links,
-        GroupRepositoryInterface $groups,
-        BreadcrumbCollection $breadcrumbs,
-        $group,
+        MenuRepositoryInterface $menus,
+        $menu,
         $id
     ) {
+        /* @var LinkInterface $entry */
         $entry = $links->find($id);
 
-        $form->addForm('type', $entry->getType()->getFormBuilder()->setEntry($entry->getEntry()->getId()));
+        $type = $entry->getType();
+
+        $form->addForm('type', $type->builder()->setEntry($entry->getEntry()->getId()));
+
         $form->addForm(
             'link',
-            $link->setEntry($id)->setType($entry->getType())->setGroup($group = $groups->findBySlug($group))
+            $link->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($menu))
         );
 
-        $breadcrumbs->add($group->getName(), 'admin/navigation/links/' . $group->getSlug());
+        $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
 
         return $form->render();
+    }
+
+    /**
+     * View the link destination.
+     *
+     * @param LinkRepositoryInterface $links
+     * @param                         $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function view(LinkRepositoryInterface $links, $id)
+    {
+        /* @var LinkInterface $link */
+        $link = $links->find($id);
+
+        return $this->response->redirectTo($link->getUrl());
     }
 
     /**
@@ -119,10 +159,19 @@ class LinksController extends AdminController
      */
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer, $id)
     {
-        $authorizer->authorize('anomaly.module.navigation::links.delete');
+        if (!$authorizer->authorize('anomaly.module.navigation::links.delete')) {
 
-        $links->delete($links->find($id));
+            $this->messages->error('streams::message.access_denied');
 
-        return redirect()->back();
+            return $this->redirect->back();
+        }
+
+        /**
+         * Force delete until we get
+         * views into the tree UI.
+         */
+        $links->forceDelete($links->find($id));
+
+        return $this->redirect->back();
     }
 }

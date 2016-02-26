@@ -6,67 +6,90 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
 /**
  * Class LinkCollection
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link
  */
 class LinkCollection extends EntryCollection
 {
 
     /**
-     * Return only root items.
+     * Alias for $this->top()
      *
      * @return LinkCollection
      */
     public function root()
     {
-        $root = [];
+        return $this->top();
+    }
 
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
-            if (!$item->getParent()) {
-                $root[] = $item;
+    /**
+     * Return only top level links.
+     *
+     * @return LinkCollection
+     */
+    public function top()
+    {
+        return $this->filter(
+            function ($item) {
+
+                /* @var LinkInterface $item */
+                return !$item->getParentId();
             }
-        }
-
-        return new static($root);
+        );
     }
 
     /**
      * Return only children of the provided item.
      *
-     * @param LinkInterface $parent
+     * @param $parent
      * @return LinkCollection
      */
-    public function children(LinkInterface $parent)
+    public function children($parent)
     {
-        $children = [];
+        /* @var LinkInterface $parent */
+        return $this->filter(
+            function ($item) use ($parent) {
 
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
-            if ($item->getParentId() == $parent->getId()) {
-                $children[] = $item;
+                /* @var LinkInterface $item */
+                return $item->getParentId() == $parent->getId();
             }
-        }
-
-        return new static($children);
+        );
     }
 
     /**
      * Return the current link.
      *
-     * @return LinkInterface
+     * @return LinkInterface|null
      */
     public function current()
     {
         /* @var LinkInterface $item */
         foreach ($this->items as $item) {
+
             if ($item->isCurrent()) {
                 return $item;
             }
         }
 
         return null;
+    }
+
+    /**
+     * Return only active links.
+     *
+     * @param bool $active
+     * @return LinkCollection
+     */
+    public function active($active = true)
+    {
+        return $this->filter(
+            function ($item) use ($active) {
+
+                /* @var LinkInterface $item */
+                return $item->isActive() == $active;
+            }
+        );
     }
 }

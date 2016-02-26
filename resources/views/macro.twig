@@ -1,15 +1,24 @@
-{% macro links(links, collection, group, options) %}
+{% macro links(links, collection, options, depth) %}
     {% for link in links %}
-        <li class="{{ link.current ? 'current' }} {{ link.active ? 'active' }} {{ link.class }}">
-            <a href="{{ link.url }}" target="{{ link.target }}">
-                {{ link.title }}
+
+        <{{ options.link_tag ?: 'li' }} class="
+            {{ link.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
+            {{ link.active ? options.get('active_class', 'active') }}
+            {{ link.current ? options.get('current_class', 'current') }}
+            {{ options.item_class }}
+            {{ link.class }}">
+
+            <a href="{{ link.url }}" class="{{ options.link_class }}" target="{{ link.target }}">
+                {{ link.title|raw }}
             </a>
 
-            {% if not collection.children(link.getObject()).isEmpty() %}
-                <ul>
-                    {{ _self.links(collection.children(link.getObject()), collection, group, options) }}
-                </ul>
+            {% if not link.children.isEmpty() %}
+                {% if depth+1 <= options.get('depth', 999) %}
+                    <{{ options.child_list_tag ?: options.list_tag ?: 'ul' }} class="{{ options.child_list_class }}">
+                        {{ _self.links(link.children, collection, options, depth+1) }}
+                    </{{ options.child_list_tag ?: options.list_tag ?: 'ul' }}>
+                {% endif %}
             {% endif %}
-        </li>
+        </{{ options.link_tag ?: 'li' }}>
     {% endfor %}
 {% endmacro %}

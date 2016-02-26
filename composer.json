@@ -1,21 +1,19 @@
 {
     "name": "anomaly/navigation-module",
     "type": "streams-addon",
-    "description": "Navigation management.",
-    "version": "1.0.0",
+    "description": "Powerful navigation management made easy.",
     "license": "MIT",
     "keywords": [
         "navigation",
         "streams",
-        "pyrocms",
-        "laravel"
+        "module"
     ],
-    "homepage": "http://anomaly.is/",
+    "homepage": "http://pyrocms.com/",
     "authors": [
         {
-            "name": "AnomalyLabs, Inc.",
-            "email": "hello@anomaly.is",
-            "homepage": "http://anomaly.is/",
+            "name": "PyroCMS, Inc.",
+            "email": "support@pyrocms.com",
+            "homepage": "http://pyrocms.com/",
             "role": "Owner"
         },
         {
@@ -25,9 +23,7 @@
         }
     ],
     "support": {
-        "email": "support@anomaly.is",
-        "source": "https://github.com/anomalylabs/addons-module",
-        "issues": "https://github.com/anomalylabs/addons-module/issues"
+        "email": "support@pyrocms.com"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
@@ -39,11 +35,5 @@
         "psr-4": {
             "Anomaly\\NavigationModule\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }

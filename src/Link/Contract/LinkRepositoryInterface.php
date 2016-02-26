@@ -1,29 +1,26 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
+use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+
 /**
  * Interface LinkRepositoryInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link\Contract
  */
-interface LinkRepositoryInterface
+interface LinkRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
-     * Find a link by it's ID.
+     * Return links belonging to
+     * the provided menu.
      *
-     * @param $id
-     * @return null|LinkInterface
+     * @param MenuInterface $menu
+     * @return LinkCollection
      */
-    public function find($id);
-
-    /**
-     * Delete a link.
-     *
-     * @param LinkInterface $link
-     * @return bool
-     */
-    public function delete(LinkInterface $link);
+    public function findAllByMenu(MenuInterface $menu);
 }

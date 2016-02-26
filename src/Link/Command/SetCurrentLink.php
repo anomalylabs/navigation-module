@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 /**
  * Class SetCurrentLink
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link\Command
  */
 class SetCurrentLink implements SelfHandling
@@ -42,38 +42,27 @@ class SetCurrentLink implements SelfHandling
     {
         $current = null;
 
+        /**
+         * If the route does not exist,
+         * i.e. a 404 or 500 handling page.
+         * Then we don't have anything to do.
+         */
+        if (!$route = $request->route()) {
+            return;
+        };
+
+        $compiled     = $route->getCompiled();
+        $staticPrefix = $compiled->getStaticPrefix();
+
+        $exact   = $request->fullUrl();
+        $partial = $request->getUriForPath($staticPrefix);
+
+        /* @var LinkInterface $link */
         foreach ($this->links as $link) {
 
-            /**
-             * Get the HREF for both the current
-             * and loop iteration link.
-             */
-            $url        = $link->getUrl();
-            $currentUrl = '';
-
-            if ($current && $current instanceof LinkInterface) {
-                $currentUrl = $current->getUrl();
-            }
-
-            /**
-             * If the request URL does not even
-             * contain the HREF then skip it.
-             */
-            if (!str_contains($request->url(), $url)) {
-                continue;
-            }
-
-            /**
-             * Compare the length of the current HREF
-             * and loop iteration HREF. The longer the
-             * HREF the more detailed and exact it is and
-             * the more likely it is the current HREF and
-             * therefore the current link.
-             */
-            $urlLength        = strlen($url);
-            $currentUrlLength = strlen($currentUrl);
-
-            if ($urlLength > $currentUrlLength) {
+            if ($link->getUrl() == $exact) {
+                $current = $link;
+            } elseif ($link->getUrl() == $partial) {
                 $current = $link;
             }
         }
@@ -81,8 +70,10 @@ class SetCurrentLink implements SelfHandling
         /**
          * If we have an current link determined
          * then mark it as such.
+         *
+         * @var LinkInterface $current
          */
-        if ($current && $current instanceof LinkInterface) {
+        if ($current) {
             $current->setCurrent(true);
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'new_group' => 'Nouveau groupe',
-    'new_link'  => 'Nouveau lien'
+    'new_menu' => 'Nouveau menue',
+    'new_link' => 'Nouveau lien'
 ];

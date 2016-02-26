@@ -1,19 +1,29 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
-use Anomaly\NavigationModule\Link\Contract\LinkEntryInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
+use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
+use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
 
 /**
  * Class LinkModel
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link
  */
 class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 {
+
+    /**
+     * The cache minutes.
+     *
+     * @var int
+     */
+    protected $ttl = 99999;
 
     /**
      * The active flag.
@@ -36,7 +46,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $with = [
         'entry',
-        'parent'
+        'allowedRoles'
     ];
 
     /**
@@ -46,35 +56,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getUrl()
     {
-        $entry = $this->getEntry();
+        $type = $this->getType();
 
-        $url = $entry->getUrl();
-
-        if (!starts_with($url, ['http://', 'https://', '//'])) {
-            $url = url($url);
+        if (!$type) {
+            return null;
         }
 
-        return $url;
-    }
-
-    /**
-     * Get the type.
-     *
-     * @return LinkType
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Get the related entry.
-     *
-     * @return LinkEntryInterface
-     */
-    public function getEntry()
-    {
-        return $this->entry;
+        return $type->url($this);
     }
 
     /**
@@ -84,9 +72,59 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function getTitle()
     {
-        $entry = $this->getEntry();
+        $type = $this->getType();
 
-        return $entry->getTitle();
+        if (!$type) {
+            return null;
+        }
+
+        return $type->title($this);
+    }
+
+    /**
+     * Get the broken flag.
+     *
+     * @return bool
+     */
+    public function isBroken()
+    {
+        $type = $this->getType();
+
+        if (!$type) {
+            return null;
+        }
+
+        return $type->broken($this);
+    }
+
+    /**
+     * Get the type.
+     *
+     * @return LinkTypeInterface
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get the related entry.
+     *
+     * @return EntryInterface
+     */
+    public function getEntry()
+    {
+        return $this->entry;
+    }
+
+    /**
+     * Get the related allowed roles.
+     *
+     * @return EntryCollection
+     */
+    public function getAllowedRoles()
+    {
+        return $this->allowed_roles;
     }
 
     /**
@@ -110,19 +148,54 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Return the active flag.
+     * Set the parent ID.
      *
-     * @return bool
+     * @param $id
+     * @return $this
      */
-    public function isActive()
+    public function setParentId($id)
     {
-        return $this->active;
+        $this->parent_id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the related child links.
+     *
+     * @return LinkCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Get the menu.
+     *
+     * @return MenuInterface
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * Get the menu slug.
+     *
+     * @return string
+     */
+    public function getMenuSlug()
+    {
+        $menu = $this->getMenu();
+
+        return $menu->getSlug();
     }
 
     /**
      * Set the active flag.
      *
-     * @param $active
+     * @param $true
      * @return $this
      */
     public function setActive($active)
@@ -133,7 +206,30 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Get the current flag.
+     * Return the active flag.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the current flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
+
+        return $this;
+    }
+
+    /**
+     * Return the current flag.
      *
      * @return bool
      */
@@ -143,15 +239,27 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Set the current flag.
+     * Return the child links relationship.
      *
-     * @param $current
-     * @return $this
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function setCurrent($current)
+    public function children()
     {
-        $this->current = $current;
+        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'parent_id', 'id');
+    }
 
-        return $this;
+    /**
+     * Return the model as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['url']   = $this->getUrl();
+        $array['title'] = $this->getTitle();
+
+        return $array;
     }
 }

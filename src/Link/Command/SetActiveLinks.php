@@ -3,17 +3,20 @@
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class SetActiveLinks
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link\Command
  */
 class SetActiveLinks implements SelfHandling
 {
+
+    use DispatchesJobs;
 
     /**
      * The link collection.
@@ -37,18 +40,42 @@ class SetActiveLinks implements SelfHandling
      */
     public function handle()
     {
-        $current = $this->links->current();
-
-        if (!$current) {
+        if (!$current = $this->links->current()) {
             return;
         }
 
-        $current->setActive(true);
+        if (!$current->getParentId()) {
+            return;
+        }
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-            if ($current->getParentId() == $link->getId()) {
+
+            /**
+             * Already flagged.
+             */
+            if ($link->isActive() || $link->isCurrent()) {
+                continue;
+            }
+
+            /**
+             * Set active if the direct
+             * parent of current link.
+             */
+            if ($link->getId() == $current->getParentId()) {
+
                 $link->setActive(true);
+            }
+
+            /**
+             * If the active link is in the children
+             * of this link then mark it active too.
+             */
+            if (!$this->links->children($link)->active()->isEmpty()) {
+
+                $link->setActive(true);
+
+                $this->dispatch(new SetActiveLinks($this->links));
             }
         }
     }

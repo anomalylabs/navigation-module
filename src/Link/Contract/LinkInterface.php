@@ -1,25 +1,21 @@
 <?php namespace Anomaly\NavigationModule\Link\Contract;
 
-use Anomaly\NavigationModule\Link\LinkType;
+use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Anomaly\Streams\Platform\Entry\EntryCollection;
 
 /**
  * Interface LinkInterface
  *
- * @link          http://anomaly.is/streams-platform
- * @author        AnomalyLabs, Inc. <hello@anomaly.is>
- * @author        Ryan Thompson <ryan@anomaly.is>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  * @package       Anomaly\NavigationModule\Link\Contract
  */
-interface LinkInterface
+interface LinkInterface extends EntryInterface
 {
-
-    /**
-     * Get the ID.
-     *
-     * @return null|int
-     */
-    public function getId();
 
     /**
      * Get the URL.
@@ -29,9 +25,16 @@ interface LinkInterface
     public function getUrl();
 
     /**
+     * Get the title.
+     *
+     * @return string
+     */
+    public function getTitle();
+
+    /**
      * Get the type.
      *
-     * @return LinkType
+     * @return LinkTypeExtension
      */
     public function getType();
 
@@ -43,11 +46,41 @@ interface LinkInterface
     public function getEntry();
 
     /**
-     * Get the title.
+     * Get the related allowed roles.
      *
-     * @return string
+     * @return EntryCollection
      */
-    public function getTitle();
+    public function getAllowedRoles();
+
+    /**
+     * et the active flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setActive($active);
+
+    /**
+     * Return the active flag.
+     *
+     * @return bool
+     */
+    public function isActive();
+
+    /**
+     * Set the current flag.
+     *
+     * @param $true
+     * @return $this
+     */
+    public function setCurrent($current);
+
+    /**
+     * Return the current flag.
+     *
+     * @return bool
+     */
+    public function isCurrent();
 
     /**
      * Get the related parent.
@@ -64,32 +97,38 @@ interface LinkInterface
     public function getParentId();
 
     /**
-     * Return the active flag.
+     * Set the parent ID.
      *
-     * @return bool
-     */
-    public function isActive();
-
-    /**
-     * Set the active flag.
-     *
-     * @param $active
+     * @param $id
      * @return $this
      */
-    public function setActive($active);
+    public function setParentId($id);
 
     /**
-     * Get the current flag.
+     * Get the menu.
      *
-     * @return bool
+     * @return MenuInterface
      */
-    public function isCurrent();
+    public function getMenu();
 
     /**
-     * Set the current flag.
+     * Get the menu slug.
      *
-     * @param $current
-     * @return $this
+     * @return string
      */
-    public function setCurrent($current);
+    public function getMenuSlug();
+
+    /**
+     * Get the related child links.
+     *
+     * @return LinkCollection
+     */
+    public function getChildren();
+
+    /**
+     * Return the child links relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children();
 }

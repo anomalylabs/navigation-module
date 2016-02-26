@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'name'        => 'Navigation',
-    'description' => 'Navigation management.',
+    'title'       => 'Navigation',
+    'name'        => 'Navigation Module',
+    'description' => 'Powerful navigation management made easy.',
     'section'     => [
-        'groups' => 'Groups',
-        'links'  => 'Links'
+        'menus' => 'Menus',
+        'links' => 'Links'
     ]
 ];
