@@ -1,24 +1,35 @@
 <?php
 
 return [
-    'name'        => [
-        'name' => 'Nom'
-    ],
-    'slug'        => [
-        'name' => 'Slug'
-    ],
-    'description' => [
-        'name' => 'Description'
-    ],
-    'target'      => [
-        'name'   => 'Cible',
-        'option' => [
-            'self'  => 'Ouvrir dans la même fenêtre.',
-            'blank' => 'Ouvrir dans une nouvelle fenêtre.'
+    'name'          => [
+        'name'         => 'Nom',
+        'instructions' => [
+            'menus' => 'Nom de ce menu.'
         ]
     ],
-    'class'       => [
-        'name'        => 'Classe CSS',
-        'placeholder' => 'Classes CSS supplémentaires (séparées par des espaces)'
+    'slug'          => [
+        'name'         => 'Slug',
+        'instructions' => 'Le slug permet de localiser ce menu.'
+    ],
+    'description'   => [
+        'name'         => 'Description',
+        'instructions' => 'Ajoutez une brève description pour ce menu.'
+    ],
+    'target'        => [
+        'name'         => 'Cible',
+        'instructions' => 'Que se passe t-il quand ce lien est cliqué ?',
+        'option'       => [
+            'self'  => 'Ouverture dans la même fenêtre.',
+            'blank' => 'Ouverture dans une nouvelle fenêtre.'
+        ]
+    ],
+    'class'         => [
+        'name'         => 'Class',
+        'instructions' => 'Ajouter des classes spécifiques pour personnaliser ce lien.'
+    ],
+    'allowed_roles' => [
+        'name'         => 'Rôles autorisés',
+        'instructions' => 'Choisissez quels rôles utilisateur peuvent voir ce lien.',
+        'warning'      => 'Si aucun rôle n\'est fourni, tout le monde pourra voir ce lien.' 
     ]
 ];

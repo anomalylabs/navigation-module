@@ -1,6 +1,8 @@
 <?php
 
 return [
-    'new_menu' => 'Nouveau menue',
-    'new_link' => 'Nouveau lien'
+    'create_child_link' => 'Créer un lien enfant',
+    'new_menu'          => 'Nouveau Menu',
+    'new_link'          => 'Nouveau Lien',
+    'links'             => 'Liens'
 ];
