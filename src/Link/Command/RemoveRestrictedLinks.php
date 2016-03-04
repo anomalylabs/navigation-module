@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -47,7 +48,30 @@ class RemoveRestrictedLinks implements SelfHandling
         /* @var LinkInterface $link */
         foreach ($this->links as $key => $link) {
 
+            /* @var RoleCollection $roles */
             $roles = $link->getAllowedRoles();
+
+            /**
+             * If there is a guest role and
+             * no user then this link
+             * can display. Otherwise
+             * we need to hide it.
+             */
+            if ($roles->has('guest') && !$user) {
+                continue;
+            }
+
+            /**
+             * If there is a guest role and
+             * there IS a user then this link
+             * can NOT display. Forget it.
+             */
+            if ($roles->has('guest') && $user) {
+
+                $this->links->forget($key);
+
+                continue;
+            }
 
             /**
              * If there are role restrictions

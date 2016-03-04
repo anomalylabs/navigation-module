@@ -15,16 +15,14 @@ class EntryFormBuilder extends MultipleFormBuilder
 {
 
     /**
-     * The form actions.
-     *
-     * @var array
+     * Fired when form is ready to build.
      */
-    protected $actions = [
-        'save' => [
-            'redirect' => 'admin/navigation/links/{request.route.parameters.menu}'
-        ],
-        'save_edit'
-    ];
+    public function onReady()
+    {
+        if ($this->getFormMode() == 'create') {
+            $this->setOption('redirect', 'admin/navigation/links/{request.route.parameters.menu}');
+        }
+    }
 
     /**
      * Fired just after the type is saved.
