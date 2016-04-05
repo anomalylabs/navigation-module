@@ -56,8 +56,8 @@ class AnomalyModuleNavigationCreateNavigationFields extends Migration
         'target'        => [
             'type'   => 'anomaly.field_type.select',
             'config' => [
-                'default_option' => '_self',
-                'options'        => [
+                'default_value' => '_self',
+                'options'       => [
                     '_self'  => 'anomaly.module.navigation::field.target.option.self',
                     '_blank' => 'anomaly.module.navigation::field.target.option.blank'
                 ]
