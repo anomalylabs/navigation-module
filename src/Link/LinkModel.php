@@ -118,6 +118,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Get the link target.
+     *
+     * @return string
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
      * Get the related allowed roles.
      *
      * @return EntryCollection

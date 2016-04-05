@@ -38,6 +38,17 @@ class LinkTreeSegments
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-danger',
+                    'value'       => '<i class="fa fa-external-link"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.external'
+                    ],
+                    'enabled'     => function (LinkInterface $entry) {
+                        return $entry->getTarget() === '_blank';
+                    }
+                ],
+                [
+                    'data-toggle' => 'tooltip',
+                    'class'       => 'text-danger',
                     'value'       => '<i class="fa fa-chain-broken"></i>',
                     'attributes'  => [
                         'title' => 'module::message.broken'

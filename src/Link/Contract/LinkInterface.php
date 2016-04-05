@@ -46,6 +46,13 @@ interface LinkInterface extends EntryInterface
     public function getEntry();
 
     /**
+     * Get the link target.
+     *
+     * @return string
+     */
+    public function getTarget();
+
+    /**
      * Get the related allowed roles.
      *
      * @return EntryCollection
