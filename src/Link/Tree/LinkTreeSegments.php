@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Link\Tree;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
+use Illuminate\Translation\Translator;
 
 /**
  * Class LinkTreeSegments
@@ -23,6 +24,17 @@ class LinkTreeSegments
         $builder->setSegments(
             [
                 'entry.edit_link',
+                [
+                    'class' => 'text-faded',
+                    'value' => function (LinkInterface $entry, Translator $translator) {
+
+                        $type = $entry->getType();
+
+                        return '<span class="small" style="padding-right:10px;">' . $translator->trans(
+                            $type->getTitle()
+                        ) . '</span>';
+                    },
+                ],
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-danger',
