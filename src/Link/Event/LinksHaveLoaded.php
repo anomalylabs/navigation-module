@@ -4,13 +4,13 @@ use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 
 /**
- * Class LinksAreLoading
+ * Class LinksHaveLoaded
  *
  * @link          http://fritzandandre.com
  * @author        Brennon Loveless <brennon@fritzandandre.com>
  * @package       Anomaly\Streams\Platform\Ui\Table\Event
  */
-class LinksAreLoading
+class LinksHaveLoaded
 {
     /**
      * The menu that is loading
@@ -29,7 +29,8 @@ class LinksAreLoading
     /**
      * Create a new MenuIsLoading instance.
      *
-     * @param MenuInterface $menu
+     * @param MenuInterface  $menu
+     * @param LinkCollection $links
      */
     public function __construct(MenuInterface $menu, LinkCollection $links)
     {
