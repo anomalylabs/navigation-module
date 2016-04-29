@@ -1,5 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
+use Anomaly\NavigationModule\Link\Event\LinksAreLoading;
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
@@ -82,7 +83,12 @@ class GetLinks implements SelfHandling
         // Flag appropriate links.
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
-
+        
+        /**
+         * Allow other things to inject into the menu
+         */
+        app('events')->fire(new LinksAreLoading($this->menu, $links));
+        
         return $links;
     }
 }
