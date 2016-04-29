@@ -7,7 +7,6 @@ use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class GetLinks
