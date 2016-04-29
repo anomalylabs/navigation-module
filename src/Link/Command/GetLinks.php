@@ -38,7 +38,6 @@ class GetLinks implements SelfHandling
     /**
      * Create a new GetLinks instance.
      *
-     * @param Dispatcher         $events
      * @param Collection         $options
      * @param MenuInterface|null $menu
      */
