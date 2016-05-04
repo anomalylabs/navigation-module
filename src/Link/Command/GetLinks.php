@@ -1,9 +1,11 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
+use Anomaly\NavigationModule\Link\Event\LinksHaveLoaded;
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -48,9 +50,10 @@ class GetLinks implements SelfHandling
     /**
      * Handle the command.
      *
+     * @param Dispatcher $events
      * @return \Anomaly\NavigationModule\Link\LinkCollection|mixed|null
      */
-    public function handle()
+    public function handle(Dispatcher $events)
     {
         if (!$this->menu) {
             $this->menu = $this->dispatch(new GetMenu($this->options->get('menu')));
@@ -82,6 +85,11 @@ class GetLinks implements SelfHandling
         // Flag appropriate links.
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
+
+        /**
+         * Allow other things to inject into the menu
+         */
+        $events->fire(new LinksHaveLoaded($this->menu, $links));
 
         return $links;
     }
