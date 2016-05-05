@@ -52,6 +52,14 @@ class RemoveRestrictedLinks implements SelfHandling
             $roles = $link->getAllowedRoles();
 
             /**
+             * Admin's can see
+             * absolutely everything.
+             */
+            if ($user && $user->isAdmin()) {
+                continue;
+            }
+
+            /**
              * If there is a guest role and
              * no user then this link
              * can display. Otherwise
