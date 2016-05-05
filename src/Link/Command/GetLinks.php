@@ -69,6 +69,8 @@ class GetLinks implements SelfHandling
             return null;
         }
 
+        $links = $links->enabled();
+
         if ($root = $this->options->get('root')) {
             if ($link = $this->dispatch(new GetParentLink($root, $links))) {
                 $this->options->put('parent', $link);

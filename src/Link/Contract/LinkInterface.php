@@ -46,6 +46,13 @@ interface LinkInterface extends EntryInterface
     public function getEntry();
 
     /**
+     * Get the enabled flag.
+     *
+     * @return EntryInterface
+     */
+    public function isEnabled();
+
+    /**
      * Get the link target.
      *
      * @return string

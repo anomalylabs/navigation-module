@@ -39,6 +39,14 @@ interface LinkTypeInterface
     public function exists(LinkInterface $link);
 
     /**
+     * Return if the link is enabled or not.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function enabled(LinkInterface $link);
+
+    /**
      * Return the form builder for
      * the link type entry.
      *

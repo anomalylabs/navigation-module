@@ -98,6 +98,22 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Get the enabled flag.
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        $type = $this->getType();
+
+        if (!$type) {
+            return null;
+        }
+
+        return $type->enabled($this);
+    }
+
+    /**
      * Get the type.
      *
      * @return LinkTypeInterface

@@ -41,6 +41,22 @@ class LinkCollection extends EntryCollection
     }
 
     /**
+     * Return only enabled links.
+     *
+     * @return LinkCollection
+     */
+    public function enabled()
+    {
+        return $this->filter(
+            function ($item) {
+
+                /* @var LinkInterface $item */
+                return $item->isEnabled();
+            }
+        );
+    }
+
+    /**
      * Return only children of the provided item.
      *
      * @param $parent

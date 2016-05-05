@@ -50,6 +50,17 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     }
 
     /**
+     * Return if the link is enabled or not.
+     *
+     * @param LinkInterface $link
+     * @return bool
+     */
+    public function enabled(LinkInterface $link)
+    {
+        return true;
+    }
+
+    /**
      * Return the form builder for
      * the link type entry.
      *
