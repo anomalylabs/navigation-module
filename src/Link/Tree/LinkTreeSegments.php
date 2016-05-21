@@ -49,16 +49,16 @@ class LinkTreeSegments
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-muted',
-                    'value'       => '<i class="fa fa-lock"></i>',
-                    'attributes'  => [
-                        'title' => 'module::message.restricted'
-                    ],
-                    'enabled'     => function (LinkInterface $entry) {
+                    'value'       => function (LinkInterface $entry) {
 
                         $roles = $entry->getAllowedRoles();
 
-                        return !$roles->isEmpty();
-                    }
+                        return implode(',', $roles->lists('id')->all());
+                    },//'<i class="fa fa-lock"></i>',
+                    'attributes'  => [
+                        'title' => 'module::message.restricted'
+                    ],
+                    'enabled'     => true
                 ],
                 [
                     'data-toggle' => 'tooltip',

@@ -35,7 +35,7 @@ class NavigationModule extends Module
             'slug'        => 'links',
             'data-toggle' => 'modal',
             'data-target' => '#modal',
-            'data-href'   => 'admin/navigation/links',
+            'data-href'   => 'admin/navigation/links/{request.route.parameters.menu}',
             'href'        => 'admin/navigation/choose',
 
             'buttons' => [
