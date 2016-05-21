@@ -40,9 +40,7 @@ class LinksController extends AdminController
         }
 
         $tree->setMenu($menu = $menus->findBySlug($menu));
-
-        $this->breadcrumbs->add($menu->getName(), $this->request->fullUrl());
-
+        
         return $tree->render();
     }
 
