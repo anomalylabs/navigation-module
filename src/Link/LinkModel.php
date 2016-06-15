@@ -46,7 +46,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $with = [
         'entry',
-        'allowedRoles'
     ];
 
     /**
