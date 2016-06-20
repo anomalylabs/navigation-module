@@ -40,7 +40,7 @@ class LinksController extends AdminController
         }
 
         $tree->setMenu($menu = $menus->findBySlug($menu));
-        
+
         return $tree->render();
     }
 
@@ -136,13 +136,12 @@ class LinksController extends AdminController
      * View the link destination.
      *
      * @param LinkRepositoryInterface $links
-     * @param                         $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function view(LinkRepositoryInterface $links, $id)
+    public function view(LinkRepositoryInterface $links)
     {
         /* @var LinkInterface $link */
-        $link = $links->find($id);
+        $link = $links->find($this->route->getParameter('id'));
 
         return $this->response->redirectTo($link->getUrl());
     }
@@ -152,10 +151,9 @@ class LinksController extends AdminController
      *
      * @param LinkRepositoryInterface $links
      * @param Authorizer              $authorizer
-     * @param                         $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(LinkRepositoryInterface $links, Authorizer $authorizer, $id)
+    public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
     {
         if (!$authorizer->authorize('anomaly.module.navigation::links.delete')) {
 
@@ -168,7 +166,7 @@ class LinksController extends AdminController
          * Force delete until we get
          * views into the tree UI.
          */
-        $links->forceDelete($links->find($id));
+        $links->forceDelete($links->find($this->route->getParameter('id')));
 
         return $this->redirect->back();
     }
