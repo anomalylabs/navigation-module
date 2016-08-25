@@ -4,7 +4,7 @@ use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
