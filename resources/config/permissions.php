@@ -4,11 +4,11 @@ return [
     'menus' => [
         'read',
         'write',
-        'delete'
+        'delete',
     ],
     'links' => [
         'read',
         'write',
-        'delete'
-    ]
+        'delete',
+    ],
 ];

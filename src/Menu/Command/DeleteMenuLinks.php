@@ -2,7 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class DeleteMenuLinks
@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Menu\Command
  */
-class DeleteMenuLinks implements SelfHandling
+class DeleteMenuLinks
 {
 
     /**

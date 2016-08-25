@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Tree
  */
 class LinkTreeBuilder extends TreeBuilder
 {
@@ -32,14 +31,14 @@ class LinkTreeBuilder extends TreeBuilder
             'data-toggle' => 'modal',
             'data-target' => '#modal',
             'text'        => 'anomaly.module.navigation::button.create_child_link',
-            'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}?parent={entry.id}'
+            'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}?parent={entry.id}',
         ],
         'view'   => [
-            'target' => '_blank'
+            'target' => '_blank',
         ],
         'prompt' => [
-            'href' => 'admin/navigation/links/delete/{entry.id}'
-        ]
+            'href' => 'admin/navigation/links/delete/{entry.id}',
+        ],
     ];
 
     /**

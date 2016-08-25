@@ -3,7 +3,7 @@
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Model\EloquentModel;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class SetChildrenRelations
@@ -11,9 +11,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class SetChildrenRelations implements SelfHandling
+class SetChildrenRelations
 {
 
     /**

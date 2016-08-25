@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Entry\EntryRepository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Menu
  */
 class MenuRepository extends EntryRepository implements MenuRepositoryInterface
 {

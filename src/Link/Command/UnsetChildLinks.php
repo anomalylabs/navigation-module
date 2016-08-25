@@ -2,7 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class UnsetChildLinks
@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Type\Command
  */
-class UnsetChildLinks implements SelfHandling
+class UnsetChildLinks
 {
 
     /**

@@ -6,6 +6,6 @@ return [
     'description' => 'Gestion de la navigation.',
     'section'     => [
         'menus' => 'Menus',
-        'links' => 'Liens'
-    ]
+        'links' => 'Liens',
+    ],
 ];

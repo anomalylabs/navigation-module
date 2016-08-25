@@ -21,7 +21,7 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
         'slug'         => 'menus',
         'title_column' => 'name',
         'translatable' => true,
-        'trashable'    => true
+        'trashable'    => true,
     ];
 
     /**
@@ -33,15 +33,15 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
         'name'        => [
             'translatable' => true,
             'required'     => true,
-            'unique'       => true
+            'unique'       => true,
         ],
         'slug'        => [
             'required' => true,
-            'unique'   => true
+            'unique'   => true,
         ],
         'description' => [
-            'translatable' => true
-        ]
+            'translatable' => true,
+        ],
     ];
 
 }

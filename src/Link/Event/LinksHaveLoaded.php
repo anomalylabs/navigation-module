@@ -8,7 +8,6 @@ use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
  *
  * @link          http://fritzandandre.com
  * @author        Brennon Loveless <brennon@fritzandandre.com>
- * @package       Anomaly\Streams\Platform\Ui\Table\Event
  */
 class LinksHaveLoaded
 {

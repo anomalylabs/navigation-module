@@ -4,7 +4,6 @@ use Anomaly\NavigationModule\Link\Event\LinksHaveLoaded;
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -14,9 +13,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class GetLinks implements SelfHandling
+class GetLinks
 {
 
     use DispatchesJobs;
@@ -50,7 +48,7 @@ class GetLinks implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Dispatcher $events
+     * @param  Dispatcher                                               $events
      * @return \Anomaly\NavigationModule\Link\LinkCollection|mixed|null
      */
     public function handle(Dispatcher $events)
@@ -88,7 +86,7 @@ class GetLinks implements SelfHandling
         $this->dispatch(new SetCurrentLink($links));
         $this->dispatch(new SetActiveLinks($links));
 
-        /**
+        /*
          * Allow other things to inject into the menu
          */
         $events->fire(new LinksHaveLoaded($this->menu, $links));

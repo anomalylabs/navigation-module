@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Type\Contract
  */
 interface LinkTypeInterface
 {
@@ -17,7 +16,7 @@ interface LinkTypeInterface
     /**
      * Return the link URL.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return string
      */
     public function url(LinkInterface $link);
@@ -25,7 +24,7 @@ interface LinkTypeInterface
     /**
      * Return the link title.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return string
      */
     public function title(LinkInterface $link);
@@ -33,7 +32,7 @@ interface LinkTypeInterface
     /**
      * Return if the link exists or not.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return bool
      */
     public function exists(LinkInterface $link);
@@ -41,7 +40,7 @@ interface LinkTypeInterface
     /**
      * Return if the link is enabled or not.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return bool
      */
     public function enabled(LinkInterface $link);

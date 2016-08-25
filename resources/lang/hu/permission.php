@@ -3,18 +3,18 @@
 return [
     'menus' => [
         'name' => 'Menük',
-    'option' => [
+    'option'   => [
         'read' => 'Hozzáférhet a menüköz',
-    'write' => 'Létrehozhat és szerkeszthet menüket.',
-    'delete' => 'Törölhet menüket.',
+    'write'    => 'Létrehozhat és szerkeszthet menüket.',
+    'delete'   => 'Törölhet menüket.',
     ],
     ],
     'links' => [
         'name' => 'Linkek',
-    'option' => [
+    'option'   => [
         'read' => 'Hozzáférhet a linkekhez.',
-    'write' => 'Létrehozhat és szerkeszthet linkeket.',
-    'delete' => 'Törölhet linkeket.',
+    'write'    => 'Létrehozhat és szerkeszthet linkeket.',
+    'delete'   => 'Törölhet linkeket.',
     ],
     ],
 ];

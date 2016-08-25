@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Type
  */
 class LinkTypeExtension extends Extension implements LinkTypeInterface
 {
@@ -19,7 +18,7 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     /**
      * Return the link URL.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return string
      */
     public function url(LinkInterface $link)
@@ -30,7 +29,7 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     /**
      * Return the link title.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return string
      */
     public function title(LinkInterface $link)
@@ -41,7 +40,7 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     /**
      * Return if the link exists or not.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return bool
      */
     public function exists(LinkInterface $link)
@@ -52,7 +51,7 @@ class LinkTypeExtension extends Extension implements LinkTypeInterface
     /**
      * Return if the link is enabled or not.
      *
-     * @param LinkInterface $link
+     * @param  LinkInterface $link
      * @return bool
      */
     public function enabled(LinkInterface $link)

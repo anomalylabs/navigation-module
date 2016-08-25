@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Support\Decorator;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link
  */
 class LinkPresenter extends EntryPresenter
 {
@@ -40,7 +39,7 @@ class LinkPresenter extends EntryPresenter
                         $this->object->getStreamSlug(),
                         $this->object->getMenuSlug(),
                         'edit',
-                        $this->object->getId()
+                        $this->object->getId(),
                     ]
                 )
             ),

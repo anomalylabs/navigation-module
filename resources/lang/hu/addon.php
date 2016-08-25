@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'title' => 'Navigáció',
-    'name' => 'Navigáció Modul',
+    'title'       => 'Navigáció',
+    'name'        => 'Navigáció Modul',
     'description' => 'Menü kezelés egyszerűen.',
-    'section' => [
+    'section'     => [
         'menus' => 'Menük',
-    'links' => 'Linkek',
+    'links'     => 'Linkek',
     ],
 ];

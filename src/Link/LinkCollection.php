@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link
  */
 class LinkCollection extends EntryCollection
 {
@@ -95,7 +94,7 @@ class LinkCollection extends EntryCollection
     /**
      * Return only active links.
      *
-     * @param bool $active
+     * @param  bool           $active
      * @return LinkCollection
      */
     public function active($active = true)

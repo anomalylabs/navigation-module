@@ -12,7 +12,6 @@ use Anomaly\UrlLinkTypeExtension\UrlLinkTypeModel;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Seeder
  */
 class LinkSeeder extends Seeder
 {
@@ -59,18 +58,18 @@ class LinkSeeder extends Seeder
         $pyrocms = $repository->create(
             [
                 'en'  => [
-                    'title' => 'PyroCMS.com'
+                    'title' => 'PyroCMS.com',
                 ],
-                'url' => 'http://pyrocms.com/'
+                'url' => 'http://pyrocms.com/',
             ]
         );
 
         $documentation = $repository->create(
             [
                 'en'  => [
-                    'title' => 'Documentation'
+                    'title' => 'Documentation',
                 ],
-                'url' => 'http://pyrocms.com/documentation'
+                'url' => 'http://pyrocms.com/documentation',
             ]
         );
 
@@ -81,7 +80,7 @@ class LinkSeeder extends Seeder
                 'menu'   => $menu,
                 'target' => '_blank',
                 'entry'  => $pyrocms,
-                'type'   => 'anomaly.extension.url_link_type'
+                'type'   => 'anomaly.extension.url_link_type',
             ]
         );
 
@@ -90,7 +89,7 @@ class LinkSeeder extends Seeder
                 'menu'   => $menu,
                 'target' => '_blank',
                 'entry'  => $documentation,
-                'type'   => 'anomaly.extension.url_link_type'
+                'type'   => 'anomaly.extension.url_link_type',
             ]
         );
     }

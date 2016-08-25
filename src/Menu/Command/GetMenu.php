@@ -3,7 +3,7 @@
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Support\Presenter;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class GetMenu
@@ -11,9 +11,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Menu\Command
  */
-class GetMenu implements SelfHandling
+class GetMenu
 {
 
     /**
@@ -36,7 +35,7 @@ class GetMenu implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param MenuRepositoryInterface $menus
+     * @param  MenuRepositoryInterface $menus
      * @return MenuInterface|null
      */
     public function handle(MenuRepositoryInterface $menus)

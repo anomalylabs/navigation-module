@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule
  */
 class NavigationModuleServiceProvider extends AddonServiceProvider
 {
@@ -19,7 +18,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\NavigationModule\NavigationModulePlugin'
+        'Anomaly\NavigationModule\NavigationModulePlugin',
     ];
 
     /**
@@ -37,7 +36,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
         'admin/navigation/links/{menu}/edit/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
         'admin/navigation/links/{menu}/view/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@view',
         'admin/navigation/links/delete/{id}'      => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@delete',
-        'admin/navigation/links/choose/{menu}'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@choose'
+        'admin/navigation/links/choose/{menu}'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@choose',
     ];
 
     /**
@@ -47,7 +46,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      */
     protected $bindings = [
         'Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel' => 'Anomaly\NavigationModule\Link\LinkModel',
-        'Anomaly\Streams\Platform\Model\Navigation\NavigationMenusEntryModel' => 'Anomaly\NavigationModule\Menu\MenuModel'
+        'Anomaly\Streams\Platform\Model\Navigation\NavigationMenusEntryModel' => 'Anomaly\NavigationModule\Menu\MenuModel',
     ];
 
     /**
@@ -57,7 +56,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
      */
     protected $singletons = [
         'Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface' => 'Anomaly\NavigationModule\Link\LinkRepository',
-        'Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface' => 'Anomaly\NavigationModule\Menu\MenuRepository'
+        'Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface' => 'Anomaly\NavigationModule\Menu\MenuRepository',
     ];
 
 }

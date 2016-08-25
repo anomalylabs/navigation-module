@@ -9,7 +9,6 @@ use Anomaly\Streams\Platform\Database\Seeder\Seeder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Seeder
  */
 class MenuSeeder extends Seeder
 {
@@ -42,9 +41,9 @@ class MenuSeeder extends Seeder
                 [
                     'en'   => [
                         'name'        => 'Footer',
-                        'description' => 'This is the footer.'
+                        'description' => 'This is the footer.',
                     ],
-                    'slug' => 'footer'
+                    'slug' => 'footer',
                 ]
             );
     }

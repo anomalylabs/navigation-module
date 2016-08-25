@@ -2,7 +2,6 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -11,9 +10,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class SetActiveLinks implements SelfHandling
+class SetActiveLinks
 {
 
     use DispatchesJobs;
@@ -51,14 +49,14 @@ class SetActiveLinks implements SelfHandling
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
 
-            /**
+            /*
              * Already flagged.
              */
             if ($link->isActive() || $link->isCurrent()) {
                 continue;
             }
 
-            /**
+            /*
              * Set active if the direct
              * parent of current link.
              */
@@ -67,7 +65,7 @@ class SetActiveLinks implements SelfHandling
                 $link->setActive(true);
             }
 
-            /**
+            /*
              * If the active link is in the children
              * of this link then mark it active too.
              */

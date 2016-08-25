@@ -2,7 +2,6 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Http\Request;
 
 /**
@@ -11,9 +10,8 @@ use Illuminate\Http\Request;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class SetCurrentLink implements SelfHandling
+class SetCurrentLink
 {
 
     /**
@@ -42,7 +40,7 @@ class SetCurrentLink implements SelfHandling
     {
         $current = null;
 
-        /**
+        /*
          * If the route does not exist,
          * i.e. a 404 or 500 handling page.
          * Then we don't have anything to do.

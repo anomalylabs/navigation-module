@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Form
  */
 class LinkFormBuilder extends FormBuilder
 {
@@ -46,7 +45,7 @@ class LinkFormBuilder extends FormBuilder
         'parent',
         'entry',
         'type',
-        'menu'
+        'menu',
     ];
 
     /**
@@ -99,7 +98,7 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Set the type.
      *
-     * @param LinkTypeExtension $type
+     * @param  LinkTypeExtension $type
      * @return $this
      */
     public function setType(LinkTypeExtension $type)
@@ -145,7 +144,7 @@ class LinkFormBuilder extends FormBuilder
     /**
      * Set the parent link.
      *
-     * @param LinkInterface $parent
+     * @param  LinkInterface $parent
      * @return $this
      */
     public function setParent(LinkInterface $parent)

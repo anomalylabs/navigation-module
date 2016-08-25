@@ -12,7 +12,6 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Contract
  */
 interface LinkInterface extends EntryInterface
 {

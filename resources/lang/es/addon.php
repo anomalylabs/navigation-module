@@ -5,6 +5,6 @@ return [
     'description' => 'Administración de la navegación.',
     'section'     => [
         'menus' => 'Grupos',
-        'links' => 'Enlaces'
-    ]
+        'links' => 'Enlaces',
+    ],
 ];

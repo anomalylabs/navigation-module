@@ -6,7 +6,6 @@
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Entry
  */
 class EntryFormSections
 {
@@ -31,7 +30,7 @@ class EntryFormSections
                             },
                             $type->getFormFieldSlugs()
                         );
-                    }
+                    },
                 ],
                 'link' => [
                     'fields' => function () use ($link) {
@@ -41,8 +40,8 @@ class EntryFormSections
                             },
                             $link->getFormFieldSlugs()
                         );
-                    }
-                ]
+                    },
+                ],
             ]
         );
     }

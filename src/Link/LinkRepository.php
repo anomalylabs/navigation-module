@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Entry\EntryRepository;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link
  */
 class LinkRepository extends EntryRepository implements LinkRepositoryInterface
 {
@@ -36,7 +35,7 @@ class LinkRepository extends EntryRepository implements LinkRepositoryInterface
      * Return links belonging to
      * the provided menu.
      *
-     * @param MenuInterface $menu
+     * @param  MenuInterface  $menu
      * @return LinkCollection
      */
     public function findAllByMenu(MenuInterface $menu)

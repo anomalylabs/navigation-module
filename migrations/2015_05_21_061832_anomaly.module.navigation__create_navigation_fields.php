@@ -25,33 +25,33 @@ class AnomalyModuleNavigationCreateNavigationFields extends Migration
         'slug'          => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
-                'slugify' => 'name'
-            ]
+                'slugify' => 'name',
+            ],
         ],
         'menu'          => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'related' => 'Anomaly\NavigationModule\Menu\MenuModel'
-            ]
+                'related' => 'Anomaly\NavigationModule\Menu\MenuModel',
+            ],
         ],
         'parent'        => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'related' => 'Anomaly\NavigationModule\Link\LinkModel'
-            ]
+                'related' => 'Anomaly\NavigationModule\Link\LinkModel',
+            ],
         ],
         'allowed_roles' => [
             'type'   => 'anomaly.field_type.multiple',
             'config' => [
-                'related' => 'Anomaly\UsersModule\Role\RoleModel'
-            ]
+                'related' => 'Anomaly\UsersModule\Role\RoleModel',
+            ],
         ],
         'type'          => [
             'type'   => 'anomaly.field_type.addon',
             'config' => [
                 'type'   => 'extension',
-                'search' => 'anomaly.module.navigation::link_type.*'
-            ]
+                'search' => 'anomaly.module.navigation::link_type.*',
+            ],
         ],
         'target'        => [
             'type'   => 'anomaly.field_type.select',
@@ -59,10 +59,10 @@ class AnomalyModuleNavigationCreateNavigationFields extends Migration
                 'default_value' => '_self',
                 'options'       => [
                     '_self'  => 'anomaly.module.navigation::field.target.option.self',
-                    '_blank' => 'anomaly.module.navigation::field.target.option.blank'
-                ]
-            ]
-        ]
+                    '_blank' => 'anomaly.module.navigation::field.target.option.blank',
+                ],
+            ],
+        ],
     ];
 
 }

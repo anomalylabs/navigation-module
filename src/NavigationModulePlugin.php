@@ -13,7 +13,6 @@ use Anomaly\Streams\Platform\Support\Decorator;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule
  */
 class NavigationModulePlugin extends Plugin
 {
@@ -37,7 +36,7 @@ class NavigationModulePlugin extends Plugin
                     );
                 },
                 [
-                    'is_safe' => ['html']
+                    'is_safe' => ['html'],
                 ]
             ),
             new \Twig_SimpleFunction(
@@ -52,7 +51,7 @@ class NavigationModulePlugin extends Plugin
                         }
                     );
                 }
-            )
+            ),
         ];
     }
 }

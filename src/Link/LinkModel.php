@@ -13,7 +13,6 @@ use Anomaly\Streams\Platform\Model\Navigation\NavigationLinksEntryModel;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link
  */
 class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 {

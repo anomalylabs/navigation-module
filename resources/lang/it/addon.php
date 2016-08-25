@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'title' => 'Navigazione',
-    'name' => 'Modulo Navigazione',
+    'title'       => 'Navigazione',
+    'name'        => 'Modulo Navigazione',
     'description' => 'Potente e semplice modulo per la gestione della navigazione.',
-    'section' => [
+    'section'     => [
         'menus' => 'Menu',
-    'links' => 'Link',
+    'links'     => 'Link',
     ],
 ];

@@ -5,7 +5,6 @@ use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
  * Class RemoveRestrictedLinks
@@ -13,9 +12,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class RemoveRestrictedLinks implements SelfHandling
+class RemoveRestrictedLinks
 {
 
     /**
@@ -51,7 +49,7 @@ class RemoveRestrictedLinks implements SelfHandling
             /* @var RoleCollection $roles */
             $roles = $link->getAllowedRoles();
 
-            /**
+            /*
              * Admin's can see
              * absolutely everything.
              */
@@ -59,7 +57,7 @@ class RemoveRestrictedLinks implements SelfHandling
                 continue;
             }
 
-            /**
+            /*
              * If there is a guest role and
              * no user then this link
              * can display. Otherwise
@@ -69,7 +67,7 @@ class RemoveRestrictedLinks implements SelfHandling
                 continue;
             }
 
-            /**
+            /*
              * If there is a guest role and
              * there IS a user then this link
              * can NOT display. Forget it.
@@ -81,7 +79,7 @@ class RemoveRestrictedLinks implements SelfHandling
                 continue;
             }
 
-            /**
+            /*
              * If there are role restrictions
              * but no user is signed in then
              * we can't authorize anything!
@@ -93,7 +91,7 @@ class RemoveRestrictedLinks implements SelfHandling
                 continue;
             }
 
-            /**
+            /*
              * If there are role restrictions
              * and the user does not belong to
              * any of them then don't show it.

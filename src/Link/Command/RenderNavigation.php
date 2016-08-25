@@ -2,7 +2,6 @@
 
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -12,9 +11,8 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class RenderNavigation implements SelfHandling
+class RenderNavigation
 {
 
     use DispatchesJobs;
@@ -39,7 +37,7 @@ class RenderNavigation implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Factory $view
+     * @param  Factory     $view
      * @return null|string
      */
     public function handle(Factory $view)
@@ -52,7 +50,7 @@ class RenderNavigation implements SelfHandling
             [
                 'menu'    => $menu,
                 'links'   => $links,
-                'options' => $this->options
+                'options' => $this->options,
             ]
         )->render();
     }

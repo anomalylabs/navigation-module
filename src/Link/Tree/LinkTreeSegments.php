@@ -9,7 +9,6 @@ use Illuminate\Translation\Translator;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Tree
  */
 class LinkTreeSegments
 {
@@ -40,40 +39,40 @@ class LinkTreeSegments
                     'class'       => 'text-danger',
                     'value'       => '<i class="fa fa-external-link"></i>',
                     'attributes'  => [
-                        'title' => 'module::message.external'
+                        'title' => 'module::message.external',
                     ],
                     'enabled'     => function (LinkInterface $entry) {
                         return $entry->getTarget() === '_blank';
-                    }
+                    },
                 ],
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-muted',
                     'value'       => '<i class="fa fa-lock"></i>',
                     'attributes'  => [
-                        'title' => 'module::message.restricted'
+                        'title' => 'module::message.restricted',
                     ],
                     'enabled'     => function (LinkInterface $entry) {
 
                         $roles = $entry->getAllowedRoles();
 
                         return !$roles->isEmpty();
-                    }
+                    },
                 ],
                 [
                     'data-toggle' => 'tooltip',
                     'class'       => 'text-danger',
                     'value'       => '<i class="fa fa-chain-broken"></i>',
                     'attributes'  => [
-                        'title' => 'module::message.broken'
+                        'title' => 'module::message.broken',
                     ],
                     'enabled'     => function (LinkInterface $entry) {
 
                         $type = $entry->getType();
 
                         return !$type->exists($entry);
-                    }
-                ]
+                    },
+                ],
             ]
         );
     }

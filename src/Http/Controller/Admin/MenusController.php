@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Http\Controller\AdminController;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Http\Controller\Admin
  */
 class MenusController extends AdminController
 {
@@ -19,7 +18,7 @@ class MenusController extends AdminController
     /**
      * Return an index of existing navigation menus.
      *
-     * @param MenuTableBuilder $table
+     * @param  MenuTableBuilder                           $table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(MenuTableBuilder $table)
@@ -30,7 +29,7 @@ class MenusController extends AdminController
     /**
      * Return the modal for choosing a menu.
      *
-     * @param MenuRepositoryInterface $menus
+     * @param  MenuRepositoryInterface $menus
      * @return \Illuminate\View\View
      */
     public function choose(MenuRepositoryInterface $menus)
@@ -38,7 +37,7 @@ class MenusController extends AdminController
         return view(
             'module::ajax/choose_menu',
             [
-                'menus' => $menus->all()
+                'menus' => $menus->all(),
             ]
         );
     }
@@ -46,7 +45,7 @@ class MenusController extends AdminController
     /**
      * Return the form for creating a new navigation menu.
      *
-     * @param MenuFormBuilder $form
+     * @param  MenuFormBuilder                            $form
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create(MenuFormBuilder $form)
@@ -57,8 +56,8 @@ class MenusController extends AdminController
     /**
      * Return the form for editing an existing navigation menu.
      *
-     * @param MenuFormBuilder  $form
-     * @param                  $id
+     * @param  MenuFormBuilder                            $form
+     * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(MenuFormBuilder $form, $id)

@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Addon\Module\Module;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule
  */
 class NavigationModule extends Module
 {
@@ -28,8 +27,8 @@ class NavigationModule extends Module
     protected $sections = [
         'menus' => [
             'buttons' => [
-                'new_menu'
-            ]
+                'new_menu',
+            ],
         ],
         'links' => [
             'slug'        => 'links',
@@ -42,10 +41,10 @@ class NavigationModule extends Module
                 'new_link' => [
                     'data-toggle' => 'modal',
                     'data-target' => '#modal',
-                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}'
-                ]
-            ]
-        ]
+                    'href'        => 'admin/navigation/links/choose/{request.route.parameters.menu}',
+                ],
+            ],
+        ],
     ];
 
 }

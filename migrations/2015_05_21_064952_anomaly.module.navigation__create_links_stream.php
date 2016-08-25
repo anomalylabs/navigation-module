@@ -20,7 +20,7 @@ class AnomalyModuleNavigationCreateLinksStream extends Migration
     protected $stream = [
         'slug'      => 'links',
         'sortable'  => true,
-        'trashable' => true
+        'trashable' => true,
     ];
 
     /**
@@ -30,20 +30,20 @@ class AnomalyModuleNavigationCreateLinksStream extends Migration
      */
     protected $assignments = [
         'menu'   => [
-            'required' => true
+            'required' => true,
         ],
         'type'   => [
-            'required' => true
+            'required' => true,
         ],
         'entry'  => [
-            'required' => true
+            'required' => true,
         ],
         'target' => [
-            'required' => true
+            'required' => true,
         ],
         'class',
         'parent',
-        'allowed_roles'
+        'allowed_roles',
     ];
 
 }

@@ -3,7 +3,7 @@
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Routing\UrlGenerator;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class GetParentLink
@@ -11,9 +11,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Link\Command
  */
-class GetParentLink implements SelfHandling
+class GetParentLink
 {
 
     /**
@@ -45,7 +44,7 @@ class GetParentLink implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param UrlGenerator $url
+     * @param  UrlGenerator       $url
      * @return LinkInterface|null
      */
     public function handle(UrlGenerator $url)

@@ -2,23 +2,23 @@
 
 return [
     'name'        => [
-        'name' => 'Nombre'
+        'name' => 'Nombre',
     ],
     'slug'        => [
-        'name' => 'Slug'
+        'name' => 'Slug',
     ],
     'description' => [
-        'name' => 'Descripción'
+        'name' => 'Descripción',
     ],
     'target'      => [
         'name'   => 'Target',
         'option' => [
             'self'  => 'Abrir en la misma ventana.',
-            'blank' => 'Abrir en una nueva ventana.'
-        ]
+            'blank' => 'Abrir en una nueva ventana.',
+        ],
     ],
     'class'       => [
         'name'        => 'Clase',
-        'placeholder' => 'Alguna clase adicional? (separadas por espacio)'
-    ]
+        'placeholder' => 'Alguna clase adicional? (separadas por espacio)',
+    ],
 ];

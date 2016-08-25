@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\NavigationModule\Menu\Table
  */
 class MenuTableBuilder extends TableBuilder
 {
@@ -23,9 +22,9 @@ class MenuTableBuilder extends TableBuilder
             'fields' => [
                 'name',
                 'slug',
-                'description'
-            ]
-        ]
+                'description',
+            ],
+        ],
     ];
 
     /**
@@ -35,7 +34,7 @@ class MenuTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
-        'description'
+        'description',
     ];
 
     /**
@@ -49,8 +48,8 @@ class MenuTableBuilder extends TableBuilder
             'type' => 'info',
             'icon' => 'link',
             'text' => 'module::button.links',
-            'href' => 'admin/navigation/links/{entry.slug}'
-        ]
+            'href' => 'admin/navigation/links/{entry.slug}',
+        ],
     ];
 
     /**
@@ -59,7 +58,7 @@ class MenuTableBuilder extends TableBuilder
      * @var array
      */
     protected $actions = [
-        'delete'
+        'delete',
     ];
 
 }
