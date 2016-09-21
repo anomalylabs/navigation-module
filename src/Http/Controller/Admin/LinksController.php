@@ -81,9 +81,10 @@ class LinksController extends AdminController
         $menu
     ) {
         /* @var LinkTypeInterface $type */
-        $type = $extensions->get($_GET['link_type']);
+        $type = $extensions->findBySlug($link_type);
+        $parent_id = isset($_GET['parent']) ? $_GET['parent'] : 0;
 
-        if ($parent = $links->find($this->request->get('parent'))) {
+        if ($parent = $links->find($parent_id)) {
             $link->setParent($parent);
         }
 
