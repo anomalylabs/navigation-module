@@ -5,7 +5,7 @@ use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Link\Entry\EntryFormBuilder;
 use Anomaly\NavigationModule\Link\Form\LinkFormBuilder;
 use Anomaly\NavigationModule\Link\Tree\LinkTreeBuilder;
-use Anomaly\NavigationModule\Link\Type\Contract\LinkTypeInterface;
+use Anomaly\NavigationModule\Link\Type\LinkTypeExtension;
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Extension\ExtensionCollection;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
@@ -24,9 +24,9 @@ class LinksController extends AdminController
     /**
      * Return an index of existing links.
      *
-     * @param  LinkTreeBuilder                                             $tree
-     * @param  MenuRepositoryInterface                                     $menus
-     * @param  null                                                        $menu
+     * @param  LinkTreeBuilder         $tree
+     * @param  MenuRepositoryInterface $menus
+     * @param  null                    $menu
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function index(LinkTreeBuilder $tree, MenuRepositoryInterface $menus, $menu = null)
@@ -46,8 +46,8 @@ class LinksController extends AdminController
     /**
      * Return the modal for choosing a link type.
      *
-     * @param  ExtensionCollection   $extensions
-     * @param  string                $menu
+     * @param  ExtensionCollection $extensions
+     * @param  string              $menu
      * @return \Illuminate\View\View
      */
     public function choose(ExtensionCollection $extensions, $menu)
@@ -80,9 +80,10 @@ class LinksController extends AdminController
         ExtensionCollection $extensions,
         $menu
     ) {
-        /* @var LinkTypeInterface $type */
-        $type = $extensions->get($_GET['link_type']);
+        /* @var LinkTypeExtension $type */
+        $type = $extensions->get($this->request->get('link_type'));
 
+        /* @var LinkInterface $parent */
         if ($parent = $links->find($this->request->get('parent'))) {
             $link->setParent($parent);
         }
@@ -134,7 +135,7 @@ class LinksController extends AdminController
     /**
      * View the link destination.
      *
-     * @param  LinkRepositoryInterface           $links
+     * @param  LinkRepositoryInterface $links
      * @return \Illuminate\Http\RedirectResponse
      */
     public function view(LinkRepositoryInterface $links)
@@ -148,8 +149,8 @@ class LinksController extends AdminController
     /**
      * Delete a link and go back.
      *
-     * @param  LinkRepositoryInterface           $links
-     * @param  Authorizer                        $authorizer
+     * @param  LinkRepositoryInterface $links
+     * @param  Authorizer              $authorizer
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
