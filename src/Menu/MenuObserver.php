@@ -2,15 +2,16 @@
 
 use Anomaly\NavigationModule\Menu\Command\DeleteMenuLinks;
 use Anomaly\NavigationModule\Menu\Command\RestoreMenuLinks;
+use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 
 /**
  * Class MenuObserver
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class MenuObserver extends EntryObserver
 {
@@ -18,7 +19,7 @@ class MenuObserver extends EntryObserver
     /**
      * Fired after an entry is deleted.
      *
-     * @param EntryInterface $entry
+     * @param EntryInterface|MenuInterface $entry
      */
     public function deleted(EntryInterface $entry)
     {
@@ -27,6 +28,11 @@ class MenuObserver extends EntryObserver
         parent::deleted($entry);
     }
 
+    /**
+     * Fired after an entry has been restored.
+     *
+     * @param EntryInterface|MenuInterface $entry
+     */
     public function restored(EntryInterface $entry)
     {
         $this->dispatch(new RestoreMenuLinks($entry));

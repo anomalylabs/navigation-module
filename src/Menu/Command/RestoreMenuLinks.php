@@ -38,7 +38,7 @@ class RestoreMenuLinks
      */
     public function handle(LinkRepositoryInterface $links)
     {
-        foreach ($this->menu->getTrashedLinks() as $link) {
+        foreach ($this->menu->links()->onlyTrashed()->get() as $link) {
             $links->restore($link);
         }
     }
