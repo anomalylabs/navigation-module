@@ -33,4 +33,11 @@ interface MenuInterface extends EntryInterface
      * @return LinkCollection
      */
     public function getLinks();
+
+    /**
+     * Get the related links (with trashed).
+     *
+     * @return LinkCollection
+     */
+    public function getTrashedLinks();
 }

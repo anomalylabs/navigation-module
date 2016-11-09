@@ -45,6 +45,16 @@ class MenuModel extends NavigationMenusEntryModel implements MenuInterface
     }
 
     /**
+     * Get the related links (with trashed).
+     *
+     * @return LinkCollection
+     */
+    public function getTrashedLinks()
+    {
+        return $this->links()->withTrashed()->get();
+    }
+
+    /**
      * Return the links relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

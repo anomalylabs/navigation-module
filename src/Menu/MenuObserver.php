@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Menu;
 
 use Anomaly\NavigationModule\Menu\Command\DeleteMenuLinks;
+use Anomaly\NavigationModule\Menu\Command\RestoreMenuLinks;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 
@@ -24,5 +25,12 @@ class MenuObserver extends EntryObserver
         $this->dispatch(new DeleteMenuLinks($entry));
 
         parent::deleted($entry);
+    }
+
+    public function restored(EntryInterface $entry)
+    {
+        $this->dispatch(new RestoreMenuLinks($entry));
+
+        parent::restored($entry);
     }
 }
