@@ -2,6 +2,7 @@
 
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Interface MenuInterface
@@ -33,4 +34,11 @@ interface MenuInterface extends EntryInterface
      * @return LinkCollection
      */
     public function getLinks();
+
+    /**
+     * Return the links relation.
+     *
+     * @return HasMany
+     */
+    public function links();
 }

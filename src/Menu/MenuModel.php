@@ -3,13 +3,14 @@
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationMenusEntryModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class MenuModel
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class MenuModel extends NavigationMenusEntryModel implements MenuInterface
 {
@@ -47,7 +48,7 @@ class MenuModel extends NavigationMenusEntryModel implements MenuInterface
     /**
      * Return the links relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function links()
     {
