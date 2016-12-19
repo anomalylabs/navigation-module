@@ -25,7 +25,7 @@
     "support": {
         "email": "support@pyrocms.com"
     },
-    "required": {
+    "require": {
         "anomaly/streams-platform": "~1.1",
         "anomaly/users-module": "~2.1",
         "anomaly/url_link_type-extension": "~2.1"
