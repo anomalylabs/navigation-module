@@ -37,11 +37,13 @@ class RenderNavigation
     /**
      * Handle the command.
      *
-     * @param  Factory     $view
+     * @param  Factory $view
      * @return null|string
      */
     public function handle(Factory $view)
     {
+        $this->dispatch(new HandlePresets($this->options));
+
         $menu  = $this->dispatch(new GetMenu($this->options->get('menu')));
         $links = $this->dispatch(new GetLinks($this->options, $menu));
 

@@ -9,8 +9,8 @@
 
         <a
                 href="{{ link.url }}"
-                class="{{ options.link_class }}"
                 target="{{ link.target }}"
+                class="{{ options.link_class }} {{ link.children.count() ? options.get('link_class_dropdown') }}"
                 {{ html_attributes(options.get('link_attributes', [])) }}
                 {% if link.children.count() %}
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
