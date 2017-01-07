@@ -6,6 +6,9 @@
 </div>
 
 <div class="modal-body">
+
+    {% include "streams::modals/filter" %}
+
     {% if not link_types.isEmpty() %}
         <ul class="nav nav-pills nav-stacked">
             {% for link_type in link_types %}
