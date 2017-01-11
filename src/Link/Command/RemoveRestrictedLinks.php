@@ -50,14 +50,6 @@ class RemoveRestrictedLinks
             $roles = $link->getAllowedRoles();
 
             /*
-             * Admin's can see
-             * absolutely everything.
-             */
-            if ($user && $user->isAdmin()) {
-                continue;
-            }
-
-            /*
              * If there is a guest role and
              * no user then this link
              * can display. Otherwise
@@ -96,7 +88,7 @@ class RemoveRestrictedLinks
              * and the user does not belong to
              * any of them then don't show it.
              */
-            if (!$roles->isEmpty() && !$user->hasAnyRole($roles)) {
+            if (!$roles->isEmpty() && !$user->hasAnyRole($roles) && !$user->isAdmin()) {
 
                 $this->links->forget($key);
 
