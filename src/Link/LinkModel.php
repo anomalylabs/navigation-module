@@ -65,6 +65,21 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Get the Path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        // Get the path
+        $path = parse_url($this->getUrl())["path"];
+        // Remove leading '/'
+        $path = substr($path, 1);
+
+        return $path;
+    }
+
+    /**
      * Get the title.
      *
      * @return string
