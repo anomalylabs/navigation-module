@@ -54,13 +54,19 @@ class SetCurrentLink
 
         $exact   = $request->fullUrl();
         $partial = $request->getUriForPath($staticPrefix);
+        $path    = parse_url($partial)["path"];
+        $path    = substr($path, 1);
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
+            // Remove anything leading up to the first '/', remove any locale
+            $linkPath = substr($link->getPath(), ($pos = strpos($link->getPath(), '/')) !== false ? $pos + 1 : 0);
 
             if ($link->getUrl() == $exact) {
                 $current = $link;
             } elseif ($link->getUrl() == $partial) {
+                $current = $link;
+            } elseif ($linkPath == $path){
                 $current = $link;
             }
         }
