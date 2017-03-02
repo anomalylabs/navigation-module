@@ -17,18 +17,18 @@ interface LinkInterface extends EntryInterface
 {
 
     /**
+     * Return the URL path.
+     *
+     * @return string
+     */
+    public function path();
+
+    /**
      * Get the URL.
      *
      * @return string
      */
     public function getUrl();
-
-    /**
-     * Get the path.
-     *
-     * @return string
-     */
-    public function getPath();
 
     /**
      * Get the title.

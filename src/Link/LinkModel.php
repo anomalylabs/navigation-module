@@ -18,13 +18,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 {
 
     /**
-     * The cache minutes.
-     *
-     * @var int
-     */
-    protected $ttl = 99999;
-
-    /**
      * The active flag.
      *
      * @var bool
@@ -45,8 +38,20 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $with = [
         'entry',
-        'allowedRoles'
+        'allowedRoles',
     ];
+
+    /**
+     * Return the URI path.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')\//';
+
+        return preg_replace($pattern, '/', parse_url($this->getUrl())['path']);
+    }
 
     /**
      * Get the URL.
@@ -62,21 +67,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         }
 
         return $type->url($this);
-    }
-
-    /**
-     * Get the Path.
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        // Get the path
-        $path = parse_url($this->getUrl())["path"];
-        // Remove leading '/'
-        $path = substr($path, 1);
-
-        return $path;
     }
 
     /**
