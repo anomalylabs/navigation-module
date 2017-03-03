@@ -48,6 +48,10 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function path()
     {
+        $type = $this->getType();
+        if ($type->namespace == 'anomaly.extension.url_link_type') {
+          return null;
+        }   
         $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')\//';
 
         return preg_replace($pattern, '/', parse_url($this->getUrl())['path']);
