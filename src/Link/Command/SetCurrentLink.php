@@ -55,7 +55,7 @@ class SetCurrentLink
         $exact   = $request->fullUrl();
         $partial = $request->getUriForPath($staticPrefix);
 
-        $path = parse_url($partial)['path'];
+        $path = array_get(parse_url($partial), 'path');
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
