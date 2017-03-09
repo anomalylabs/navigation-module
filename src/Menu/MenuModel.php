@@ -16,6 +16,15 @@ class MenuModel extends NavigationMenusEntryModel implements MenuInterface
 {
 
     /**
+     * The cascaded relations.
+     *
+     * @var array
+     */
+    protected $cascades = [
+        'links',
+    ];
+
+    /**
      * Get the slug.
      *
      * @return string

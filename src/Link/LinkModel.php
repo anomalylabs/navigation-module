@@ -18,6 +18,15 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
 {
 
     /**
+     * The cascaded relations.
+     *
+     * @var array
+     */
+    protected $cascades = [
+        'children',
+    ];
+
+    /**
      * The active flag.
      *
      * @var bool

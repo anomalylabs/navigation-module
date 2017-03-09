@@ -1,4 +1,4 @@
-<?php namespace Anomaly\NavigationModule\Seeder;
+<?php namespace Anomaly\NavigationModule\Link;
 
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;

@@ -1,7 +1,7 @@
 <?php namespace Anomaly\NavigationModule;
 
-use Anomaly\NavigationModule\Seeder\LinkSeeder;
-use Anomaly\NavigationModule\Seeder\MenuSeeder;
+use Anomaly\NavigationModule\Link\LinkSeeder;
+use Anomaly\NavigationModule\Menu\MenuSeeder;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 
 /**
