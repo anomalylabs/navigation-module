@@ -32,7 +32,7 @@ class NavigationModuleServiceProvider extends AddonServiceProvider
         'admin/navigation/create'                 => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@create',
         'admin/navigation/edit/{id}'              => 'Anomaly\NavigationModule\Http\Controller\Admin\MenusController@edit',
         'admin/navigation/links/{menu?}'          => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@index',
-        'admin/navigation/links/{menu}/create'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
+        'admin/navigation/links/{menu}/create/{link_type}'    => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@create',
         'admin/navigation/links/{menu}/edit/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@edit',
         'admin/navigation/links/{menu}/view/{id}' => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@view',
         'admin/navigation/links/delete/{id}'      => 'Anomaly\NavigationModule\Http\Controller\Admin\LinksController@delete',
