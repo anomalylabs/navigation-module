@@ -22,25 +22,31 @@ class EntryFormSections
 
         $builder->setSections(
             [
-                'type' => [
-                    'fields' => function () use ($type) {
-                        return array_map(
-                            function ($slug) {
-                                return 'type_' . $slug;
-                            },
-                            $type->getFormFieldSlugs()
-                        );
-                    },
-                ],
                 'link' => [
-                    'fields' => function () use ($link) {
-                        return array_map(
-                            function ($slug) {
-                                return 'link_' . $slug;
+                    'tabs' => [
+                        'general' => [
+                            'title'  => 'anomaly.module.navigation::tab.general',
+                            'fields' => function () use ($type) {
+                                return array_map(
+                                    function ($slug) {
+                                        return 'type_' . $slug;
+                                    },
+                                    $type->getFormFieldSlugs()
+                                );
                             },
-                            $link->getFormFieldSlugs()
-                        );
-                    },
+                        ],
+                        'options' => [
+                            'title'  => 'anomaly.module.navigation::tab.options',
+                            'fields' => function () use ($link) {
+                                return array_map(
+                                    function ($slug) {
+                                        return 'link_' . $slug;
+                                    },
+                                    $link->getFormFieldSlugs()
+                                );
+                            },
+                        ],
+                    ],
                 ],
             ]
         );
