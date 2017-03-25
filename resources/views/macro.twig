@@ -1,9 +1,9 @@
 {% macro links(links, collection, options, depth) %}
     {% for link in links %}
-        <{{ options.link_tag ?: 'li' }} class="
+        <{{ options.item_tag ?: 'li' }} class="
         {{ link.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
         {{ link.active ? options.get('active_class', 'active') }}
-        {{ link.current ? options.get('current_class', 'current') }}
+        {{ link.current ? options.get('selected_class', options.get('current_class', 'selected')) }}
         {{ options.item_class }}
         {{ link.class }}">
 
