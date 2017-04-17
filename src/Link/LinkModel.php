@@ -47,7 +47,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $with = [
         'entry',
-        //'allowedRoles', @todo: eager load causes issues with same roles applied to multiple links
+        'allowedRoles',
     ];
 
     /**
