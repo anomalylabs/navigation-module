@@ -37,7 +37,8 @@ class LinkTreeBuilder extends TreeBuilder
             'target' => '_blank',
         ],
         'prompt' => [
-            'href' => 'admin/navigation/links/delete/{entry.id}',
+            'permission' => 'anomaly.module.navigation::links.delete',
+            'href'       => 'admin/navigation/links/delete/{entry.id}',
         ],
     ];
 
