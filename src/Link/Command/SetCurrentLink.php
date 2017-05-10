@@ -67,16 +67,17 @@ class SetCurrentLink
             } elseif ($link->path() == $path) {
                 $current = $link;
             }
-        }
 
-        /**
-         * If we have an current link determined
-         * then mark it as such.
-         *
-         * @var LinkInterface $current
-         */
-        if ($current) {
-            $current->setCurrent(true);
+            /**
+             * If we have an current link determined
+             * then mark it as such.
+             *
+             * @var LinkInterface $current
+             */
+            if ($current) {
+                $current->setCurrent(true);
+                $current = null;
+            }
         }
     }
 }
