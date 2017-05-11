@@ -84,7 +84,7 @@ class SetCurrentLink
                  * let's let things continue.
                  *
                  * For example:
-                 * 
+                 *
                  * /example/link#section1
                  * /example/link#section2
                  */

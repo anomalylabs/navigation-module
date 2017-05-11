@@ -92,9 +92,28 @@ class LinkCollection extends EntryCollection
     }
 
     /**
+     * Return the current link's children.
+     *
+     * @param null|LinkInterface $link
+     * @return LinkCollection|null
+     */
+    public function siblings($link = null)
+    {
+        if (!$link) {
+            $link = $this->current();
+        }
+
+        if (!$link) {
+            return null;
+        }
+
+        return $this->children($link->getParent());
+    }
+
+    /**
      * Return only active links.
      *
-     * @param  bool           $active
+     * @param  bool $active
      * @return LinkCollection
      */
     public function active($active = true)
