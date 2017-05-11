@@ -75,7 +75,19 @@ class SetCurrentLink
              * @var LinkInterface $current
              */
             if ($current) {
+
                 $current->setCurrent(true);
+
+                /**
+                 * Just in case there are
+                 * multiple links that match
+                 * let's let things continue.
+                 *
+                 * For example:
+                 * 
+                 * /example/link#section1
+                 * /example/link#section2
+                 */
                 $current = null;
             }
         }
