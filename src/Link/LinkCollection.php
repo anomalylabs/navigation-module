@@ -108,7 +108,7 @@ class LinkCollection extends EntryCollection
         }
 
         if (!$parent = $link->getParent()) {
-            return null;
+            return $this->root();
         }
 
         return $this->children($parent);
