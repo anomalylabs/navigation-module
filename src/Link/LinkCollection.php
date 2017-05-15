@@ -59,10 +59,14 @@ class LinkCollection extends EntryCollection
      * Return only children of the provided item.
      *
      * @param $parent
-     * @return LinkCollection
+     * @return LinkCollection|null
      */
     public function children($parent)
     {
+        if (!$parent) {
+            return null;
+        }
+
         /* @var LinkInterface $parent */
         return $this->filter(
             function ($item) use ($parent) {
