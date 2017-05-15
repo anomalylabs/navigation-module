@@ -63,10 +63,6 @@ class LinkCollection extends EntryCollection
      */
     public function children($parent)
     {
-        if (!$parent) {
-            return null;
-        }
-
         /* @var LinkInterface $parent */
         return $this->filter(
             function ($item) use ($parent) {
