@@ -49,13 +49,23 @@ class RemoveRestrictedLinks
             /* @var RoleCollection $roles */
             $roles = $link->getAllowedRoles();
 
+            /**
+             * Nothing to do!
+             */
+            if ($roles->isEmpty()) {
+                continue;
+            }
+
+            // Pull out the guest role.
+            $guest = $roles->findBy('slug', 'guest');
+
             /*
              * If there is a guest role and
              * no user then this link
              * can display. Otherwise
              * we need to hide it.
              */
-            if ($roles->has('guest') && !$user) {
+            if ($guest && !$user) {
                 continue;
             }
 
@@ -64,7 +74,7 @@ class RemoveRestrictedLinks
              * there IS a user then this link
              * can NOT display. Forget it.
              */
-            if ($roles->has('guest') && $user) {
+            if ($guest && $user) {
 
                 $this->links->forget($key);
 
