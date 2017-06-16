@@ -51,6 +51,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     ];
 
     /**
+     * Return the host.
+     *
+     * @return string
+     */
+    public function host()
+    {
+        return array_get(parse_url($this->getUrl()), 'host');
+    }
+
+    /**
      * Return the URI path.
      *
      * @return string

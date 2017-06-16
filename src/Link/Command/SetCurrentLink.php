@@ -52,6 +52,7 @@ class SetCurrentLink
         $compiled     = $route->getCompiled();
         $staticPrefix = $compiled->getStaticPrefix();
 
+        $host    = $request->getHost();
         $exact   = $request->fullUrl();
         $partial = $request->getUriForPath($staticPrefix);
 
@@ -64,7 +65,7 @@ class SetCurrentLink
                 $current = $link;
             } elseif ($link->getUrl() == $partial) {
                 $current = $link;
-            } elseif ($link->path() == $path) {
+            } elseif ($host == $link->host() && $link->path() == $path) {
                 $current = $link;
             }
 

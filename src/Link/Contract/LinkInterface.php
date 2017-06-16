@@ -17,6 +17,13 @@ interface LinkInterface extends EntryInterface
 {
 
     /**
+     * Return the host.
+     *
+     * @return string
+     */
+    public function host();
+
+    /**
      * Return the URL path.
      *
      * @return string
