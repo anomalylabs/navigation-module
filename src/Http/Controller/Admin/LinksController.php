@@ -141,7 +141,7 @@ class LinksController extends AdminController
     public function view(LinkRepositoryInterface $links)
     {
         /* @var LinkInterface $link */
-        $link = $links->find($this->route->getParameter('id'));
+        $link = $links->find($this->route->parameter('id'));
 
         return $this->response->redirectTo($link->getUrl());
     }
@@ -166,7 +166,7 @@ class LinksController extends AdminController
          * Force delete until we get
          * views into the tree UI.
          */
-        $links->forceDelete($links->find($this->route->getParameter('id')));
+        $links->forceDelete($links->find($this->route->parameter('id')));
 
         return $this->redirect->back();
     }
