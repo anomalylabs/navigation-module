@@ -294,7 +294,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function children()
     {
-        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'parent_id', 'id');
+        return $this->hasMany(get_class($this), 'parent_id', 'id');
     }
 
     /**
