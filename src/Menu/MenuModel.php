@@ -1,6 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Menu;
 
 use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Link\LinkModel;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Model\Navigation\NavigationMenusEntryModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -61,7 +62,7 @@ class MenuModel extends NavigationMenusEntryModel implements MenuInterface
      */
     public function links()
     {
-        return $this->hasMany('Anomaly\NavigationModule\Link\LinkModel', 'menu_id')
+        return $this->hasMany(LinkModel::class, 'menu_id')
             ->orderBy('sort_order', 'ASC')
             ->orderBy('parent_id', 'ASC');
     }
