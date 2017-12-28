@@ -2,5 +2,5 @@
 
 return [
     'general' => 'Pagrindinis',
-    'options' => 'Parinktys',
+    'options' => 'Nustatymai',
 ];

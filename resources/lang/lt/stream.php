@@ -5,6 +5,6 @@ return [
         'name' => 'Meniu',
     ],
     'links' => [
-        'name' => 'Linkai',
+        'name' => 'Nuorodos',
     ],
 ];
