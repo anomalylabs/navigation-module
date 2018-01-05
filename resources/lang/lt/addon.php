@@ -3,9 +3,9 @@
 return [
     'title' => 'Navigacijos',
     'name' => 'Navigacijų modulis',
-    'description' => 'Navigacijų valdymas paprastai.',
+    'description' => 'Meniu valdymas paprastai.',
     'section' => [
         'menus' => 'Meniu',
-        'links' => 'Linkai',
+        'links' => 'Nuorodos',
     ],
 ];

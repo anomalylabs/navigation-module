@@ -2,9 +2,9 @@
 
 return [
     'name' => [
-        'name' => 'Vardas',
+        'name' => 'Pavadinimas',
         'instructions' => [
-            'menus' => 'Užvadinkit meniu trumpai ir aiškiai',
+            'menus' => 'Trumpas meniu pavadinimas',
         ],
     ],
     'slug' => [
@@ -13,23 +13,23 @@ return [
     ],
     'description' => [
         'name' => 'Aprašymas',
-        'instructions' => 'Aprašykite navigacijos meniu plačiau.',
+        'instructions' => 'Meniu aprašymas',
     ],
     'target' => [
-        'name' => 'Target',
-        'instructions' => 'Kaip šis linkas turėtų atsidaryti?',
+        'name' => 'Atidarymo būdas',
+        'instructions' => 'Kaip ši nuoroda turėtų atsidaryti?',
         'option' => [
             'self' => 'Atidaryti dabartiniame lange.',
             'blank' => 'Atidaryti naujame lange.',
         ],
     ],
     'class' => [
-        'name' => 'Class',
-        'instructions' => 'Nurodykite papildomas class, kurias nurodė programuotojas',
+        'name' => 'CSS klasė',
+        'instructions' => 'Nurodykite papildomas CSS klases',
     ],
     'allowed_roles' => [
         'name' => 'Leidžiamos rolės',
-        'instructions' => 'Nurodykite kurie vartotojai gali matyti šį linką.',
-        'warning' => 'Jei vartotojų rolės nenurodytos, tai tuomet šį linką matyts visi.',
+        'instructions' => 'Nurodykite roles kurių naudotojai gali matyti šią nuorodą.',
+        'warning' => 'Jei naudotojų rolės nenurodytos, šią nuorodą matyts visi.',
     ],
 ];
