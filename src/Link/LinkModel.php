@@ -67,7 +67,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     public function path()
     {
-        $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')\//';
+        $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')(\/|$)/';
 
         return preg_replace($pattern, '/', array_get(parse_url($this->getUrl()), 'path'));
     }
