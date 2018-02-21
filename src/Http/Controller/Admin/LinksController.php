@@ -24,9 +24,9 @@ class LinksController extends AdminController
     /**
      * Return an index of existing links.
      *
-     * @param  LinkTreeBuilder         $tree
+     * @param  LinkTreeBuilder $tree
      * @param  MenuRepositoryInterface $menus
-     * @param  null                    $menu
+     * @param  null $menu
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function index(LinkTreeBuilder $tree, MenuRepositoryInterface $menus, $menu = null)
@@ -47,7 +47,7 @@ class LinksController extends AdminController
      * Return the modal for choosing a link type.
      *
      * @param  ExtensionCollection $extensions
-     * @param  string              $menu
+     * @param  string $menu
      * @return \Illuminate\View\View
      */
     public function choose(ExtensionCollection $extensions, $menu)
@@ -55,7 +55,9 @@ class LinksController extends AdminController
         return view(
             'module::ajax/choose_link_type',
             [
-                'link_types' => $extensions->search('anomaly.module.navigation::link_type.*'),
+                'link_types' => $extensions
+                    ->search('anomaly.module.navigation::link_type.*')
+                    ->enabled(),
                 'menu'       => $menu,
             ]
         );
@@ -64,11 +66,11 @@ class LinksController extends AdminController
     /**
      * Return the form for creating a new link.
      *
-     * @param  LinkFormBuilder                            $link
-     * @param  EntryFormBuilder                           $form
-     * @param  LinkRepositoryInterface                    $links
-     * @param  MenuRepositoryInterface                    $menus
-     * @param  ExtensionCollection                        $extensions
+     * @param  LinkFormBuilder $link
+     * @param  EntryFormBuilder $form
+     * @param  LinkRepositoryInterface $links
+     * @param  MenuRepositoryInterface $menus
+     * @param  ExtensionCollection $extensions
      * @param                                             $menu
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -99,10 +101,10 @@ class LinksController extends AdminController
     /**
      * Return the form for editing an existing link.
      *
-     * @param  LinkFormBuilder                            $link
-     * @param  EntryFormBuilder                           $form
-     * @param  LinkRepositoryInterface                    $links
-     * @param  MenuRepositoryInterface                    $menus
+     * @param  LinkFormBuilder $link
+     * @param  EntryFormBuilder $form
+     * @param  LinkRepositoryInterface $links
+     * @param  MenuRepositoryInterface $menus
      * @param                                             $menu
      * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -150,7 +152,7 @@ class LinksController extends AdminController
      * Delete a link and go back.
      *
      * @param  LinkRepositoryInterface $links
-     * @param  Authorizer              $authorizer
+     * @param  Authorizer $authorizer
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
