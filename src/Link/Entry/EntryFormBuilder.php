@@ -14,6 +14,20 @@ class EntryFormBuilder extends MultipleFormBuilder
 {
 
     /**
+     * The form buttons.
+     *
+     * @var array
+     */
+    protected $buttons = [
+        'cancel',
+        'view' => [
+            'enabled' => 'edit',
+            'target'  => '_blank',
+            'href'    => 'admin/navigation/links/{request.route.parameters.menu}/view/{request.route.parameters.id}',
+        ],
+    ];
+
+    /**
      * Fired when form is ready to build.
      */
     public function onReady()
