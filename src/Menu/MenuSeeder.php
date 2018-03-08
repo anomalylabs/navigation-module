@@ -41,7 +41,7 @@ class MenuSeeder extends Seeder
                 [
                     'en'   => [
                         'name'        => 'Footer',
-                        'description' => 'This is the footer.',
+                        'description' => 'This is the main footer menu.',
                     ],
                     'slug' => 'footer',
                 ]
