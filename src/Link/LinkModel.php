@@ -24,6 +24,7 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
      */
     protected $cascades = [
         'children',
+        'entry',
     ];
 
     /**
