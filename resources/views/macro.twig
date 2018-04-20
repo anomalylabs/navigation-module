@@ -3,7 +3,7 @@
     {% import _self as self %}
 
     {% for link in links %}
-        <{{ options.item_tag ?: 'li' }} class="
+        <{{ options.item_tag ?: 'li' }} {{ html_attributes(options.get('item_attributes', [])) }} class="
         {{ link.children.isEmpty() ? '' : (options.dropdown_class ?: 'dropdown') }}
         {{ link.active ? options.get('active_class', 'active') }}
         {{ link.current ? options.get('selected_class', options.get('current_class', 'selected')) }}
