@@ -28,6 +28,15 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     ];
 
     /**
+     * Touch relations.
+     *
+     * @var array
+     */
+    protected $touches = [
+        'menu',
+    ];
+
+    /**
      * The active flag.
      *
      * @var bool
