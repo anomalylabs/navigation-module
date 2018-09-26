@@ -11,15 +11,6 @@ class ValueTableBuilder extends \Anomaly\MultipleFieldType\Table\ValueTableBuild
 {
 
     /**
-     *
-     * @var array
-     */
-    protected $filters = [
-        'menu',
-        'target',
-    ];
-
-    /**
      * The table columns.
      *
      * @var array
@@ -39,19 +30,6 @@ class ValueTableBuilder extends \Anomaly\MultipleFieldType\Table\ValueTableBuild
         ],
         'entry.type.title',
         'menu',
-    ];
-
-    /**
-     * The table options.
-     *
-     * @var array
-     */
-    protected $options = [
-        'order_by' => [
-            'parent_id'  => 'ASC',
-            'sort_order' => 'ASC',
-        ],
-        'sortable' => false,
     ];
 
 }
