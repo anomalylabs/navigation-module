@@ -23,6 +23,12 @@ return [
             'blank' => 'Open in a new window.',
         ],
     ],
+    'menu'          => [
+        'name' => 'Menu',
+    ],
+    'type'          => [
+        'name' => 'Type',
+    ],
     'class'         => [
         'name'         => 'Class',
         'instructions' => 'Specify any additional link classes as instructed by your developer.',

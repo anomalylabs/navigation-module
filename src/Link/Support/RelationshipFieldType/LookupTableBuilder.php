@@ -26,6 +26,7 @@ class LookupTableBuilder extends \Anomaly\RelationshipFieldType\Table\LookupTabl
      */
     protected $columns = [
         'link' => [
+            'heading'     => 'anomaly.module.navigation::label.link',
             'sort_column' => 'title',
             'wrapper'     => '
                     <strong>{value.title}</strong>
@@ -40,11 +41,17 @@ class LookupTableBuilder extends \Anomaly\RelationshipFieldType\Table\LookupTabl
         'menu',
     ];
 
+    /**
+     * The table options.
+     *
+     * @var array
+     */
     protected $options = [
         'order_by' => [
             'parent_id'  => 'ASC',
             'sort_order' => 'ASC',
         ],
+        'sortable' => false,
     ];
 
 }
