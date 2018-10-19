@@ -13,7 +13,7 @@
         <a
                 href="{{ link.url }}"
                 target="{{ link.target }}"
-                class="{{ options.link_class }} {{ link.children.count() ? options.get('link_class_dropdown') }}"
+                class="{{ depth > 1 ? options.child_link_class ?: options.link_class : options.link_class }} {{ link.children.count() ? options.get('link_class_dropdown') }}"
                 {{ html_attributes(options.get('link_attributes', [])) }}
                 {% if link.children.count() %}
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
