@@ -2,13 +2,13 @@
     "name": "anomaly/navigation-module",
     "type": "streams-addon",
     "description": "Powerful navigation management made easy.",
-    "license": "MIT",
     "keywords": [
         "navigation",
         "streams",
         "module"
     ],
     "homepage": "http://pyrocms.com/",
+    "license": "MIT",
     "authors": [
         {
             "name": "PyroCMS, Inc.",
@@ -18,18 +18,16 @@
         },
         {
             "name": "Ryan Thompson",
-            "email": "ryan@anomaly.is",
+            "email": "ryan@pyrocms.com",
+            "homepage": "http://ryanthepyro.com/",
             "role": "Developer"
         }
     ],
     "support": {
         "email": "support@pyrocms.com"
     },
-    "require-dev": {
-        "phpspec/phpspec": "~2.0"
-    },
-    "config": {
-        "bin-dir": "bin"
+    "require": {
+        "anomaly/streams-platform": "^1.5"
     },
     "autoload": {
         "psr-4": {
