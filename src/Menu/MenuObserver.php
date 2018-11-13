@@ -1,7 +1,7 @@
 <?php namespace Anomaly\NavigationModule\Menu;
 
-use Anomaly\NavigationModule\Menu\Command\PurgeCache;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
+use Anomaly\Streams\Platform\Entry\Command\ClearHttpCache;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
 
@@ -22,7 +22,7 @@ class MenuObserver extends EntryObserver
      */
     public function saved(EntryInterface $entry)
     {
-        $this->dispatch(new PurgeCache($entry));
+        $this->dispatch(new ClearHttpCache($entry));
 
         return parent::saved($entry);
     }
