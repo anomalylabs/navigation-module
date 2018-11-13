@@ -1,9 +1,9 @@
 <?php namespace Anomaly\NavigationModule\Link;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
-use Anomaly\Streams\Platform\Entry\Command\ClearHttpCache;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\Streams\Platform\Entry\EntryObserver;
+use Anomaly\Streams\Platform\Http\Command\ClearHttpCache;
 
 /**
  * Class LinkObserver
@@ -22,7 +22,7 @@ class LinkObserver extends EntryObserver
      */
     public function saved(EntryInterface $entry)
     {
-        $this->dispatch(new ClearHttpCache($entry));
+        $this->dispatch(new ClearHttpCache());
 
         return parent::saved($entry);
     }
