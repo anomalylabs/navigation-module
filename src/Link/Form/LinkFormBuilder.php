@@ -76,7 +76,7 @@ class LinkFormBuilder extends FormBuilder
             $entry->menu_id = $menu->getId();
         }
 
-        if (!$entry->type && $type = $this->getType()) {
+        if ($type = $this->getType()) {
             $entry->type = $type->getNamespace();
         }
 

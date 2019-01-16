@@ -64,6 +64,31 @@ class LinksController extends AdminController
     }
 
     /**
+     * Change the link type.
+     *
+     * @param  LinkRepositoryInterface $links
+     * @param ExtensionCollection $extensions
+     * @param $menu
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function change(LinkRepositoryInterface $links, ExtensionCollection $extensions, $menu)
+    {
+        /* @var LinkInterface $link */
+        $link = $links->find($this->route->parameter('id'));
+
+        return view(
+            'module::ajax/change_link_type',
+            [
+                'link_types' => $extensions
+                    ->search('anomaly.module.navigation::link_type.*')
+                    ->enabled(),
+                'link'       => $link,
+                'menu'       => $menu,
+            ]
+        );
+    }
+
+    /**
      * Return the form for creating a new link.
      *
      * @param  LinkFormBuilder $link
@@ -105,8 +130,9 @@ class LinksController extends AdminController
      * @param  EntryFormBuilder $form
      * @param  LinkRepositoryInterface $links
      * @param  MenuRepositoryInterface $menus
-     * @param                                             $menu
-     * @param                                             $id
+     * @param ExtensionCollection $extensions
+     * @param $menu
+     * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(
@@ -114,7 +140,8 @@ class LinksController extends AdminController
         EntryFormBuilder $form,
         LinkRepositoryInterface $links,
         MenuRepositoryInterface $menus,
-        $menu,
+        ExtensionCollection $extensions,
+        $slug,
         $id
     ) {
         /* @var LinkInterface $entry */
@@ -126,10 +153,22 @@ class LinksController extends AdminController
 
         $form->addForm(
             'link',
-            $link->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($menu))
+            $link->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($slug))
         );
 
         $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
+
+        /**
+         * If the link is changing types then
+         * reset some configuration here for it.
+         *
+         * @var LinkTypeExtension $type
+         */
+        if ($extension = $extensions->get($this->request->get('link_type'))) {
+            $link->setType($extension);
+            $form->addForm('type', $extension->builder()->setFormMode('edit'));
+            $form->setOption('redirect', 'admin/navigation/links/' . $slug . '/' . $id);
+        }
 
         return $form->render();
     }

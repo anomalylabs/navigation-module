@@ -35,7 +35,7 @@ class MenusController extends AdminController
     public function choose(MenuRepositoryInterface $menus)
     {
         return view(
-            'module::ajax/choose_menu',
+            'anomaly.module.navigation::ajax/choose_menu',
             [
                 'menus' => $menus->all(),
             ]

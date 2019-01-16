@@ -20,7 +20,12 @@ class EntryFormBuilder extends MultipleFormBuilder
      */
     protected $buttons = [
         'cancel',
-        'view' => [
+        'change' => [
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'href'        => 'admin/navigation/links/{request.route.parameters.menu}/change/{request.route.parameters.id}',
+        ],
+        'view'   => [
             'enabled' => 'edit',
             'target'  => '_blank',
             'href'    => 'admin/navigation/links/{request.route.parameters.menu}/view/{request.route.parameters.id}',
@@ -50,10 +55,8 @@ class EntryFormBuilder extends MultipleFormBuilder
         $entry = $type->getFormEntry();
         $link  = $form->getFormEntry();
 
-        if (!$link->entry_type) {
-            $link->entry_type = get_class($entry);
-            $link->entry_id   = $entry->getId();
-        }
+        $link->entry_type = get_class($entry);
+        $link->entry_id   = $entry->getId();
     }
 
     /**
