@@ -56,4 +56,31 @@ class LinkPresenter extends EntryPresenter
     {
         return (new Decorator())->decorate($this->object->getChildren());
     }
+    
+    /**
+     * Return the string output.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $classes = [];
+
+        if ($this->object->isActive()) {
+            $classes[] = 'active';
+        }
+
+        if ($this->object->isCurrent()) {
+            $classes[] = 'current';
+        }
+
+        return (string)app('html')->link(
+            $this->object->getUrl(),
+            $this->object->getTitle(),
+            [
+                'class' => implode(' ', $classes),
+            ]
+        );
+    }
+    
 }
