@@ -78,7 +78,7 @@ class LinkPresenter extends EntryPresenter
             $this->object->getUrl(),
             $this->object->getTitle(),
             [
-                'class' => array_filter(implode(' ', $classes)),
+                'class' => implode(' ', array_filter($classes)),
             ]
         );
     }
