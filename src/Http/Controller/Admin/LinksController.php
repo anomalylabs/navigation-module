@@ -167,7 +167,7 @@ class LinksController extends AdminController
         if ($extension = $extensions->get($this->request->get('link_type'))) {
             $link->setType($extension);
             $form->addForm('type', $extension->builder()->setFormMode('edit'));
-            $form->setOption('redirect', 'admin/navigation/links/' . $slug . '/' . $id);
+            $form->setOption('redirect', 'admin/navigation/links/' . $slug . '/edit/' . $id);
         }
 
         return $form->render();
