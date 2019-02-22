@@ -22,9 +22,7 @@ class LinkTreeSegments
     {
         $builder->setSegments(
             [
-                'entry.title' => [
-                    'href' => 'admin/navigation/links/{request.route.parameters.menu}/edit/{entry.id}',
-                ],
+                'entry.edit_link',
                 [
                     'class' => 'text-faded',
                     'value' => function (LinkInterface $entry, Translator $translator) {
