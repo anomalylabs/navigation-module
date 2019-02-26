@@ -89,7 +89,7 @@ class GetLinks
         /*
          * Allow other things to inject into the menu
          */
-        $events->fire(new LinksHaveLoaded($this->menu, $links));
+        $events->dispatch(new LinksHaveLoaded($this->menu, $links));
 
         return $links;
     }
