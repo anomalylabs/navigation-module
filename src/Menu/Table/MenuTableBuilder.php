@@ -34,6 +34,7 @@ class MenuTableBuilder extends TableBuilder
      */
     protected $columns = [
         'name',
+        'slug',
         'description',
     ];
 
