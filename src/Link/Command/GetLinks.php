@@ -10,9 +10,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 /**
  * Class GetLinks
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class GetLinks
 {
@@ -36,7 +36,7 @@ class GetLinks
     /**
      * Create a new GetLinks instance.
      *
-     * @param Collection         $options
+     * @param Collection $options
      * @param MenuInterface|null $menu
      */
     public function __construct(Collection $options, MenuInterface $menu = null)
@@ -48,7 +48,7 @@ class GetLinks
     /**
      * Handle the command.
      *
-     * @param  Dispatcher                                               $events
+     * @param  Dispatcher $events
      * @return \Anomaly\NavigationModule\Link\LinkCollection|mixed|null
      */
     public function handle(Dispatcher $events)
@@ -89,7 +89,7 @@ class GetLinks
         /*
          * Allow other things to inject into the menu
          */
-        $events->fire(new LinksHaveLoaded($this->menu, $links));
+        event(new LinksHaveLoaded($this->menu, $links));
 
         return $links;
     }
