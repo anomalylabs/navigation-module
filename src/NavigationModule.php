@@ -46,5 +46,4 @@ class NavigationModule extends Module
             ],
         ],
     ];
-
 }

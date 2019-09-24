@@ -28,7 +28,6 @@ class LinkTreeSegments
                 [
                     'class' => 'text-faded',
                     'value' => function (LinkInterface $entry, Translator $translator) {
-
                         $type = $entry->getType();
 
                         return '<span class="small" style="padding-right:10px;">' . $translator->trans(
@@ -55,7 +54,6 @@ class LinkTreeSegments
                         'title' => 'module::message.restricted',
                     ],
                     'enabled'     => function (LinkInterface $entry) {
-
                         $roles = $entry->getAllowedRoles();
 
                         return !$roles->isEmpty();
@@ -69,7 +67,6 @@ class LinkTreeSegments
                         'title' => 'module::message.broken',
                     ],
                     'enabled'     => function (LinkInterface $entry) {
-
                         $type = $entry->getType();
 
                         return !$type->exists($entry);

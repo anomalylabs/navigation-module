@@ -2,7 +2,7 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
-use Anomaly\Streams\Platform\Support\Decorator;
+
 
 /**
  * Class LinkPresenter
@@ -54,9 +54,9 @@ class LinkPresenter extends EntryPresenter
      */
     public function children()
     {
-        return (new Decorator())->decorate($this->object->getChildren());
+        return decorate($this->object->getChildren());
     }
-    
+
     /**
      * Return the string output.
      *
@@ -82,5 +82,4 @@ class LinkPresenter extends EntryPresenter
             ]
         );
     }
-    
 }

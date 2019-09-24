@@ -4,7 +4,6 @@ use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
 use Anomaly\Streams\Platform\Model\EloquentModel;
 
-
 /**
  * Class SetParentRelations
  *

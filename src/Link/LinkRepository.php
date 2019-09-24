@@ -35,7 +35,7 @@ class LinkRepository extends EntryRepository implements LinkRepositoryInterface
      * Return links belonging to
      * the provided menu.
      *
-     * @param  MenuInterface  $menu
+     * @param  MenuInterface $menu
      * @return LinkCollection
      */
     public function findAllByMenu(MenuInterface $menu)

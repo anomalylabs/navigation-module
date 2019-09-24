@@ -14,6 +14,62 @@ class LinkCollection extends EntryCollection
 {
 
     /**
+     * Return only enabled links.
+     *
+     * @return LinkCollection
+     */
+    public function enabled()
+    {
+        return $this->filter(
+            function ($item) {
+
+                /* @var LinkInterface $item */
+                return $item->isEnabled();
+            }
+        );
+    }
+
+    /**
+     * Return the current link's children.
+     *
+     * @param null|LinkInterface $link
+     * @return LinkCollection|null
+     */
+    public function siblings($link = null)
+    {
+        if (!$link) {
+            $link = $this->current();
+        }
+
+        if (!$link) {
+            return null;
+        }
+
+        if (!$parent = $link->getParent()) {
+            return $this->root();
+        }
+
+        return $this->children($parent);
+    }
+
+    /**
+     * Return the current link.
+     *
+     * @return LinkInterface|null
+     */
+    public function current()
+    {
+        /* @var LinkInterface $item */
+        foreach ($this->items as $item) {
+            if ($item->isCurrent()) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Alias for $this->top()
      *
      * @return LinkCollection
@@ -40,22 +96,6 @@ class LinkCollection extends EntryCollection
     }
 
     /**
-     * Return only enabled links.
-     *
-     * @return LinkCollection
-     */
-    public function enabled()
-    {
-        return $this->filter(
-            function ($item) {
-
-                /* @var LinkInterface $item */
-                return $item->isEnabled();
-            }
-        );
-    }
-
-    /**
      * Return only children of the provided item.
      *
      * @param $parent
@@ -75,47 +115,6 @@ class LinkCollection extends EntryCollection
                 return $item->getParentId() == $parent->getId();
             }
         );
-    }
-
-    /**
-     * Return the current link.
-     *
-     * @return LinkInterface|null
-     */
-    public function current()
-    {
-        /* @var LinkInterface $item */
-        foreach ($this->items as $item) {
-
-            if ($item->isCurrent()) {
-                return $item;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Return the current link's children.
-     *
-     * @param null|LinkInterface $link
-     * @return LinkCollection|null
-     */
-    public function siblings($link = null)
-    {
-        if (!$link) {
-            $link = $this->current();
-        }
-
-        if (!$link) {
-            return null;
-        }
-
-        if (!$parent = $link->getParent()) {
-            return $this->root();
-        }
-
-        return $this->children($parent);
     }
 
     /**

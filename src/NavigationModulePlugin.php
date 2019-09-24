@@ -5,7 +5,7 @@ use Anomaly\NavigationModule\Link\Command\RenderNavigation;
 use Anomaly\NavigationModule\Menu\MenuModel;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 use Anomaly\Streams\Platform\Support\Collection;
-use Anomaly\Streams\Platform\Support\Decorator;
+
 
 /**
  * Class NavigationModulePlugin
@@ -31,7 +31,7 @@ class NavigationModulePlugin extends Plugin
                     return (new NavigationModuleCriteria(
                         'render',
                         function (Collection $options) use ($menu) {
-                            return $this->dispatch(new RenderNavigation($options->put('menu', $menu)));
+                            return dispatch_now(new RenderNavigation($options->put('menu', $menu)));
                         }
                     ))
                         ->setModel(MenuModel::class)
@@ -47,8 +47,8 @@ class NavigationModulePlugin extends Plugin
                     return (new NavigationModuleCriteria(
                         'get',
                         function (Collection $options) use ($menu) {
-                            return (new Decorator())->decorate(
-                                $this->dispatch(new GetLinks($options->put('menu', $menu)))
+                            return decorate(
+                                dispatch_now(new GetLinks($options->put('menu', $menu)))
                             );
                         }
                     ))

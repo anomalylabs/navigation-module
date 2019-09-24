@@ -71,6 +71,4 @@ class EntryFormBuilder extends MultipleFormBuilder
 
         return $form->getContextualId();
     }
-
-
 }

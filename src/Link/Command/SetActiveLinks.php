@@ -14,7 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class SetActiveLinks
 {
 
-    use DispatchesJobs;
+
 
     /**
      * The link collection.
@@ -61,7 +61,6 @@ class SetActiveLinks
              * parent of current link.
              */
             if ($link->getId() == $current->getParentId()) {
-
                 $link->setActive(true);
             }
 
@@ -70,10 +69,9 @@ class SetActiveLinks
              * of this link then mark it active too.
              */
             if (!$this->links->children($link)->active()->isEmpty()) {
-
                 $link->setActive(true);
 
-                $this->dispatch(new SetActiveLinks($this->links));
+                dispatch_now(new SetActiveLinks($this->links));
             }
         }
     }

@@ -31,5 +31,4 @@ class ValueTableBuilder extends \Anomaly\RelationshipFieldType\Table\ValueTableB
         'entry.type.title',
         'menu',
     ];
-
 }

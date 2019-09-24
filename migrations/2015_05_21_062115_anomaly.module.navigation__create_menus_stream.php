@@ -43,5 +43,4 @@ class AnomalyModuleNavigationCreateMenusStream extends Migration
             'translatable' => true,
         ],
     ];
-
 }

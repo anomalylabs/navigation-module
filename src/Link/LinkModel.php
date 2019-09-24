@@ -71,18 +71,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Return the URI path.
-     *
-     * @return string
-     */
-    public function path()
-    {
-        $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')(\/|$)/';
-
-        return preg_replace($pattern, '/', array_get(parse_url($this->getUrl()), 'path'));
-    }
-
-    /**
      * Get the URL.
      *
      * @return string
@@ -99,19 +87,25 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Get the title.
+     * Get the type.
+     *
+     * @return LinkTypeInterface
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Return the URI path.
      *
      * @return string
      */
-    public function getTitle()
+    public function path()
     {
-        $type = $this->getType();
+        $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')(\/|$)/';
 
-        if (!$type) {
-            return null;
-        }
-
-        return $type->title($this);
+        return preg_replace($pattern, '/', array_get(parse_url($this->getUrl()), 'path'));
     }
 
     /**
@@ -144,16 +138,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         }
 
         return $type->enabled($this);
-    }
-
-    /**
-     * Get the type.
-     *
-     * @return LinkTypeInterface
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
@@ -230,16 +214,6 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
-     * Get the menu.
-     *
-     * @return MenuInterface
-     */
-    public function getMenu()
-    {
-        return $this->menu;
-    }
-
-    /**
      * Get the menu slug.
      *
      * @return string
@@ -249,6 +223,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         $menu = $this->getMenu();
 
         return $menu->getSlug();
+    }
+
+    /**
+     * Get the menu.
+     *
+     * @return MenuInterface
+     */
+    public function getMenu()
+    {
+        return $this->menu;
     }
 
     /**
@@ -320,5 +304,21 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
         $array['title'] = $this->getTitle();
 
         return $array;
+    }
+
+    /**
+     * Get the title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        $type = $this->getType();
+
+        if (!$type) {
+            return null;
+        }
+
+        return $type->title($this);
     }
 }

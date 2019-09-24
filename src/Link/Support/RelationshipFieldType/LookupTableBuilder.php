@@ -53,5 +53,4 @@ class LookupTableBuilder extends \Anomaly\RelationshipFieldType\Table\LookupTabl
         ],
         'sortable' => false,
     ];
-
 }

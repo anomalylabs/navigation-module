@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class RenderNavigation
 {
 
-    use DispatchesJobs;
+
 
     /**
      * The rendering options.
@@ -29,7 +29,7 @@ class RenderNavigation
      *
      * @param Collection $options
      */
-    function __construct(Collection $options)
+    public function __construct(Collection $options)
     {
         $this->options = $options;
     }
@@ -42,10 +42,10 @@ class RenderNavigation
      */
     public function handle(Factory $view)
     {
-        $this->dispatch(new HandlePresets($this->options));
+        dispatch_now(new HandlePresets($this->options));
 
-        $menu  = $this->dispatch(new GetMenu($this->options->get('menu')));
-        $links = $this->dispatch(new GetLinks($this->options, $menu));
+        $menu  = dispatch_now(new GetMenu($this->options->get('menu')));
+        $links = dispatch_now(new GetLinks($this->options, $menu));
 
         return $view->make(
             $this->options->get('view', 'anomaly.module.navigation::links'),

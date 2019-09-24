@@ -64,5 +64,4 @@ class AnomalyModuleNavigationCreateNavigationFields extends Migration
             ],
         ],
     ];
-
 }

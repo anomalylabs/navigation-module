@@ -4,8 +4,6 @@ use Anomaly\NavigationModule\Link\Event\LinksHaveLoaded;
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class GetLinks
@@ -16,8 +14,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class GetLinks
 {
-
-    use DispatchesJobs;
 
     /**
      * The options.
@@ -48,13 +44,12 @@ class GetLinks
     /**
      * Handle the command.
      *
-     * @param  Dispatcher $events
      * @return \Anomaly\NavigationModule\Link\LinkCollection|mixed|null
      */
-    public function handle(Dispatcher $events)
+    public function handle()
     {
         if (!$this->menu) {
-            $this->menu = $this->dispatch(new GetMenu($this->options->get('menu')));
+            $this->menu = dispatch_now(new GetMenu($this->options->get('menu')));
         }
 
         if ($this->menu) {
@@ -70,21 +65,21 @@ class GetLinks
         $links = $links->enabled();
 
         if ($root = $this->options->get('root')) {
-            if ($link = $this->dispatch(new GetParentLink($root, $links))) {
+            if ($link = dispatch_now(new GetParentLink($root, $links))) {
                 $this->options->put('parent', $link);
             }
         }
 
         // Remove restricted for security purposes.
-        $this->dispatch(new RemoveRestrictedLinks($links));
+        dispatch_now(new RemoveRestrictedLinks($links));
 
         // Set the relationships manually.
-        $this->dispatch(new SetParentRelations($links));
-        $this->dispatch(new SetChildrenRelations($links));
+        dispatch_now(new SetParentRelations($links));
+        dispatch_now(new SetChildrenRelations($links));
 
         // Flag appropriate links.
-        $this->dispatch(new SetCurrentLink($links));
-        $this->dispatch(new SetActiveLinks($links));
+        dispatch_now(new SetCurrentLink($links));
+        dispatch_now(new SetActiveLinks($links));
 
         /*
          * Allow other things to inject into the menu

@@ -53,5 +53,4 @@ class LookupTableBuilder extends \Anomaly\MultipleFieldType\Table\LookupTableBui
         ],
         'sortable' => false,
     ];
-
 }

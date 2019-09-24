@@ -22,7 +22,7 @@ class MenuObserver extends EntryObserver
      */
     public function saved(EntryInterface $entry)
     {
-        $this->dispatch(new ClearHttpCache());
+        dispatch_now(new ClearHttpCache());
 
         return parent::saved($entry);
     }

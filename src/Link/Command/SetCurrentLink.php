@@ -60,7 +60,6 @@ class SetCurrentLink
 
         /* @var LinkInterface $link */
         foreach ($this->links as $link) {
-
             if ($link->getUrl() == $exact) {
                 $current = $link;
             } elseif ($link->getUrl() == $partial) {
@@ -76,7 +75,6 @@ class SetCurrentLink
              * @var LinkInterface $current
              */
             if ($current) {
-
                 $current->setCurrent(true);
 
                 /**

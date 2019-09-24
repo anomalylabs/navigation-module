@@ -20,7 +20,7 @@ class LinksHaveLoaded
 
     /**
      * The links that are loading
-     * 
+     *
      * @var LinkCollection
      */
     protected $links;
@@ -49,7 +49,7 @@ class LinksHaveLoaded
 
     /**
      * Get the links.
-     * 
+     *
      * @return LinkCollection
      */
     public function getLinks()

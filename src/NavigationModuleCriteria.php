@@ -43,5 +43,4 @@ class NavigationModuleCriteria extends PluginCriteria
 
         return $this;
     }
-
 }

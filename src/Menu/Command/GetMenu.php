@@ -4,7 +4,6 @@ use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Support\Presenter;
 
-
 /**
  * Class GetMenu
  *

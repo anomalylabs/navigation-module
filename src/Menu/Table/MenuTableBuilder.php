@@ -61,5 +61,4 @@ class MenuTableBuilder extends TableBuilder
     protected $actions = [
         'delete',
     ];
-
 }

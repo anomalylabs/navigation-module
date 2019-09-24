@@ -30,6 +30,6 @@ return [
     'allowed_roles' => [
         'name'         => 'Rôles autorisés',
         'instructions' => 'Choisissez quels rôles utilisateur peuvent voir ce lien.',
-        'warning'      => 'Si aucun rôle n\'est fourni, tout le monde pourra voir ce lien.', 
+        'warning'      => 'Si aucun rôle n\'est fourni, tout le monde pourra voir ce lien.',
     ],
 ];

@@ -31,5 +31,4 @@ class ValueTableBuilder extends \Anomaly\MultipleFieldType\Table\ValueTableBuild
         'entry.type.title',
         'menu',
     ];
-
 }

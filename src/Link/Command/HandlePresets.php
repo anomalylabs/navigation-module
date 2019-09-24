@@ -13,7 +13,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class HandlePresets
 {
 
-    use DispatchesJobs;
+
 
     /**
      * The options.

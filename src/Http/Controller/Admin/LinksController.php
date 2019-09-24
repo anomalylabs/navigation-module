@@ -32,7 +32,6 @@ class LinksController extends AdminController
     public function index(LinkTreeBuilder $tree, MenuRepositoryInterface $menus, $menu = null)
     {
         if (!$menu) {
-
             $this->messages->warning('Please choose a menu first.');
 
             return $this->response->redirectTo('admin/navigation');
@@ -108,10 +107,10 @@ class LinksController extends AdminController
         $menu
     ) {
         /* @var LinkTypeExtension $type */
-        $type = $extensions->get($this->request->get('link_type'));
+        $type = $extensions->get(request('link_type'));
 
         /* @var LinkInterface $parent */
-        if ($parent = $links->find($this->request->get('parent'))) {
+        if ($parent = $links->find(request('parent'))) {
             $link->setParent($parent);
         }
 
@@ -164,7 +163,7 @@ class LinksController extends AdminController
          *
          * @var LinkTypeExtension $type
          */
-        if ($extension = $extensions->get($this->request->get('link_type'))) {
+        if ($extension = $extensions->get(request('link_type'))) {
             $link->setType($extension);
             $form->addForm('type', $extension->builder()->setFormMode('edit'));
             $form->setOption('redirect', 'admin/navigation/links/' . $slug . '/edit/' . $id);
@@ -197,10 +196,9 @@ class LinksController extends AdminController
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
     {
         if (!$authorizer->authorize('anomaly.module.navigation::links.delete')) {
-
             $this->messages->error('streams::message.access_denied');
 
-            return $this->redirect->back();
+            return back();
         }
 
         /*
@@ -209,6 +207,6 @@ class LinksController extends AdminController
          */
         $links->forceDelete($links->find($this->route->parameter('id')));
 
-        return $this->redirect->back();
+        return back();
     }
 }

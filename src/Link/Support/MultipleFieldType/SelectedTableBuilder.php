@@ -31,5 +31,4 @@ class SelectedTableBuilder extends \Anomaly\MultipleFieldType\Table\SelectedTabl
         'entry.type.title',
         'menu',
     ];
-
 }

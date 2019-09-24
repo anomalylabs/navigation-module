@@ -11,5 +11,4 @@ use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
  */
 class MenuFormBuilder extends FormBuilder
 {
-
 }
