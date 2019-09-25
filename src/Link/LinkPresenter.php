@@ -1,4 +1,6 @@
-<?php namespace Anomaly\NavigationModule\Link;
+<?php
+
+namespace Anomaly\NavigationModule\Link;
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
@@ -56,7 +58,7 @@ class LinkPresenter extends EntryPresenter
     {
         return (new Decorator())->decorate($this->object->getChildren());
     }
-    
+
     /**
      * Return the string output.
      *
@@ -74,13 +76,13 @@ class LinkPresenter extends EntryPresenter
             $classes[] = 'current';
         }
 
-        return (string)app('html')->link(
+        return (string) app('html')->link(
             $this->object->getUrl(),
             $this->object->getTitle(),
             [
-                'class' => implode(' ', array_filter($classes)),
+                'class'  => implode(' ', array_filter($classes)),
+                'target' => $this->object->getTarget()
             ]
         );
     }
-    
 }
