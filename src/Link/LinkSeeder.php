@@ -1,4 +1,6 @@
-<?php namespace Anomaly\NavigationModule\Link;
+<?php
+
+namespace Anomaly\NavigationModule\Link;
 
 use Anomaly\NavigationModule\Link\Contract\LinkRepositoryInterface;
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
@@ -57,7 +59,7 @@ class LinkSeeder extends Seeder
 
         $pyrocms = $repository->create(
             [
-                'en'  => [
+                config('app.locale', 'en')   => [
                     'title' => 'PyroCMS.com',
                 ],
                 'url' => 'http://pyrocms.com/',
@@ -66,7 +68,7 @@ class LinkSeeder extends Seeder
 
         $documentation = $repository->create(
             [
-                'en'  => [
+                config('app.locale', 'en')   => [
                     'title' => 'Documentation',
                 ],
                 'url' => 'http://pyrocms.com/documentation',

@@ -1,4 +1,6 @@
-<?php namespace Anomaly\NavigationModule\Menu;
+<?php
+
+namespace Anomaly\NavigationModule\Menu;
 
 use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
@@ -39,7 +41,7 @@ class MenuSeeder extends Seeder
             ->truncate()
             ->create(
                 [
-                    'en'   => [
+                    config('app.locale', 'en')   => [
                         'name'        => 'Footer',
                         'description' => 'This is the main footer menu.',
                     ],
