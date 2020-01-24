@@ -9,9 +9,8 @@ return [
 
     ],
     "slug" => [
-        "name" => "sümüklüböcek",
-        "instructions" => "Sülük,
-      menüyü görüntülerken kullanılır.",
+        "name" => "Özel isim",
+        "instructions" => "değer, menüyü görüntülerken kullanılır.",
 
     ],
     "description" => [
