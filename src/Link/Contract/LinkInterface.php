@@ -158,4 +158,11 @@ interface LinkInterface extends EntryInterface
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function children();
+
+    /**
+     * Get the HTML class.
+     *
+     * @return string
+     */
+    public function getClass();
 }

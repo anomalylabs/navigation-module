@@ -157,6 +157,16 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     }
 
     /**
+     * Get the HTML class.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
      * Get the related entry.
      *
      * @return EntryInterface

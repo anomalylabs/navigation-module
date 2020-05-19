@@ -66,7 +66,7 @@ class LinkPresenter extends EntryPresenter
      */
     public function __toString()
     {
-        $classes = [];
+        $classes = explode(' ', $this->object->getClass());
 
         if ($this->object->isActive()) {
             $classes[] = 'active';
