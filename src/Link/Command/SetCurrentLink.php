@@ -1,8 +1,9 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
-use Anomaly\NavigationModule\Link\Contract\LinkInterface;
-use Anomaly\NavigationModule\Link\LinkCollection;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Anomaly\NavigationModule\Link\LinkCollection;
+use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 
 /**
  * Class SetCurrentLink
@@ -69,28 +70,51 @@ class SetCurrentLink
                 $current = $link;
             }
 
-            /**
-             * If we have an current link determined
-             * then mark it as such.
-             *
-             * @var LinkInterface $current
+
+            /*
+             * If the request URL does not even
+             * contain the HREF then skip it.
              */
-            if ($current) {
-
-                $current->setCurrent(true);
-
-                /**
-                 * Just in case there are
-                 * multiple links that match
-                 * let's let things continue.
-                 *
-                 * For example:
-                 *
-                 * /example/link#section1
-                 * /example/link#section2
-                 */
-                $current = null;
+            if (!Str::contains($exact, $link->getUrl())) {
+                continue;
             }
+
+            /*
+             * Compare the length of the active HREF
+             * and loop iteration HREF. The longer the
+             * HREF the more detailed and exact it is and
+             * the more likely it is the active HREF and
+             * therefore the active section.
+             */
+            $hrefLength       = strlen($link->getUrl());
+            $activeHrefLength = $current ? strlen($current->getUrl()) : '';
+
+            if ($hrefLength > $activeHrefLength) {
+                $current = $link;
+            }
+        }
+
+        /**
+         * If we have an current link determined
+         * then mark it as such.
+         *
+         * @var LinkInterface $current
+         */
+        if ($current) {
+
+            $current->setCurrent(true);
+
+            /**
+             * Just in case there are
+             * multiple links that match
+             * let's let things continue.
+             *
+             * For example:
+             *
+             * /example/link#section1
+             * /example/link#section2
+             */
+            $current = null;
         }
     }
 }
