@@ -54,7 +54,10 @@ class SetCurrentLink
         $staticPrefix = $compiled->getStaticPrefix();
 
         $host    = $request->getHost();
-        $exact   = $request->fullUrl();
+        // Use the url generator to get the exact path as this
+        // will include the locale path segment if present which is
+        // removed from the request
+        $exact   = url()->current();
         $partial = $request->getUriForPath($staticPrefix);
 
         $path = array_get(parse_url($partial), 'path');
