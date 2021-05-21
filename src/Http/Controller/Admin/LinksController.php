@@ -149,7 +149,9 @@ class LinksController extends AdminController
 
         $type = $entry->getType();
 
-        $form->addForm('type', $type->builder()->setEntry($entry->getEntry()->getId()));
+        $typeEntry = $entry->getEntry();
+
+        $form->addForm('type', $type->builder()->setEntry($typeEntry ? $typeEntry->id : null));
 
         $form->addForm(
             'link',
