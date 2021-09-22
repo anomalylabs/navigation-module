@@ -79,6 +79,14 @@ class SetCurrentLink
                 continue;
             }
 
+            /**
+             * Home page will partial match
+             * anything so don't include it.
+             */
+            if ($link->getUrl() === url('/')) {
+                continue;
+            }
+
             /*
              * Compare the length of the active HREF
              * and loop iteration HREF. The longer the
