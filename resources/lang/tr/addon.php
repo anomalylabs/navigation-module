@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "title" => "navigasyon",
+    "title" => "Navigasyon",
     "name" => "Gezinme Modülü",
     "description" => "Güçlü navigasyon yönetimi kolay.",
     "section" => [
