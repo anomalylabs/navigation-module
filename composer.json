@@ -29,7 +29,7 @@
         "source": "https://github.com/anomalylabs/forum-module"
     },
     "require": {
-        "anomaly/streams-platform": "^1.5"
+        "anomaly/streams-platform": "^1.8"
     },
     "autoload": {
         "psr-4": {

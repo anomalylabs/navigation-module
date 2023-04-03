@@ -54,7 +54,7 @@ class GetLinks
     public function handle(Dispatcher $events)
     {
         if (!$this->menu) {
-            $this->menu = $this->dispatch(new GetMenu($this->options->get('menu')));
+            $this->menu = $this->dispatchSync(new GetMenu($this->options->get('menu')));
         }
 
         if ($this->menu) {
@@ -70,21 +70,21 @@ class GetLinks
         $links = $links->enabled();
 
         if ($root = $this->options->get('root')) {
-            if ($link = $this->dispatch(new GetParentLink($root, $links))) {
+            if ($link = $this->dispatchSync(new GetParentLink($root, $links))) {
                 $this->options->put('parent', $link);
             }
         }
 
         // Remove restricted for security purposes.
-        $this->dispatch(new RemoveRestrictedLinks($links));
+        $this->dispatchSync(new RemoveRestrictedLinks($links));
 
         // Set the relationships manually.
-        $this->dispatch(new SetParentRelations($links));
-        $this->dispatch(new SetChildrenRelations($links));
+        $this->dispatchSync(new SetParentRelations($links));
+        $this->dispatchSync(new SetChildrenRelations($links));
 
         // Flag appropriate links.
-        $this->dispatch(new SetCurrentLink($links));
-        $this->dispatch(new SetActiveLinks($links));
+        $this->dispatchSync(new SetCurrentLink($links));
+        $this->dispatchSync(new SetActiveLinks($links));
 
         /*
          * Allow other things to inject into the menu

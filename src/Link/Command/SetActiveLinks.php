@@ -73,7 +73,7 @@ class SetActiveLinks
 
                 $link->setActive(true);
 
-                $this->dispatch(new SetActiveLinks($this->links));
+                $this->dispatchSync(new SetActiveLinks($this->links));
             }
         }
     }
