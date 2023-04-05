@@ -22,7 +22,7 @@ class LinkObserver extends EntryObserver
      */
     public function saved(EntryInterface $entry)
     {
-        $this->dispatchSync(new ClearHttpCache());
+        dispatch_sync(new ClearHttpCache());
 
         return parent::saved($entry);
     }

@@ -2,7 +2,6 @@
 
 use Anomaly\NavigationModule\Link\Contract\LinkInterface;
 use Anomaly\NavigationModule\Link\LinkCollection;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class SetActiveLinks
@@ -13,9 +12,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class SetActiveLinks
 {
-
-    use DispatchesJobs;
-
     /**
      * The link collection.
      *
@@ -73,7 +69,7 @@ class SetActiveLinks
 
                 $link->setActive(true);
 
-                $this->dispatchSync(new SetActiveLinks($this->links));
+                dispatch_sync(new SetActiveLinks($this->links));
             }
         }
     }

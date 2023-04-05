@@ -3,7 +3,6 @@
 use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class RenderNavigation
@@ -14,9 +13,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class RenderNavigation
 {
-
-    use DispatchesJobs;
-
     /**
      * The rendering options.
      *
@@ -42,10 +38,10 @@ class RenderNavigation
      */
     public function handle(Factory $view)
     {
-        $this->dispatchSync(new HandlePresets($this->options));
+        dispatch_sync(new HandlePresets($this->options));
 
-        $menu  = $this->dispatchSync(new GetMenu($this->options->get('menu')));
-        $links = $this->dispatchSync(new GetLinks($this->options, $menu));
+        $menu  = dispatch_sync(new GetMenu($this->options->get('menu')));
+        $links = dispatch_sync(new GetLinks($this->options, $menu));
 
         return $view->make(
             $this->options->get('view', 'anomaly.module.navigation::links'),

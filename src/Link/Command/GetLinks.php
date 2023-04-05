@@ -5,7 +5,6 @@ use Anomaly\NavigationModule\Menu\Command\GetMenu;
 use Anomaly\NavigationModule\Menu\Contract\MenuInterface;
 use Anomaly\Streams\Platform\Support\Collection;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class GetLinks
@@ -16,9 +15,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class GetLinks
 {
-
-    use DispatchesJobs;
-
     /**
      * The options.
      *
@@ -54,7 +50,7 @@ class GetLinks
     public function handle(Dispatcher $events)
     {
         if (!$this->menu) {
-            $this->menu = $this->dispatchSync(new GetMenu($this->options->get('menu')));
+            $this->menu = dispatch_sync(new GetMenu($this->options->get('menu')));
         }
 
         if ($this->menu) {
@@ -70,21 +66,21 @@ class GetLinks
         $links = $links->enabled();
 
         if ($root = $this->options->get('root')) {
-            if ($link = $this->dispatchSync(new GetParentLink($root, $links))) {
+            if ($link = dispatch_sync(new GetParentLink($root, $links))) {
                 $this->options->put('parent', $link);
             }
         }
 
         // Remove restricted for security purposes.
-        $this->dispatchSync(new RemoveRestrictedLinks($links));
+        dispatch_sync(new RemoveRestrictedLinks($links));
 
         // Set the relationships manually.
-        $this->dispatchSync(new SetParentRelations($links));
-        $this->dispatchSync(new SetChildrenRelations($links));
+        dispatch_sync(new SetParentRelations($links));
+        dispatch_sync(new SetChildrenRelations($links));
 
         // Flag appropriate links.
-        $this->dispatchSync(new SetCurrentLink($links));
-        $this->dispatchSync(new SetActiveLinks($links));
+        dispatch_sync(new SetCurrentLink($links));
+        dispatch_sync(new SetActiveLinks($links));
 
         /*
          * Allow other things to inject into the menu

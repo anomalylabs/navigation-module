@@ -1,7 +1,6 @@
 <?php namespace Anomaly\NavigationModule\Link\Command;
 
 use Anomaly\Streams\Platform\Support\Collection;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class HandlePresets
@@ -12,9 +11,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class HandlePresets
 {
-
-    use DispatchesJobs;
-
     /**
      * The options.
      *
