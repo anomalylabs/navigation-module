@@ -6,6 +6,7 @@ use Anomaly\NavigationModule\Menu\MenuModel;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\Support\Decorator;
+use Twig\TwigFunction;
 
 /**
  * Class NavigationModulePlugin
@@ -25,7 +26,7 @@ class NavigationModulePlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'menu',
                 function ($menu = null) {
                     return (new NavigationModuleCriteria(
@@ -41,7 +42,7 @@ class NavigationModulePlugin extends Plugin
                     'is_safe' => ['html'],
                 ]
             ),
-            new \Twig_SimpleFunction(
+            new TwigFunction(
                 'links',
                 function ($menu = null) {
                     return (new NavigationModuleCriteria(
