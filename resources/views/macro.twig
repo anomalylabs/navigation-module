@@ -19,7 +19,7 @@
                     {{ html_attributes(options.get('link_attributes_dropdown', [])) }}
                 {% endif %}
         >
-            {{ link.title|raw }}
+            {{ link.title }}
         </a>
 
         {% if not link.children.isEmpty() %}
