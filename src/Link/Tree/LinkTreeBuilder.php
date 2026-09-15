@@ -52,6 +52,12 @@ class LinkTreeBuilder extends TreeBuilder
         if (!$this->getMenu()) {
             throw new \Exception('The $menu parameter is required.');
         }
+
+        $buttons = $this->getButtons();
+
+        $buttons['prompt']['href'] .= '?_token=' . csrf_token();
+
+        $this->setButtons($buttons);
     }
 
     /**

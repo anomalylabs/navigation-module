@@ -198,6 +198,13 @@ class LinksController extends AdminController
      */
     public function delete(LinkRepositoryInterface $links, Authorizer $authorizer)
     {
+        if (!hash_equals((string)csrf_token(), (string)$this->request->get('_token'))) {
+
+            $this->messages->error('streams::message.csrf_token_mismatch');
+
+            return $this->redirect->back();
+        }
+
         if (!$authorizer->authorize('anomaly.module.navigation::links.delete')) {
 
             $this->messages->error('streams::message.access_denied');
@@ -205,11 +212,15 @@ class LinksController extends AdminController
             return $this->redirect->back();
         }
 
+        if (!$link = $links->find($this->route->parameter('id'))) {
+            abort(404);
+        }
+
         /*
          * Force delete until we get
          * views into the tree UI.
          */
-        $links->forceDelete($links->find($this->route->parameter('id')));
+        $links->forceDelete($link);
 
         return $this->redirect->back();
     }
