@@ -61,13 +61,26 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     ];
 
     /**
+     * The URL schemes links may use.
+     *
+     * @var array
+     */
+    protected $schemes = [
+        'http',
+        'https',
+        'mailto',
+        'tel',
+        'sms',
+    ];
+
+    /**
      * Return the host.
      *
      * @return string
      */
     public function host()
     {
-        return array_get(parse_url($this->getUrl()), 'host');
+        return array_get(parse_url((string)$this->getUrl()), 'host');
     }
 
     /**
@@ -79,13 +92,13 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
     {
         $pattern = '/^\/(' . implode('|', array_keys(config('streams::locales.supported'))) . ')(\/|$)/';
 
-        return preg_replace($pattern, '/', array_get(parse_url($this->getUrl()), 'path'));
+        return preg_replace($pattern, '/', (string)array_get(parse_url((string)$this->getUrl()), 'path'));
     }
 
     /**
      * Get the URL.
      *
-     * @return string
+     * @return null|string
      */
     public function getUrl()
     {
@@ -95,7 +108,21 @@ class LinkModel extends NavigationLinksEntryModel implements LinkInterface
             return null;
         }
 
-        return $type->url($this);
+        $url = $type->url($this);
+
+        if (!is_string($url) || $url === '') {
+            return null;
+        }
+
+        // Browsers ignore whitespace and control characters
+        // when reading a scheme, so strip them before looking.
+        $scheme = preg_replace('/[\s\x00-\x1F\x7F]+/', '', $url);
+
+        if (preg_match('/^([a-z][a-z0-9+.\-]*):/i', $scheme, $matches)) {
+            return in_array(strtolower($matches[1]), $this->schemes) ? $url : null;
+        }
+
+        return $url;
     }
 
     /**
