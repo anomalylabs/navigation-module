@@ -4,6 +4,7 @@ use Anomaly\NavigationModule\Menu\Contract\MenuRepositoryInterface;
 use Anomaly\NavigationModule\Menu\Form\MenuFormBuilder;
 use Anomaly\NavigationModule\Menu\Table\MenuTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
+use Anomaly\Streams\Platform\Support\Authorizer;
 
 /**
  * Class MenusController
@@ -30,10 +31,15 @@ class MenusController extends AdminController
      * Return the modal for choosing a menu.
      *
      * @param  MenuRepositoryInterface $menus
+     * @param  Authorizer $authorizer
      * @return \Illuminate\View\View
      */
-    public function choose(MenuRepositoryInterface $menus)
+    public function choose(MenuRepositoryInterface $menus, Authorizer $authorizer)
     {
+        if (!$authorizer->authorize('anomaly.module.navigation::menus.read')) {
+            abort(403);
+        }
+
         return view(
             'anomaly.module.navigation::ajax/choose_menu',
             [

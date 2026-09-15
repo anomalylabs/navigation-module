@@ -38,7 +38,11 @@ class LinksController extends AdminController
             return $this->response->redirectTo('admin/navigation');
         }
 
-        $tree->setMenu($menu = $menus->findBySlug($menu));
+        if (!$menu = $menus->findBySlug($menu)) {
+            abort(404);
+        }
+
+        $tree->setMenu($menu);
 
         return $tree->render();
     }
@@ -47,11 +51,21 @@ class LinksController extends AdminController
      * Return the modal for choosing a link type.
      *
      * @param  ExtensionCollection $extensions
+     * @param  MenuRepositoryInterface $menus
+     * @param  Authorizer $authorizer
      * @param  string $menu
      * @return \Illuminate\View\View
      */
-    public function choose(ExtensionCollection $extensions, $menu)
+    public function choose(ExtensionCollection $extensions, MenuRepositoryInterface $menus, Authorizer $authorizer, $menu)
     {
+        if (!$authorizer->authorize('anomaly.module.navigation::links.read')) {
+            abort(403);
+        }
+
+        if (!$menus->findBySlug($menu)) {
+            abort(404);
+        }
+
         return view(
             'module::ajax/choose_link_type',
             [
@@ -68,13 +82,22 @@ class LinksController extends AdminController
      *
      * @param  LinkRepositoryInterface $links
      * @param ExtensionCollection $extensions
+     * @param Authorizer $authorizer
      * @param $menu
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function change(LinkRepositoryInterface $links, ExtensionCollection $extensions, $menu)
+    public function change(LinkRepositoryInterface $links, ExtensionCollection $extensions, Authorizer $authorizer, $menu)
     {
+        if (!$authorizer->authorize('anomaly.module.navigation::links.read')) {
+            abort(403);
+        }
+
         /* @var LinkInterface $link */
         $link = $links->find($this->route->parameter('id'));
+
+        if (!$link || $link->getMenuSlug() !== $menu) {
+            abort(404);
+        }
 
         return view(
             'module::ajax/change_link_type',
@@ -115,8 +138,12 @@ class LinksController extends AdminController
             $link->setParent($parent);
         }
 
+        if (!$menu = $menus->findBySlug($menu)) {
+            abort(404);
+        }
+
         $form->addForm('type', $type->builder());
-        $form->addForm('link', $link->setType($type)->setMenu($menu = $menus->findBySlug($menu)));
+        $form->addForm('link', $link->setType($type)->setMenu($menu));
 
         $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
 
@@ -147,6 +174,10 @@ class LinksController extends AdminController
         /* @var LinkInterface $entry */
         $entry = $links->find($id);
 
+        if (!$entry || $entry->getMenuSlug() !== $slug || !$menu = $menus->findBySlug($slug)) {
+            abort(404);
+        }
+
         $type = $entry->getType();
 
         $typeEntry = $entry->getEntry();
@@ -155,7 +186,7 @@ class LinksController extends AdminController
 
         $form->addForm(
             'link',
-            $link->setEntry($id)->setType($entry->getType())->setMenu($menu = $menus->findBySlug($slug))
+            $link->setEntry($id)->setType($entry->getType())->setMenu($menu)
         );
 
         $this->breadcrumbs->add($menu->getName(), 'admin/navigation/links/' . $menu->getSlug());
