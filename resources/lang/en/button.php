@@ -5,4 +5,5 @@ return [
     'new_menu'          => 'New Menu',
     'new_link'          => 'New Link',
     'links'             => 'Links',
+    'continue'          => 'Continue',
 ];

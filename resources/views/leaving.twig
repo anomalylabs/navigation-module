@@ -1,0 +1,27 @@
+{% extends template.layout ?: "theme::layouts/default" %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-block card-body">
+
+                <h4>{{ trans('module::message.leaving_title') }}</h4>
+
+                <p>{{ trans('module::message.leaving_message') }}</p>
+
+                <p><code>{{ url }}</code></p>
+
+                <a href="{{ url }}" rel="noopener noreferrer" class="btn btn-primary">
+                    {{ trans('module::button.continue') }}
+                </a>
+
+                <a href="{{ back }}" class="btn btn-default">
+                    {{ trans('streams::button.cancel') }}
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

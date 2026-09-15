@@ -179,14 +179,73 @@ class LinksController extends AdminController
      * View the link destination.
      *
      * @param  LinkRepositoryInterface $links
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  Authorizer $authorizer
+     * @param  $menu
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function view(LinkRepositoryInterface $links)
+    public function view(LinkRepositoryInterface $links, Authorizer $authorizer, $menu)
     {
+        if (!$authorizer->authorize('anomaly.module.navigation::links.read')) {
+            abort(403);
+        }
+
         /* @var LinkInterface $link */
         $link = $links->find($this->route->parameter('id'));
 
-        return $this->response->redirectTo($link->getUrl());
+        if (!$link || $link->getMenuSlug() !== $menu) {
+            abort(404);
+        }
+
+        if (!$url = $link->getUrl()) {
+
+            $this->messages->error('anomaly.module.navigation::message.no_destination');
+
+            return $this->redirect->back();
+        }
+
+        if (!$this->leavesApplication($url)) {
+            return $this->response->redirectTo($url);
+        }
+
+        return $this->view->make(
+            'module::leaving',
+            [
+                'url'  => $url,
+                'back' => $this->url->to('admin/navigation/links/' . $menu),
+            ]
+        );
+    }
+
+    /**
+     * Return whether a URL points somewhere other than this application.
+     *
+     * @param  string $url
+     * @return bool
+     */
+    protected function leavesApplication($url)
+    {
+        /*
+         * Browsers read a backslash as a forward slash, so "/\evil.example"
+         * leaves the site despite parsing as a relative path. Control
+         * characters hide the same thing from parse_url.
+         */
+        if (str_contains($url, '\\') || preg_match('/[\x00-\x1F\x7F]/', $url)) {
+            return true;
+        }
+
+        if (str_starts_with($url, '//')) {
+            return true;
+        }
+
+        if (($parts = parse_url($url)) === false) {
+            return true;
+        }
+
+        if ($host = array_get($parts, 'host')) {
+            return $host !== $this->request->getHost();
+        }
+
+        return (bool)array_get($parts, 'scheme');
     }
 
     /**
